@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
 	return (
 		<html lang="en">
-			<meta content="#FFFFFF" name="theme-color" />
+			<meta content="#000000" name="theme-color" />
 			<body className={roboto.className}>
 				<NextUIProvider>
 					<NextThemesProvider attribute="class" enableSystem>

@@ -18,6 +18,10 @@
 	@apply ml-1 text-xl font-semibold text-primary;
 }
 
+.theme-icon {
+	@apply text-foreground;
+}
+
 .navbar-item {
 	@apply hidden xs:list-item;
 }

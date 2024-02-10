@@ -28,14 +28,14 @@ const AboutSection = () => {
 					<h1>{`About Me`}</h1>
 					<p>{about}</p>
 				</div>
-				<Tabs aria-label="Tabs" classNames={{ base: styles["tabs-base"], tabList: styles["tabs-tab-list"], panel: styles["tabs-panel"] }} color="primary" size="lg" variant="solid">
+				<Tabs aria-label="Tabs" classNames={{ base: styles["tabs-base"], panel: styles["tabs-panel"] }} color="primary" size="lg" variant="solid">
 					{tabs?.map((tab: Tab) => (
 						<Tab key={tab?.id} title={tab?.title}>
 							<Listbox aria-label="Items" classNames={{ base: styles["listbox-base"], list: tab?.id === 2 && styles["listbox-list"] }} color="default" selectionMode="none" variant="light">
 								{tab?.items?.map((item: string, index: number) => (
 									<ListboxItem classNames={{ base: styles["listbox-item-base"], title: styles["listbox-item-title"] }} isReadOnly key={index} startContent={getStartContent(tab?.id)} textValue={item}>
 										{tab?.id === 2 ? (
-											<Chip color="primary" variant="flat">
+											<Chip color="primary" size="lg" variant="flat">
 												{item}
 											</Chip>
 										) : (

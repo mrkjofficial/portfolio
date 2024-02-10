@@ -6,7 +6,7 @@ import NextLink from "next/link";
 import { menuItems } from "@data";
 import { useTheme } from "next-themes";
 import styles from "./navbar.module.css";
-import { Menu, Moon, Sun, X } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import { Button, Link, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Tooltip } from "@nextui-org/react";
 
 const NavbarComponent = () => {
@@ -19,7 +19,7 @@ const NavbarComponent = () => {
 
 	return (
 		<Navbar classNames={{ base: styles["navbar-base"], wrapper: styles["navbar-wrapper"] }} isMenuOpen={isMenuOpen} maxWidth="2xl" onMenuOpenChange={setIsMenuOpen}>
-			<NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} className={styles["navbar-menu-toggle"]} icon={isMenuOpen ? <X /> : <Menu />} />
+			<NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} className={styles["navbar-menu-toggle"]} />
 			<NavbarBrand>
 				<Link as={NextLink} href="/">
 					<Image alt="Logo" className={styles["logo"]} priority={true} src={logo} />
@@ -29,8 +29,8 @@ const NavbarComponent = () => {
 			<NavbarContent justify="end">
 				<NavbarItem>
 					<Tooltip color="default" content={theme === "light" ? "Dark Mode" : "Light Mode"} placement="bottom">
-						<Button aria-label="Toggle Theme" color="default" isIconOnly onPress={toggleTheme} variant="light">
-							{theme === "light" ? <Moon /> : <Sun />}
+						<Button aria-label="Toggle Theme" color="default" isIconOnly onPress={toggleTheme} size="lg" variant="light">
+							{theme === "light" ? <Moon className={styles["theme-icon"]} /> : <Sun className={styles["theme-icon"]} />}
 						</Button>
 					</Tooltip>
 				</NavbarItem>

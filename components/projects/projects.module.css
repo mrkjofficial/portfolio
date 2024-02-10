@@ -19,7 +19,7 @@
 }
 
 .project-info {
-	@apply absolute bottom-1 z-10 mx-1 w-[calc(100%-8px)] justify-between overflow-hidden rounded-large bg-background/80;
+	@apply absolute bottom-1 z-10 mx-1 w-[calc(100%-8px)] justify-between overflow-hidden rounded-large bg-background/70;
 }
 
 .info-section {
@@ -27,13 +27,17 @@
 }
 
 .info-section > h1 {
-	@apply text-tiny font-medium text-foreground;
+	@apply text-xs text-foreground;
 }
 
 .info-section > p {
-	@apply text-tiny text-foreground;
+	@apply text-xs font-light text-foreground;
 }
 
 .cta-section {
 	@apply flex items-center justify-center gap-1;
+}
+
+.cta-section svg {
+	@apply text-foreground;
 }

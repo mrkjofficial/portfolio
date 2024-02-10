@@ -25,7 +25,7 @@ export const greeting = "Hello, I'm";
 
 export const intro = ["Karan Jaiswal", 1000, "Web Developer", 1000];
 
-export const subHeading = "Seasoned Full-Stack Web Developer with a solid foundation in Next.js, React.js & Node.js.";
+export const subHeading = "Seasoned Web Dev | Passionate Learner | Open to Opportunities | Building for the Future.";
 
 export const nameInitials = "KJ";
 
@@ -59,7 +59,7 @@ export const projects: Project[] = [
 	{
 		id: 1,
 		title: "React Portfolio Website",
-		description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+		description: "#react #next #postgres",
 		thumbnail: project1.src,
 		sourceUrl: "http://www.github.com/",
 		previewUrl: "/",
@@ -67,7 +67,7 @@ export const projects: Project[] = [
 	{
 		id: 2,
 		title: "Potography Portfolio Website",
-		description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+		description: "#react #next #postgres",
 		thumbnail: project2.src,
 		sourceUrl: "http://www.github.com/",
 		previewUrl: "/",
@@ -75,7 +75,7 @@ export const projects: Project[] = [
 	{
 		id: 3,
 		title: "E-commerce Application",
-		description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+		description: "#react #next #postgres",
 		thumbnail: project3.src,
 		sourceUrl: "http://www.github.com/",
 		previewUrl: "/",
@@ -83,7 +83,7 @@ export const projects: Project[] = [
 	{
 		id: 4,
 		title: "Food Ordering Application",
-		description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+		description: "#react #next #postgres",
 		thumbnail: project4.src,
 		sourceUrl: "http://www.github.com/",
 		previewUrl: "/",
@@ -91,7 +91,7 @@ export const projects: Project[] = [
 	{
 		id: 5,
 		title: "React Firebase Template",
-		description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+		description: "#react #next #postgres",
 		thumbnail: project5.src,
 		sourceUrl: "http://www.github.com/",
 		previewUrl: "/",
@@ -99,7 +99,7 @@ export const projects: Project[] = [
 	{
 		id: 6,
 		title: "Full-stack Roadmap",
-		description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+		description: "#react #next #postgres",
 		thumbnail: project6.src,
 		sourceUrl: "http://www.github.com/",
 		previewUrl: "/",
