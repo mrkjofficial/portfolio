@@ -1,0 +1,23 @@
+.navbar-base {
+	@apply px-6;
+}
+
+.navbar-wrapper {
+	@apply px-0;
+}
+
+.navbar-menu-toggle {
+	@apply xs:hidden;
+}
+
+.logo {
+	@apply h-16 w-16;
+}
+
+.logo + h1 {
+	@apply ml-1 text-xl font-semibold text-primary;
+}
+
+.navbar-item {
+	@apply hidden xs:list-item;
+}

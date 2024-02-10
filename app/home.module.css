@@ -1,0 +1,3 @@
+.main-container {
+	@apply my-auto flex h-full min-h-[calc(100vh-4rem)] w-full flex-col items-center justify-center gap-10 px-6;
+}

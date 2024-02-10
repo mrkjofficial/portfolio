@@ -1,0 +1,39 @@
+.container {
+	@apply flex w-full max-w-screen-2xl flex-col items-center justify-center gap-10 py-10;
+}
+
+.container > h1 {
+	@apply text-center text-4xl font-bold;
+}
+
+.projects {
+	@apply grid w-full max-w-screen-2xl grid-cols-1 place-items-center gap-10 md:grid-cols-2 xl:grid-cols-3;
+}
+
+.project {
+	@apply aspect-video w-full max-w-md border-none;
+}
+
+.project > img {
+	@apply object-cover;
+}
+
+.project-info {
+	@apply absolute bottom-1 z-10 mx-1 w-[calc(100%-8px)] justify-between overflow-hidden rounded-large bg-background/80;
+}
+
+.info-section {
+	@apply flex flex-col justify-center gap-1;
+}
+
+.info-section > h1 {
+	@apply text-tiny font-medium text-foreground;
+}
+
+.info-section > p {
+	@apply text-tiny text-foreground;
+}
+
+.cta-section {
+	@apply flex items-center justify-center gap-1;
+}

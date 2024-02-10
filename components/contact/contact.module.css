@@ -1,0 +1,27 @@
+.container {
+	@apply grid w-full max-w-screen-2xl grid-cols-1 place-items-stretch gap-10 py-10 md:grid-cols-2;
+}
+
+.social-wrapper {
+	@apply flex w-full max-w-xl flex-col gap-5 justify-self-center md:justify-self-start;
+}
+
+.social-wrapper h1 {
+	@apply text-xl font-bold;
+}
+
+.social-wrapper p {
+	@apply text-default-500;
+}
+
+.social-links {
+	@apply flex flex-row gap-2;
+}
+
+.form-wrapper {
+	@apply flex w-full max-w-xl flex-col items-center justify-center gap-5 justify-self-center md:justify-self-end;
+}
+
+.form-wrapper button {
+	@apply w-full;
+}
