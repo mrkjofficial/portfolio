@@ -27,5 +27,10 @@
 }
 
 .cta-section {
-	@apply flex w-full items-center justify-center gap-5 md:justify-start;
+	@apply flex w-full flex-col items-center justify-center gap-5 xs:flex-row md:justify-start;
+}
+
+.cta-section a,
+.cta-section button {
+	@apply w-64 xs:w-auto;
 }

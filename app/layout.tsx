@@ -1,4 +1,5 @@
 import "./globals.css";
+import { Toaster } from "sonner";
 import { ReactNode } from "react";
 import type { Metadata } from "next";
 import { Navbar } from "@components";
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 					<NextThemesProvider attribute="class" enableSystem>
 						<Navbar />
 						{children}
+						<Toaster richColors />
 						<Analytics />
 						<SpeedInsights />
 					</NextThemesProvider>

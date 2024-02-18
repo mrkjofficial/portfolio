@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss";
-const { nextui } = require("@nextui-org/react");
+import { nextui } from "@nextui-org/react";
 import { semanticColors } from "@nextui-org/theme";
 
 const config: Config = {

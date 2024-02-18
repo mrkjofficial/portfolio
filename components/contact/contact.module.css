@@ -25,3 +25,9 @@
 .form-wrapper button {
 	@apply w-full;
 }
+.form-wrapper input:-webkit-autofill,
+.form-wrapper input:-webkit-autofill:hover,
+.form-wrapper input:-webkit-autofill:focus,
+.form-wrapper input:-webkit-autofill:active {
+	@apply transition-[background-color] duration-[5000s] ease-[ease-in-out] delay-[0s];
+}

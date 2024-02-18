@@ -1,16 +1,18 @@
 "use client";
 import { z } from "zod";
 import Link from "next/link";
-import { useCallback } from "react";
+import { toast } from "sonner";
+import { useState } from "react";
 import { outro, socials } from "@data";
 import styles from "./contact.module.css";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ContactSchema } from "@schemas/ContactSchema";
 import { Button, Input, Textarea } from "@nextui-org/react";
-import { Github, Linkedin, Mail, MessageSquareText, Send, UserCircle } from "lucide-react";
+import { Github, Linkedin, Loader2, Mail, MessageSquareText, Send, UserCircle } from "lucide-react";
 
 const ContactComponent = () => {
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const defaultValues: z.infer<typeof ContactSchema> = {
 		name: "",
 		email: "",
@@ -23,41 +25,35 @@ const ContactComponent = () => {
 		resolver: zodResolver(ContactSchema),
 	});
 
-	const onClear = useCallback(
-		function onClear() {
-			reset({
-				name: "",
-				email: "",
-				message: "",
-			});
-			clearErrors();
-		},
-		[clearErrors, reset]
-	);
+	function onClear() {
+		reset({
+			name: "",
+			email: "",
+			message: "",
+		});
+		clearErrors();
+	}
 
-	const onSubmit = useCallback(
-		async function onSubmit(contactData: z.infer<typeof ContactSchema>) {
-			// setIsLoading(true);
-			// const sendMessage = toast.loading("Sending Message...");
-			try {
-				const response = await fetch("/api/contact", {
-					method: "POST",
-					body: JSON.stringify(contactData),
-				});
-				const res = await response.json();
-				if (!response.ok) {
-					throw new Error(res.message);
-				}
-				// toast.success(res.message, { id: sendMessage });
-			} catch (error: unknown) {
-				// toast.error((error as Error)?.message, { id: sendMessage });
-			} finally {
-				// setIsLoading(false);
-				onClear();
+	async function onSubmit(contactData: z.infer<typeof ContactSchema>) {
+		setIsLoading(true);
+		const contactToast = toast.loading("Sending message...");
+		try {
+			const response = await fetch("/api/send", {
+				method: "POST",
+				body: JSON.stringify(contactData),
+			});
+			const res = await response.json();
+			if (!response.ok) {
+				throw new Error(res.message);
 			}
-		},
-		[onClear]
-	);
+			toast.success(res?.message, { id: contactToast });
+		} catch (error: unknown) {
+			toast.error((error as Error)?.message, { id: contactToast });
+		} finally {
+			onClear();
+			setIsLoading(false);
+		}
+	}
 
 	return (
 		<section className={styles["container"]} id="contact">
@@ -138,7 +134,7 @@ const ContactComponent = () => {
 						/>
 					)}
 				/>
-				<Button color="primary" endContent={<Send />} size="lg" type="submit" variant="solid">
+				<Button color="primary" endContent={!isLoading ? <Send /> : undefined} isLoading={isLoading} size="lg" spinner={<Loader2 className="animate-spin" size={16} />} type="submit" variant="solid">
 					{`Send Message`}
 				</Button>
 			</form>

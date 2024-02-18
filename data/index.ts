@@ -1,7 +1,7 @@
 import { project1, project2, project3, project4, project5, project6 } from "@assets";
 
 export const APP_NAME = "MrKJOfficial";
-export const APP_DESCRIPTION = "MrKJOfficial's Portfolio";
+export const APP_DESCRIPTION = "Karan's Portfolio";
 
 export const menuItems: MenuItem[] = [
 	{
@@ -23,9 +23,13 @@ export const menuItems: MenuItem[] = [
 
 export const greeting = "Hello, I'm";
 
+export const firstName = "Karan";
+
+export const lastName = "Jaiswal";
+
 export const intro = ["Karan Jaiswal", 1000, "Web Developer", 1000];
 
-export const subHeading = "Seasoned Web Dev | Passionate Learner | Open to Opportunities | Building for the Future.";
+export const subHeading = "Passionate Learner | Seasoned Web Dev | Building for the Future.";
 
 export const nameInitials = "KJ";
 
