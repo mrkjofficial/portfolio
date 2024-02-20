@@ -3,6 +3,7 @@ import { Toaster } from "sonner";
 import { ReactNode } from "react";
 import type { Metadata } from "next";
 import { Navbar } from "@components";
+import { headers } from "next/headers";
 import { Roboto } from "next/font/google";
 import { APP_DESCRIPTION, APP_NAME } from "@data";
 import { Analytics } from "@vercel/analytics/react";
@@ -24,12 +25,13 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
+	const nonce = headers().get("x-nonce") as string;
 	return (
 		<html lang="en">
-			<meta content="#000000" name="theme-color" />
+			<meta content="#000000" name="theme-color" nonce={nonce} />
 			<body className={roboto.className}>
 				<NextUIProvider>
-					<NextThemesProvider attribute="class" enableSystem>
+					<NextThemesProvider attribute="class" enableSystem nonce={nonce}>
 						<Navbar />
 						{children}
 						<Toaster richColors />
