@@ -34,7 +34,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 					<NextThemesProvider attribute="class" enableSystem nonce={nonce}>
 						<Navbar />
 						{children}
-						<Toaster richColors />
+						<Toaster position="top-right" richColors />
 						<Analytics />
 						<SpeedInsights />
 					</NextThemesProvider>
