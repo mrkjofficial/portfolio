@@ -31,10 +31,10 @@ const ProjectsComponent = () => {
 								<p>{project.description}</p>
 							</div>
 							<div className={styles["cta-section"]}>
-								<Button aria-label="Source Code" as={NextLink} color="default" href={project?.sourceUrl} isIconOnly radius="full" size="sm" variant="light">
+								<Button aria-label="Source Code" as={NextLink} color="default" disabled={project?.disabled} href={project?.sourceUrl} isIconOnly radius="full" size="sm" variant="light">
 									<Code2 size={20} />
 								</Button>
-								<Button aria-label="Preview" as={NextLink} color="default" href={project?.previewUrl} isIconOnly radius="full" size="sm" variant="light">
+								<Button aria-label="Preview" as={NextLink} color="default" disabled={project?.disabled} href={project?.previewUrl} isIconOnly radius="full" size="sm" variant="light">
 									<Eye size={20} />
 								</Button>
 							</div>

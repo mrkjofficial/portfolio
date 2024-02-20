@@ -1,4 +1,4 @@
-import { project1, project2, project3, project4, project5, project6 } from "@assets";
+import { advancegpt, aura } from "@assets";
 
 export const APP_NAME = "MrKJOfficial";
 export const APP_DESCRIPTION = "Karan's Portfolio";
@@ -40,73 +40,147 @@ export const tabs: Tab[] = [
 	{
 		id: 1,
 		title: "Experience",
-		items: ["Full-Stack Developer, Baseel Partners, United Kingdom | Jun 2023 - Present", "Web Developer Intern, Enterprise Minds Inc, India | Jan 2023 - Apr 2023"],
+		items: [
+			{
+				name: "Full-Stack Developer, Baseel Partners, United Kingdom | Jun 2023 - Present",
+				link: "",
+			},
+			{
+				name: "Web Developer Intern, Enterprise Minds Inc, India | Jan 2023 - Apr 2023",
+				link: "",
+			},
+		],
 	},
 	{
 		id: 2,
 		title: "Skills",
-		items: ["JavaScript", "TypeScript", "React.js", "React-Native", "Next.js", "Node.js", "MongoDB", "PostgreSQL", "MySQL", "HTML", "CSS", "SASS", "TailwindCSS", "Git", "Docker", "AWS", "Firebase"],
+		items: [
+			{
+				name: "JavaScript",
+				link: "",
+			},
+			{
+				name: "TypeScript",
+				link: "",
+			},
+			{
+				name: "React.js",
+				link: "",
+			},
+			{
+				name: "React-Native",
+				link: "",
+			},
+			{
+				name: "Next.js",
+				link: "",
+			},
+			{
+				name: "Node.js",
+				link: "",
+			},
+			{
+				name: "MongoDB",
+				link: "",
+			},
+			{
+				name: "PostgreSQL",
+				link: "",
+			},
+			{
+				name: "MySQL",
+				link: "",
+			},
+			{
+				name: "HTML",
+				link: "",
+			},
+			{
+				name: "MongoDB",
+				link: "",
+			},
+			{
+				name: "CSS",
+				link: "",
+			},
+			{
+				name: "SASS",
+				link: "",
+			},
+			{
+				name: "TailwindCSS",
+				link: "",
+			},
+			{
+				name: "Git",
+				link: "",
+			},
+			{
+				name: "AWS",
+				link: "",
+			},
+			{
+				name: "Firebase",
+				link: "",
+			},
+		],
 	},
 	{
 		id: 3,
 		title: "Education",
-		items: ["Master of Computer Applications, Pondicherry University, India | 2021 - 2023", "Bachelor of Computer Applications, Siliguri Institute of Technology, India | 2015 - 2018"],
+		items: [
+			{
+				name: "Master of Computer Applications, Pondicherry University, India | 2021 - 2023",
+				link: "",
+			},
+			{
+				name: "Bachelor of Computer Applications, Siliguri Institute of Technology, India | 2015 - 2018",
+				link: "",
+			},
+		],
 	},
 	{
 		id: 4,
 		title: "Certificates",
-		items: ["React - The Complete Guide 2023 (incl. React Router & Redux)", "JavaScript - The Complete Guide 2023 (Beginner + Advanced)", " CSS - The Complete Guide 2023 (incl. Flexbox, Grid & Sass)"],
+		items: [
+			{
+				name: "React - The Complete Guide 2023 (incl. React Router & Redux) | Udemy | 2023",
+				link: "https://www.udemy.com/certificate/UC-619239f2-a456-4b17-9232-410231afb89c",
+			},
+			{
+				name: "JavaScript - The Complete Guide 2023 (Beginner + Advanced) | Udemy | 2023",
+				link: "https://www.udemy.com/certificate/UC-7fd16e41-3d2f-400a-b17e-4783c5d90db6",
+			},
+			{
+				name: "CSS - The Complete Guide 2023 (incl. Flexbox, Grid & Sass) | Udemy | 2023",
+				link: "https://www.udemy.com/certificate/UC-daa12bca-f6dd-4df5-9078-3e00739a55b9",
+			},
+			{
+				name: "Cybersecurity Essentials | Cisco Networking Academy | 2022",
+				link: "https://www.credly.com/badges/845f5476-7f55-495c-b817-8f6ae555d252",
+			},
+		],
 	},
 ];
 
 export const projects: Project[] = [
 	{
 		id: 1,
-		title: "React Portfolio Website",
-		description: "#react #next #postgres",
-		thumbnail: project1.src,
-		sourceUrl: "http://www.github.com/",
-		previewUrl: "/",
+		title: "AdvanceGPT - AI Chatbot",
+		description: "#firebase #next #openai",
+		thumbnail: advancegpt.src,
+		sourceUrl: "https://github.com/mrkjofficial/AdvanceGPT",
+		previewUrl: "https://advancegpt.mrkjofficial.dev",
+		disabled: true,
 	},
 	{
 		id: 2,
-		title: "Potography Portfolio Website",
-		description: "#react #next #postgres",
-		thumbnail: project2.src,
-		sourceUrl: "http://www.github.com/",
+		title: "Aura - Ecommerce Platform",
+		description: "#react #mongodb #node",
+		thumbnail: aura.src,
+		sourceUrl: "https://github.com/mrkjofficial/Aura",
 		previewUrl: "/",
-	},
-	{
-		id: 3,
-		title: "E-commerce Application",
-		description: "#react #next #postgres",
-		thumbnail: project3.src,
-		sourceUrl: "http://www.github.com/",
-		previewUrl: "/",
-	},
-	{
-		id: 4,
-		title: "Food Ordering Application",
-		description: "#react #next #postgres",
-		thumbnail: project4.src,
-		sourceUrl: "http://www.github.com/",
-		previewUrl: "/",
-	},
-	{
-		id: 5,
-		title: "React Firebase Template",
-		description: "#react #next #postgres",
-		thumbnail: project5.src,
-		sourceUrl: "http://www.github.com/",
-		previewUrl: "/",
-	},
-	{
-		id: 6,
-		title: "Full-stack Roadmap",
-		description: "#react #next #postgres",
-		thumbnail: project6.src,
-		sourceUrl: "http://www.github.com/",
-		previewUrl: "/",
+		disabled: true,
 	},
 ];
 

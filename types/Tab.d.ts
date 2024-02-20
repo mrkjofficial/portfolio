@@ -1,5 +1,5 @@
 type Tab = {
 	id: number;
 	title: string;
-	items: string[];
+	items: ListItem[];
 };

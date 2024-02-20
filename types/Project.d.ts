@@ -5,4 +5,5 @@ type Project = {
 	thumbnail: string;
 	sourceUrl: string;
 	previewUrl: string;
+	disabled: boolean;
 };

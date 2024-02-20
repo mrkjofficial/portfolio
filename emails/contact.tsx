@@ -1,4 +1,4 @@
-import { Body, Container, Head, Heading, Html, Img, Link, Preview, Row, Section, Text } from "@react-email/components";
+import { Body, Container, Font, Head, Heading, Html, Img, Link, Preview, Row, Section, Text } from "@react-email/components";
 
 type ContactProps = {
 	logoURL: string;
@@ -12,9 +12,11 @@ type ContactProps = {
 const Contact = ({ logoURL, senderName, recipientName, message, appURL, appName }: ContactProps) => {
 	return (
 		<Html>
-			<Head />
+			<Head>
+				<Font fallbackFontFamily="Helvetica" fontFamily="Roboto" fontStyle="normal" fontWeight={400} webFont={{ format: "woff2", url: "https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2" }} />
+			</Head>
 			<Preview>{`You got a new message from ${senderName}`}</Preview>
-			<Body style={{ color: "#3F3F46", fontFamily: "Segoe UI" }}>
+			<Body style={{ color: "#3F3F46", fontFamily: "Roboto" }}>
 				<Img alt="logo" height={32} src={logoURL} style={{ margin: "20px auto" }} width={144} />
 				<Container style={{ background: "#F6FAFF", borderRadius: "20px", padding: "24px" }}>
 					<Heading as="h2" style={{ textAlign: "center" }}>{`Message from ${senderName}`}</Heading>

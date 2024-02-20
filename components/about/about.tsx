@@ -32,14 +32,14 @@ const AboutSection = () => {
 					{tabs?.map((tab: Tab) => (
 						<Tab key={tab?.id} title={tab?.title}>
 							<Listbox aria-label="Items" classNames={{ base: styles["listbox-base"], list: tab?.id === 2 && styles["listbox-list"] }} color="default" selectionMode="none" variant="light">
-								{tab?.items?.map((item: string, index: number) => (
-									<ListboxItem classNames={{ base: styles["listbox-item-base"], title: styles["listbox-item-title"] }} isReadOnly key={index} startContent={getStartContent(tab?.id)} textValue={item}>
+								{tab?.items?.map((item: ListItem, index: number) => (
+									<ListboxItem classNames={{ base: styles["listbox-item-base"], title: styles["listbox-item-title"] }} href={item?.link} isReadOnly key={index} startContent={getStartContent(tab?.id)} textValue={item?.name}>
 										{tab?.id === 2 ? (
 											<Chip color="primary" size="lg" variant="flat">
-												{item}
+												{item?.name}
 											</Chip>
 										) : (
-											item
+											item?.name
 										)}
 									</ListboxItem>
 								))}
