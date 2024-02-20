@@ -19,8 +19,8 @@ export async function POST(request: NextRequest) {
 		const data = await list({ limit: 1, prefix: `${path}/logo` });
 		const url = data?.blobs?.at(0)?.url as string;
 
-		await sendMessage(url, name, email, message);
-		await autoReply(url, name, email);
+		const promises = [sendMessage(url, name, email, message), autoReply(url, name, email)];
+		await Promise.all(promises);
 
 		const response = NextResponse.json({ message: "Message sent successfully!" }, { status: 200 });
 		return response;
