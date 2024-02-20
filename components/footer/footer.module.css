@@ -1,0 +1,11 @@
+.container {
+	@apply flex h-24 w-full max-w-screen-2xl flex-col items-center justify-center gap-5 py-10;
+}
+
+.wrapper {
+	@apply flex w-full flex-col items-center justify-center gap-1 xs:flex-row;
+}
+
+.wrapper a {
+	@apply font-medium;
+}

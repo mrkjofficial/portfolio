@@ -1,5 +1,5 @@
 import styles from "./home.module.css";
-import { About, Contact, Hero, Projects } from "@components";
+import { About, Contact, Footer, Hero, Projects } from "@components";
 
 export default function Home() {
 	return (
@@ -8,6 +8,7 @@ export default function Home() {
 			<About />
 			<Projects />
 			<Contact />
+			<Footer />
 		</main>
 	);
 }
