@@ -29,6 +29,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 	return (
 		<html lang="en">
 			<meta content="#000000" name="theme-color" nonce={nonce} />
+			<meta name="probely-verification" content="fcb01181-3f97-4ec5-85d0-7b37afca8622" />
 			<body className={roboto.className}>
 				<NextUIProvider>
 					<NextThemesProvider attribute="class" enableSystem nonce={nonce}>
