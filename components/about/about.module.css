@@ -7,7 +7,7 @@
 }
 
 .placeholder-wrapper img {
-	@apply h-auto w-unit-8xl;
+	@apply h-auto;
 }
 
 .about-wrapper {

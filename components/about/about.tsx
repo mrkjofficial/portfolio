@@ -3,7 +3,7 @@ import NextImage from "next/image";
 import { about, tabs } from "@data";
 import { placeholder } from "@assets";
 import styles from "./about.module.css";
-import { Award, Briefcase, GraduationCap } from "lucide-react";
+import { Briefcase, GraduationCap, Trophy } from "lucide-react";
 import { Chip, Image, Listbox, ListboxItem, Tab, Tabs } from "@nextui-org/react";
 
 const AboutSection = () => {
@@ -14,7 +14,7 @@ const AboutSection = () => {
 			case 3:
 				return <GraduationCap />;
 			case 4:
-				return <Award />;
+				return <Trophy />;
 		}
 	};
 

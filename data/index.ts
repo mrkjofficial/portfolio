@@ -80,11 +80,11 @@ export const tabs: Tab[] = [
 				link: "",
 			},
 			{
-				name: "MongoDB",
+				name: "PostgreSQL",
 				link: "",
 			},
 			{
-				name: "PostgreSQL",
+				name: "MongoDB",
 				link: "",
 			},
 			{
@@ -120,7 +120,7 @@ export const tabs: Tab[] = [
 				link: "",
 			},
 			{
-				name: "Firebase",
+				name: "Springboot",
 				link: "",
 			},
 		],
@@ -143,6 +143,10 @@ export const tabs: Tab[] = [
 		id: 4,
 		title: "Certificates",
 		items: [
+			{
+				name: "Understanding TypeScript | Udemy | 2024",
+				link: "https://www.udemy.com/certificate/UC-f125b8b5-9a82-46c4-879c-4e6b9d1f6669",
+			},
 			{
 				name: "React - The Complete Guide 2023 (incl. React Router & Redux) | Udemy | 2023",
 				link: "https://www.udemy.com/certificate/UC-619239f2-a456-4b17-9232-410231afb89c",
