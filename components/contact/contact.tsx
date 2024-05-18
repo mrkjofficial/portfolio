@@ -76,6 +76,7 @@ const ContactComponent = () => {
 					render={({ field: { onBlur, onChange, ref, value } }) => (
 						<Input
 							errorMessage={formState?.errors?.name?.message}
+							isInvalid={!!formState?.errors?.name}
 							isRequired
 							label="Name"
 							onBlur={onBlur}
@@ -97,6 +98,7 @@ const ContactComponent = () => {
 					render={({ field: { onBlur, onChange, ref, value } }) => (
 						<Input
 							errorMessage={formState?.errors?.email?.message}
+							isInvalid={!!formState?.errors?.email}
 							isRequired
 							label="Email"
 							onBlur={onBlur}
@@ -118,6 +120,7 @@ const ContactComponent = () => {
 					render={({ field: { onBlur, onChange, ref, value } }) => (
 						<Textarea
 							errorMessage={formState?.errors?.message?.message}
+							isInvalid={!!formState?.errors?.message}
 							isRequired
 							label="Message"
 							maxRows={3}
