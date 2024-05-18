@@ -3,7 +3,7 @@ import NextImage from "next/image";
 import { about, tabs } from "@data";
 import { placeholder } from "@assets";
 import styles from "./about.module.css";
-import { Briefcase, GraduationCap, Trophy } from "lucide-react";
+import { Briefcase, GraduationCap, Lightbulb, Trophy } from "lucide-react";
 import { Chip, Image, Listbox, ListboxItem, Tab, Tabs } from "@nextui-org/react";
 
 const AboutSection = () => {
@@ -35,7 +35,7 @@ const AboutSection = () => {
 								{tab?.items?.map((item: ListItem, index: number) => (
 									<ListboxItem classNames={{ base: styles["listbox-item-base"], title: styles["listbox-item-title"] }} href={item?.link} isReadOnly key={index} startContent={getStartContent(tab?.id)} textValue={item?.name}>
 										{tab?.id === 2 ? (
-											<Chip color="primary" size="lg" variant="flat">
+											<Chip color="default" size="lg" startContent={<Lightbulb size={16} />} variant="flat">
 												{item?.name}
 											</Chip>
 										) : (

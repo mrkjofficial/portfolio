@@ -2,9 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+	@apply scrollbar-none;
+}
+
+svg {
+	@apply shrink-0;
+}
+
+
 body input:-webkit-autofill,
 body input:-webkit-autofill:hover,
 body input:-webkit-autofill:focus,
-body input:-webkit-autofill:active {
+body input:-webkit-autofill:active,
+.textarea_base textarea:-webkit-autofill,
+.textarea_base textarea:-webkit-autofill:hover,
+.textarea_base textarea:-webkit-autofill:focus,
+.textarea_base textarea:-webkit-autofill:active {
 	@apply transition-[background-color] delay-[0s] duration-[5000s] ease-[ease-in-out];
 }
