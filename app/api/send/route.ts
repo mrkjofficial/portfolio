@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
 }
 
 async function sendMessage(url: string, name: string, email: string, message: string) {
-	const htmlTemplate = render(
+	const htmlTemplate = await render(
 		Contact({
 			logoURL: url,
 			senderName: name,
@@ -57,7 +57,7 @@ async function sendMessage(url: string, name: string, email: string, message: st
 		{ pretty: true }
 	);
 
-	const textTemplate = render(
+	const textTemplate = await render(
 		Contact({
 			logoURL: url,
 			senderName: name,
@@ -75,12 +75,12 @@ async function sendMessage(url: string, name: string, email: string, message: st
 		subject: `Message from ${name}`,
 		html: htmlTemplate,
 		text: textTemplate,
-		reply_to: email,
+		replyTo: email,
 	});
 }
 
 async function autoReply(url: string, name: string, email: string) {
-	const htmlTemplate = render(
+	const htmlTemplate = await render(
 		Reply({
 			logoURL: url,
 			senderName: firstName,
@@ -91,7 +91,7 @@ async function autoReply(url: string, name: string, email: string) {
 		{ pretty: true }
 	);
 
-	const textTemplate = render(
+	const textTemplate = await render(
 		Reply({
 			logoURL: url,
 			senderName: firstName,
@@ -108,6 +108,6 @@ async function autoReply(url: string, name: string, email: string) {
 		subject: `Message from ${firstName}`,
 		html: htmlTemplate,
 		text: textTemplate,
-		reply_to: process.env.PERSONAL_EMAIL_ADDRESS as string,
+		replyTo: process.env.PERSONAL_EMAIL_ADDRESS as string,
 	});
 }
