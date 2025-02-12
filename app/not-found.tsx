@@ -2,7 +2,7 @@
 import styles from "./notfound.module.css";
 import { useRouter } from "next/navigation";
 import { AlertTriangle } from "lucide-react";
-import { Button, Card, CardBody, CardFooter, Chip } from "@nextui-org/react";
+import { Button, Card, CardBody, CardFooter, Chip } from "@heroui/react";
 
 export default function NotFoundPage() {
 	const router = useRouter();

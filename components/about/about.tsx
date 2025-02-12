@@ -4,7 +4,7 @@ import { about, tabs } from "@data";
 import { placeholder } from "@assets";
 import styles from "./about.module.css";
 import { Briefcase, GraduationCap, Lightbulb, Trophy } from "lucide-react";
-import { Chip, Image, Listbox, ListboxItem, Tab, Tabs } from "@nextui-org/react";
+import { Chip, Image, Listbox, ListboxItem, Tab, Tabs } from "@heroui/react";
 
 const AboutSection = () => {
 	const getStartContent = (tabId: number) => {

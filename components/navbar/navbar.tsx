@@ -7,7 +7,7 @@ import { menuItems } from "@data";
 import { useTheme } from "next-themes";
 import styles from "./navbar.module.css";
 import { Moon, Sun } from "lucide-react";
-import { Button, Link, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Tooltip } from "@nextui-org/react";
+import { Button, Link, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Tooltip } from "@heroui/react";
 
 const NavbarComponent = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);

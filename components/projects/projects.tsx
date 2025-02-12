@@ -5,7 +5,7 @@ import NextImage from "next/image";
 import { Code2, Eye } from "lucide-react";
 import { useMemo, useState } from "react";
 import styles from "./projects.module.css";
-import { Button, Card, CardFooter, Image, Pagination } from "@nextui-org/react";
+import { Button, Card, CardFooter, Image, Pagination } from "@heroui/react";
 
 const ProjectsComponent = () => {
 	const [page, setPage] = useState<number>(1);

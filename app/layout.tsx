@@ -7,7 +7,7 @@ import { headers } from "next/headers";
 import { Roboto } from "next/font/google";
 import { APP_DESCRIPTION, APP_NAME } from "@data";
 import { Analytics } from "@vercel/analytics/react";
-import NextUIProvider from "@providers/NextUIProvider";
+import HeroUIProvider from "@providers/HeroUIProvider";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import NextThemesProvider from "@providers/NextThemesProvider";
 
@@ -24,13 +24,13 @@ export const metadata: Metadata = {
 	title: APP_NAME,
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
-	const nonce = headers().get("x-nonce") as string;
+export default async function RootLayout({ children }: { children: ReactNode }) {
+	const nonce = (await headers()).get("x-nonce") as string;
 	return (
 		<html lang="en">
 			<meta content="#000000" name="theme-color" nonce={nonce} />
 			<body className={roboto.className}>
-				<NextUIProvider>
+				<HeroUIProvider>
 					<NextThemesProvider attribute="class" enableSystem nonce={nonce}>
 						<Navbar />
 						{children}
@@ -38,7 +38,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 						<Analytics />
 						<SpeedInsights />
 					</NextThemesProvider>
-				</NextUIProvider>
+				</HeroUIProvider>
 			</body>
 		</html>
 	);

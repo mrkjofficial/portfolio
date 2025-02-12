@@ -8,7 +8,7 @@ import styles from "./contact.module.css";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ContactSchema } from "@schemas/ContactSchema";
-import { Button, Input, Textarea } from "@nextui-org/react";
+import { Button, Input, Textarea } from "@heroui/react";
 import { Github, Linkedin, Loader2, Mail, MessageSquareText, Send, UserCircle } from "lucide-react";
 
 const ContactComponent = () => {

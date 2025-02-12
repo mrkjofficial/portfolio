@@ -6,7 +6,7 @@ import { useState } from "react";
 import { profile } from "@assets";
 import { Loader2 } from "lucide-react";
 import styles from "./hero.module.css";
-import { Avatar, Button } from "@nextui-org/react";
+import { Avatar, Button } from "@heroui/react";
 import { TypeAnimation } from "react-type-animation";
 import { greeting, intro, nameInitials, subHeading } from "@data";
 
