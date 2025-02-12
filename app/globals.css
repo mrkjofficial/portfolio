@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* * {
-	@apply scrollbar-none;
-} */
-
 svg {
 	@apply shrink-0;
 }
