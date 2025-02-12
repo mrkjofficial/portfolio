@@ -42,7 +42,11 @@ export const tabs: Tab[] = [
 		title: "Experience",
 		items: [
 			{
-				name: "Full-Stack Developer, Baseel Partners, United Kingdom | Jun 2023 - Present",
+				name: "Lead Software Developer, Baseel Partners, United Kingdom | Oct 2024 - Present",
+				link: "",
+			},
+			{
+				name: "Software Developer, Baseel Partners, United Kingdom | Jun 2023 - Sep 2024",
 				link: "",
 			},
 			{
