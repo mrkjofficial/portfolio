@@ -1,6 +1,6 @@
-import type { Config } from "tailwindcss";
 import { heroui } from "@heroui/react";
-import tailwindScrollbar from "tailwind-scrollbar";
+import type { Config } from "tailwindcss";
+// import tailwindScrollbar from "tailwind-scrollbar";
 
 const config: Config = {
 	content: ["./app/**/*.{js,ts,jsx,tsx,mdx}", "./components/**/*.{js,ts,jsx,tsx,mdx}", "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}", "./node_modules/tailwind-datepicker-react/dist/**/*.{js,jsx,ts,tsx}"],
@@ -62,7 +62,7 @@ const config: Config = {
 				},
 			},
 		}),
-		tailwindScrollbar,
+		// tailwindScrollbar,
 	],
 	theme: {
 		extend: {
