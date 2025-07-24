@@ -4,7 +4,6 @@ import Link from "next/link";
 import { toast } from "sonner";
 import { useState } from "react";
 import { outro, socials } from "@data";
-import styles from "./contact.module.css";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ContactSchema } from "@schemas/ContactSchema";
@@ -56,11 +55,11 @@ const ContactComponent = () => {
 	}
 
 	return (
-		<section className={styles["container"]} id="contact">
-			<div className={styles["social-wrapper"]}>
-				<h1>{`Let's Connect`}</h1>
-				<p>{outro}</p>
-				<div className={styles["social-links"]}>
+		<section className="grid w-full max-w-screen-2xl grid-cols-1 place-items-stretch gap-10 py-10 md:grid-cols-2" id="contact">
+			<div className="flex w-full max-w-xl flex-col gap-5 justify-self-center md:justify-self-start">
+				<h1 className="text-xl font-bold">Let&apos;s Connect</h1>
+				<p className="text-default-500">{outro}</p>
+				<div className="flex flex-row gap-2">
 					<Link aria-label="Github" href={socials?.github}>
 						<Github size={32} />
 					</Link>
@@ -69,7 +68,7 @@ const ContactComponent = () => {
 					</Link>
 				</div>
 			</div>
-			<form className={styles["form-wrapper"]} onSubmit={handleSubmit(onSubmit)}>
+			<form className="flex w-full max-w-xl flex-col items-center justify-center gap-5 justify-self-center md:justify-self-end" onSubmit={handleSubmit(onSubmit)}>
 				<Controller
 					name="name"
 					control={control}
@@ -137,8 +136,8 @@ const ContactComponent = () => {
 						/>
 					)}
 				/>
-				<Button color="primary" endContent={!isLoading ? <Send /> : undefined} isLoading={isLoading} size="lg" spinner={<Loader2 className="animate-spin" size={16} />} type="submit" variant="solid">
-					{`Send Message`}
+				<Button className="w-full" color="primary" endContent={!isLoading ? <Send /> : undefined} isLoading={isLoading} size="lg" spinner={<Loader2 className="animate-spin" size={16} />} type="submit" variant="solid">
+					Send Message
 				</Button>
 			</form>
 		</section>

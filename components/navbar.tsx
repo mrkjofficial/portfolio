@@ -5,7 +5,6 @@ import { useState } from "react";
 import NextLink from "next/link";
 import { menuItems } from "@data";
 import { useTheme } from "next-themes";
-import styles from "./navbar.module.css";
 import { Moon, Sun } from "lucide-react";
 import { Button, Link, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Tooltip } from "@heroui/react";
 
@@ -18,24 +17,24 @@ const NavbarComponent = () => {
 	}
 
 	return (
-		<Navbar classNames={{ base: styles["navbar-base"], wrapper: styles["navbar-wrapper"] }} isMenuOpen={isMenuOpen} maxWidth="2xl" onMenuOpenChange={setIsMenuOpen}>
-			<NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} className={styles["navbar-menu-toggle"]} />
+		<Navbar classNames={{ base: "px-6", wrapper: "px-0" }} isMenuOpen={isMenuOpen} maxWidth="2xl" onMenuOpenChange={setIsMenuOpen}>
+			<NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} className="xs:hidden" />
 			<NavbarBrand>
 				<Link as={NextLink} href="/">
-					<Image alt="Logo" className={styles["logo"]} priority={true} src={logo} />
-					<h1>{`MrKJOfficial`}</h1>
+					<Image alt="Logo" className="size-16" priority={true} src={logo} />
+					<h1 className="ml-1 text-xl font-semibold text-primary">MrKJOfficial</h1>
 				</Link>
 			</NavbarBrand>
 			<NavbarContent justify="end">
 				<NavbarItem>
 					<Tooltip color="default" content={theme === "light" ? "Dark Mode" : "Light Mode"} placement="bottom">
 						<Button aria-label="Toggle Theme" color="default" isIconOnly onPress={toggleTheme} size="lg" variant="light">
-							{theme === "light" ? <Moon className={styles["theme-icon"]} /> : <Sun className={styles["theme-icon"]} />}
+							{theme === "light" ? <Moon className="text-foreground" /> : <Sun className="text-foreground" />}
 						</Button>
 					</Tooltip>
 				</NavbarItem>
 				{menuItems?.map((item: MenuItem) => (
-					<NavbarItem className={styles["navbar-item"]} key={item?.id}>
+					<NavbarItem className="hidden xs:list-item" key={item?.id}>
 						<Link as={NextLink} color="foreground" href={item?.path}>
 							{item?.title}
 						</Link>

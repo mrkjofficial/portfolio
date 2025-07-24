@@ -42,7 +42,7 @@ export const tabs: Tab[] = [
 		title: "Experience",
 		items: [
 			{
-				name: "Lead Software Developer, Baseel Partners, United Kingdom | Oct 2024 - Present",
+				name: "Senior Software Developer, Baseel Partners, United Kingdom | Oct 2024 - Present",
 				link: "",
 			},
 			{
@@ -178,7 +178,7 @@ export const projects: Project[] = [
 		description: "#firebase #next #openai",
 		thumbnail: advancegpt.src,
 		sourceUrl: "https://github.com/mrkjofficial/AdvanceGPT",
-		previewUrl: "https://advancegpt.mrkjofficial.dev",
+		previewUrl: "/",
 		disabled: true,
 	},
 	{
