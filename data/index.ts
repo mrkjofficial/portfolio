@@ -43,15 +43,15 @@ export const tabs: Tab[] = [
 		items: [
 			{
 				name: "Senior Software Developer, Baseel Partners, United Kingdom | Oct 2024 - Present",
-				link: "",
+				link: "/",
 			},
 			{
 				name: "Software Developer, Baseel Partners, United Kingdom | Jun 2023 - Sep 2024",
-				link: "",
+				link: "/",
 			},
 			{
 				name: "Web Developer Intern, Enterprise Minds Inc, India | Jan 2023 - Apr 2023",
-				link: "",
+				link: "/",
 			},
 		],
 	},
@@ -61,71 +61,71 @@ export const tabs: Tab[] = [
 		items: [
 			{
 				name: "JavaScript",
-				link: "",
+				link: "/",
 			},
 			{
 				name: "TypeScript",
-				link: "",
+				link: "/",
 			},
 			{
 				name: "React.js",
-				link: "",
+				link: "/",
 			},
 			{
 				name: "React-Native",
-				link: "",
+				link: "/",
 			},
 			{
 				name: "Next.js",
-				link: "",
+				link: "/",
 			},
 			{
 				name: "Node.js",
-				link: "",
+				link: "/",
 			},
 			{
 				name: "PostgreSQL",
-				link: "",
+				link: "/",
 			},
 			{
 				name: "MongoDB",
-				link: "",
+				link: "/",
 			},
 			{
 				name: "MySQL",
-				link: "",
+				link: "/",
 			},
 			{
 				name: "HTML",
-				link: "",
+				link: "/",
 			},
 			{
 				name: "MongoDB",
-				link: "",
+				link: "/",
 			},
 			{
 				name: "CSS",
-				link: "",
+				link: "/",
 			},
 			{
 				name: "SASS",
-				link: "",
+				link: "/",
 			},
 			{
 				name: "TailwindCSS",
-				link: "",
+				link: "/",
 			},
 			{
 				name: "Git",
-				link: "",
+				link: "/",
 			},
 			{
 				name: "AWS",
-				link: "",
+				link: "/",
 			},
 			{
 				name: "Springboot",
-				link: "",
+				link: "/",
 			},
 		],
 	},
@@ -135,11 +135,11 @@ export const tabs: Tab[] = [
 		items: [
 			{
 				name: "Master of Computer Applications, Pondicherry University, India | 2021 - 2023",
-				link: "",
+				link: "/",
 			},
 			{
 				name: "Bachelor of Computer Applications, Siliguri Institute of Technology, India | 2015 - 2018",
-				link: "",
+				link: "/",
 			},
 		],
 	},
