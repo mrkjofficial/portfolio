@@ -27,7 +27,7 @@ export const firstName = "Karan";
 
 export const lastName = "Jaiswal";
 
-export const intro = ["Karan Jaiswal", 1000, "Web Developer", 1000];
+export const intro = ["Karan Jaiswal", 1000, "Full-Stack Developer", 1000];
 
 export const subHeading = "Passionate Learner | Seasoned Web Dev | Building for the Future.";
 
@@ -42,11 +42,11 @@ export const tabs: Tab[] = [
 		title: "Experience",
 		items: [
 			{
-				name: "Senior Software Developer, Baseel Partners, United Kingdom | Oct 2024 - Present",
+				name: "Lead Software Engineer, Baseel Partners, United Kingdom | Oct 2024 - Present",
 				link: "/",
 			},
 			{
-				name: "Software Developer, Baseel Partners, United Kingdom | Jun 2023 - Sep 2024",
+				name: "Software Engineer, Baseel Partners, United Kingdom | Jun 2023 - Sep 2024",
 				link: "/",
 			},
 			{
@@ -92,23 +92,11 @@ export const tabs: Tab[] = [
 				link: "/",
 			},
 			{
-				name: "MySQL",
-				link: "/",
-			},
-			{
 				name: "HTML",
 				link: "/",
 			},
 			{
-				name: "MongoDB",
-				link: "/",
-			},
-			{
 				name: "CSS",
-				link: "/",
-			},
-			{
-				name: "SASS",
 				link: "/",
 			},
 			{
@@ -117,14 +105,6 @@ export const tabs: Tab[] = [
 			},
 			{
 				name: "Git",
-				link: "/",
-			},
-			{
-				name: "AWS",
-				link: "/",
-			},
-			{
-				name: "Springboot",
 				link: "/",
 			},
 		],
@@ -152,15 +132,15 @@ export const tabs: Tab[] = [
 				link: "https://www.udemy.com/certificate/UC-f125b8b5-9a82-46c4-879c-4e6b9d1f6669",
 			},
 			{
-				name: "React - The Complete Guide 2023 (incl. React Router & Redux) | Udemy | 2023",
+				name: "React - The Complete Guide 2023 | Udemy | 2023",
 				link: "https://www.udemy.com/certificate/UC-619239f2-a456-4b17-9232-410231afb89c",
 			},
 			{
-				name: "JavaScript - The Complete Guide 2023 (Beginner + Advanced) | Udemy | 2023",
+				name: "JavaScript - The Complete Guide 2023 | Udemy | 2023",
 				link: "https://www.udemy.com/certificate/UC-7fd16e41-3d2f-400a-b17e-4783c5d90db6",
 			},
 			{
-				name: "CSS - The Complete Guide 2023 (incl. Flexbox, Grid & Sass) | Udemy | 2023",
+				name: "CSS - The Complete Guide 2023 | Udemy | 2023",
 				link: "https://www.udemy.com/certificate/UC-daa12bca-f6dd-4df5-9078-3e00739a55b9",
 			},
 			{
