@@ -27,7 +27,7 @@ export const firstName = "Karan";
 
 export const lastName = "Jaiswal";
 
-export const intro = ["Karan Jaiswal", 1000, "Full-Stack Developer", 1000];
+export const intro = ["Karan Jaiswal", 1000, "Full-Stack Engineer", 1000];
 
 export const subHeading = "Passionate Learner | Seasoned Web Dev | Building for the Future.";
 
