@@ -1,17 +1,21 @@
 import "./globals.css";
-import { Toaster } from "sonner";
 import { ReactNode } from "react";
 import type { Metadata } from "next";
-import { Navbar } from "@components";
+import { Toast } from "@heroui/react";
 import { headers } from "next/headers";
-import { Roboto } from "next/font/google";
+import { Inter } from "next/font/google";
+import Header from "@components/common/header";
+import Footer from "@components/common/footer";
 import { APP_DESCRIPTION, APP_NAME } from "@data";
-import { Analytics } from "@vercel/analytics/react";
-import HeroUIProvider from "@providers/HeroUIProvider";
+import { Analytics } from "@vercel/analytics/next";
+import QueryProvider from "@providers/QueryProvider";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import NextThemesProvider from "@providers/NextThemesProvider";
 
-const roboto = Roboto({ style: ["normal"], subsets: ["latin"], weight: ["100", "300", "400", "500", "700", "900"] });
+const inter = Inter({
+	variable: "--font-inter",
+	subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
 	appleWebApp: { capable: true, startupImage: { url: "/logo.png" }, statusBarStyle: "default", title: APP_NAME },
@@ -24,22 +28,33 @@ export const metadata: Metadata = {
 	title: APP_NAME,
 };
 
-export default async function RootLayout({ children }: { children: ReactNode }) {
+type RootLayoutProps = Readonly<{
+	children: ReactNode;
+}>;
+
+const RootLayout = async ({ children }: RootLayoutProps) => {
 	const nonce = (await headers()).get("x-nonce") as string;
 	return (
-		<html lang="en">
+		<html lang="en" suppressHydrationWarning={true}>
 			<meta content="#000000" name="theme-color" nonce={nonce} />
-			<body className={roboto.className}>
-				<HeroUIProvider>
-					<NextThemesProvider attribute="class" enableSystem nonce={nonce}>
-						<Navbar />
-						{children}
-						<Toaster position="top-right" richColors />
-						<Analytics />
-						<SpeedInsights />
+			<body className={`${inter.variable} antialiased`}>
+				<QueryProvider>
+					<NextThemesProvider attribute="class" defaultTheme="light" enableSystem nonce={nonce}>
+						<Toast.Provider placement="top end" width={400} />
+						<div className="mx-auto max-w-5xl">
+							<main className="xs:px-5 flex min-h-screen w-full flex-col items-center px-2">
+								<Header />
+								{children}
+								<Footer />
+								<Analytics />
+								<SpeedInsights />
+							</main>
+						</div>
 					</NextThemesProvider>
-				</HeroUIProvider>
+				</QueryProvider>
 			</body>
 		</html>
 	);
-}
+};
+
+export default RootLayout;
