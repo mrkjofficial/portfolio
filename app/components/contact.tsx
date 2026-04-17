@@ -71,7 +71,7 @@ const Contact = () => {
 
 	return (
 		<div className="flex w-full flex-col justify-center gap-3" id="contact">
-			<h1 className="text-2xl font-bold">{"Let's Connect"}</h1>
+			<h2 className="text-2xl font-bold">{"Let's Connect"}</h2>
 			<Card className="flex w-full flex-col items-center justify-center overflow-hidden p-0" variant="tertiary">
 				<Card.Content className="flex w-full flex-col items-center justify-center gap-0 p-6">
 					<Form className="flex w-full flex-col items-center justify-center" onSubmit={handleSubmit(values => mutate(values))}>
@@ -90,7 +90,7 @@ const Contact = () => {
 									<div className="text-muted-foreground hidden text-sm sm:flex sm:items-center sm:justify-center md:flex-col lg:flex-row">
 										<Tooltip>
 											<Tooltip.Trigger>
-												<Button isIconOnly onPress={() => router.push(`tel:${about.contact.phone}`)} variant="ghost">
+												<Button aria-label={`Call ${about.contact.phone}`} isIconOnly onPress={() => router.push(`tel:${about.contact.phone}`)} variant="ghost">
 													<Phone />
 												</Button>
 											</Tooltip.Trigger>
@@ -102,7 +102,7 @@ const Contact = () => {
 										<hr className="bg-foreground h-6 w-0.5 md:h-0.5 md:w-6 lg:h-6 lg:w-0.5" />
 										<Tooltip>
 											<Tooltip.Trigger>
-												<Button isIconOnly onPress={() => router.push(`mailto:${about.contact.email}`)} variant="ghost">
+												<Button aria-label={`Email ${about.contact.email}`} isIconOnly onPress={() => router.push(`mailto:${about.contact.email}`)} variant="ghost">
 													<Mail />
 												</Button>
 											</Tooltip.Trigger>

@@ -5,18 +5,18 @@ import { Avatar, Card, Chip } from "@heroui/react";
 const Education = () => {
 	return (
 		<div className="flex w-full flex-col justify-center gap-3" id="education">
-			<h1 className="text-2xl font-bold">Education</h1>
+			<h2 className="text-2xl font-bold">Education</h2>
 			<Card className="flex w-full flex-col items-center justify-center gap-0 px-2 py-3" variant="tertiary">
 				{about.education.map((education, index) => (
 					<Card.Content className="flex w-full flex-col justify-center gap-3 p-3 not-last:border-b" key={index}>
 						<div className="xs:flex-row xs:items-center flex flex-col justify-between gap-4">
 							<div className="flex items-center justify-center gap-2">
 								<Avatar>
-									<Avatar.Image src={education.logo} />
+									<Avatar.Image alt={education.institution} src={education.logo} />
 									<Avatar.Fallback>{education.institution.charAt(0)}</Avatar.Fallback>
 								</Avatar>
 								<div className="flex w-full flex-col justify-center">
-									<h2 className="line-clamp-1 font-semibold break-all">{education.institution}</h2>
+									<h3 className="line-clamp-1 font-semibold break-all">{education.institution}</h3>
 									<p className="text-muted-foreground text-xs">{education.degree}</p>
 								</div>
 							</div>

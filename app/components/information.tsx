@@ -8,7 +8,7 @@ const Information = () => {
 					<div className="xs:w-auto flex w-40 items-center justify-center gap-2" key={info.name}>
 						<info.icon size={40} strokeWidth={1} />
 						<div className="flex flex-col">
-							<h4 className="font-medium">{info.value}</h4>
+							<p className="font-medium">{info.value}</p>
 							<span className="text-muted-foreground text-xs">{info.name}</span>
 						</div>
 					</div>

@@ -7,7 +7,7 @@ import { ExternalLink } from "lucide-react";
 const Projects = () => {
 	return (
 		<div className="flex w-full flex-col justify-center gap-3" id="projects">
-			<h1 className="text-2xl font-bold">Notable Projects</h1>
+			<h2 className="text-2xl font-bold">Notable Projects</h2>
 			<div className="flex w-full flex-col items-center justify-center gap-6">
 				{about.projects.map(project => (
 					<Card key={project.name} variant="tertiary">

@@ -21,12 +21,12 @@ const Header = () => {
 		<header className="bg-background border-border sticky top-0 z-10 w-full border-b">
 			<div className="flex h-16 w-full items-center justify-between gap-2">
 				<div className="flex items-center justify-center gap-1">
-					<Button className="flex md:hidden" variant="ghost" onPress={() => setIsOpen(!isOpen)}>
+					<Button aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"} className="flex md:hidden" variant="ghost" onPress={() => setIsOpen(!isOpen)}>
 						{isOpen ? <X /> : <Menu />}
 					</Button>
 					<Button className="flex items-center gap-0" size="lg" variant="ghost">
 						<Image alt="Logo" height={48} priority={true} src="/logo.png" width={48} />
-						<h1 className="text-accent text-xl font-semibold">MrKJOfficial</h1>
+						<span className="text-accent text-xl font-semibold">MrKJOfficial</span>
 					</Button>
 				</div>
 				<nav className="flex items-center justify-center gap-1">

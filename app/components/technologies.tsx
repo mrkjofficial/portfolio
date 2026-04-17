@@ -8,7 +8,7 @@ const Technologies = () => {
 				<div className="flex w-full flex-col items-center justify-center gap-3" key={tech.name}>
 					<div className="flex w-full items-center gap-1">
 						<tech.icon size={24} />
-						<h4 className="font-semibold">{tech.name}</h4>
+						<p className="font-semibold">{tech.name}</p>
 					</div>
 					<div className="flex w-full flex-wrap items-center gap-3">
 						{tech.skills.map(skill => (

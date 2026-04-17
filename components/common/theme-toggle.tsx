@@ -14,7 +14,7 @@ const ThemeToggle = () => {
 
 	if (mounted) {
 		return (
-			<Switch isSelected={theme === "dark"} size="lg" onChange={toggleTheme}>
+			<Switch aria-label="Toggle dark mode" isSelected={theme === "dark"} size="lg" onChange={toggleTheme}>
 				{({ isSelected }) => (
 					<Switch.Control>
 						<Switch.Thumb>
