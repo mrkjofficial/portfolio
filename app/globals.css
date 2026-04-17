@@ -120,32 +120,6 @@
 	}
 }
 
-@property --rgb-angle {
-	syntax: "<angle>";
-	inherits: true;
-	initial-value: 0deg;
-}
-
-@keyframes rgb-spin {
-	to {
-		--rgb-angle: 360deg;
-	}
-}
-
-.rgb-glow {
-	background: conic-gradient(
-		from var(--rgb-angle),
-		#ff0000 0deg,
-		#ff8c00 14deg,
-		#ffff00 29deg,
-		#00ff88 47deg,
-		#00ffff 65deg,
-		#0088ff 79deg,
-		#8b00ff 90deg,
-		rgb(139 0 255 / 0) 115deg
-	);
-	animation: rgb-spin 4s linear infinite;
-}
 
 @utility container {
 	margin-inline: auto;

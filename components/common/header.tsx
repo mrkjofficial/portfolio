@@ -2,10 +2,11 @@
 import Image from "next/image";
 import { navItems } from "@data";
 import { useState } from "react";
+import { Button } from "@heroui/react";
 import { Menu, X } from "lucide-react";
 import ThemeToggle from "./theme-toggle";
-import { Button, cn } from "@heroui/react";
 import { useRouter } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Header = () => {
 	const router = useRouter();
@@ -30,36 +31,60 @@ const Header = () => {
 				</div>
 				<nav className="flex items-center justify-center gap-1">
 					<ul className="hidden md:flex md:items-center md:justify-center">
-						{navItems.map(navItem => {
+						{navItems.map((navItem, i) => {
 							const Icon = navItem.icon;
 							return (
-								<li key={navItem.label}>
+								<motion.li
+									key={navItem.label}
+									initial={{ opacity: 0, x: -16 }}
+									animate={{ opacity: 1, x: 0 }}
+									whileHover={{ y: -5, scale: 1.03 }}
+									whileTap={{ scale: 0.94 }}
+									transition={{ duration: 0.5, delay: i * 0.12, ease: "easeOut" }}
+								>
 									<Button onPress={() => onNavItemPress(navItem.src)} variant="ghost">
 										<Icon size={16} />
 										{navItem.label}
 									</Button>
-								</li>
+								</motion.li>
 							);
 						})}
 					</ul>
 					<ThemeToggle />
 				</nav>
 			</div>
-			<nav className={cn("border-border bg-background w-full border-t transition-all duration-300 ease-in-out md:hidden", isOpen ? "block" : "hidden")}>
-				<ul className="flex flex-col px-2 py-2">
-					{navItems.map(navItem => {
-						const Icon = navItem.icon;
-						return (
-							<li key={navItem.label}>
-								<Button className="flex w-full items-center justify-start gap-2" onPress={() => onNavItemPress(navItem.src)} variant="ghost">
-									<Icon size={16} />
-									{navItem.label}
-								</Button>
-							</li>
-						);
-					})}
-				</ul>
-			</nav>
+			<AnimatePresence>
+				{isOpen && (
+					<motion.nav
+						className="border-border bg-background w-full border-t md:hidden"
+						initial={{ opacity: 0, height: 0 }}
+						animate={{ opacity: 1, height: "auto" }}
+						exit={{ opacity: 0, height: 0 }}
+						transition={{ duration: 0.3, ease: "easeInOut" }}
+					>
+						<ul className="flex flex-col px-2 py-2">
+							{navItems.map((navItem, i) => {
+								const Icon = navItem.icon;
+								return (
+									<motion.li
+										key={navItem.label}
+										initial={{ opacity: 0, x: -16 }}
+										animate={{ opacity: 1, x: 0 }}
+										whileHover={{ x: 5, scale: 1.03 }}
+										whileTap={{ scale: 0.97 }}
+										transition={{ duration: 0.3, delay: i * 0.06, ease: "easeOut" }}
+									>
+										<Button className="flex w-full items-center justify-start gap-2" onPress={() => onNavItemPress(navItem.src)} variant="ghost">
+											<Icon size={16} />
+											{navItem.label}
+										</Button>
+									</motion.li>
+								);
+							})}
+						</ul>
+					</motion.nav>
+				)}
+			</AnimatePresence>
 		</header>
 	);
 };
