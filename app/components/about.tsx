@@ -6,6 +6,13 @@ import { animate, motion } from "framer-motion";
 import { Avatar, Button, Chip, Surface } from "@heroui/react";
 import HandwritingText from "@/components/common/handwriting-text";
 
+const DURATION = 2.0;
+
+const pseudoRandom = (seed: number) => {
+	const x = Math.sin(seed + 1) * 10000;
+	return x - Math.floor(x);
+};
+
 const About = () => {
 	const router = useRouter();
 	const ringRef = useRef<HTMLDivElement>(null);
@@ -39,14 +46,29 @@ const About = () => {
 				</div>
 			</div>
 			<div className="xs:grid-cols-2 grid w-full grid-cols-1 items-center justify-center gap-3 sm:grid-cols-4 md:grid-cols-1">
-				{about.links.map((link, index) => (
-					<motion.div key={link.name} initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} whileHover={{ y: -5, scale: 1.03 }} whileTap={{ scale: 0.94 }} transition={{ duration: 0.5, delay: index * 0.12, ease: "easeOut" }}>
-						<Button className="w-full" onPress={() => router.push(link.url)} size="lg" variant="outline">
-							<link.icon />
-							{link.name}
-						</Button>
-					</motion.div>
-				))}
+				{about.links.map((link, index) => {
+					const rand = pseudoRandom(index);
+					const shouldAnimate = rand > 0.5;
+					const initialDelay = rand * 8;
+					return (
+						<motion.div
+							key={link.name}
+							initial={{ opacity: 0, y: 32 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							whileHover={{ y: -5, scale: 1.03 }}
+							whileTap={{ scale: 0.94 }}
+							viewport={{ once: true }}
+							transition={{ duration: 0.5, delay: index * 0.12, ease: "easeOut" }}
+						>
+							<Button className="w-full" onPress={() => router.push(link.url)} size="lg" variant="outline">
+								<motion.div animate={shouldAnimate ? { rotate: [0, 360], y: [0, -4, 0] } : {}} transition={{ duration: DURATION, repeat: Infinity, repeatDelay: DURATION, delay: initialDelay, ease: "easeInOut" }}>
+									<link.icon />
+								</motion.div>
+								{link.name}
+							</Button>
+						</motion.div>
+					);
+				})}
 			</div>
 		</Surface>
 	);

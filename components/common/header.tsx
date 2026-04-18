@@ -8,6 +8,13 @@ import ThemeToggle from "./theme-toggle";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 
+const DURATION = 2.0;
+
+const pseudoRandom = (seed: number) => {
+	const x = Math.sin(seed + 1) * 10000;
+	return x - Math.floor(x);
+};
+
 const Header = () => {
 	const router = useRouter();
 	const [isOpen, setIsOpen] = useState(false);
@@ -33,6 +40,9 @@ const Header = () => {
 					<ul className="hidden md:flex md:items-center md:justify-center">
 						{navItems.map((navItem, i) => {
 							const Icon = navItem.icon;
+							const rand = pseudoRandom(i);
+							const shouldAnimate = rand > 0.5;
+							const initialDelay = rand * 8;
 							return (
 								<motion.li
 									key={navItem.label}
@@ -43,7 +53,9 @@ const Header = () => {
 									transition={{ duration: 0.5, delay: i * 0.12, ease: "easeOut" }}
 								>
 									<Button onPress={() => onNavItemPress(navItem.src)} variant="ghost">
-										<Icon size={16} />
+										<motion.div animate={shouldAnimate ? { rotate: [0, 360], y: [0, -4, 0] } : {}} transition={{ duration: DURATION, repeat: Infinity, repeatDelay: DURATION, delay: initialDelay, ease: "easeInOut" }}>
+											<Icon size={16} />
+										</motion.div>
 										{navItem.label}
 									</Button>
 								</motion.li>
@@ -56,7 +68,7 @@ const Header = () => {
 			<AnimatePresence>
 				{isOpen && (
 					<motion.nav
-						className="border-border bg-background w-full border-t md:hidden"
+						className="border-border bg-background z-10 w-full border-t md:hidden"
 						initial={{ opacity: 0, height: 0 }}
 						animate={{ opacity: 1, height: "auto" }}
 						exit={{ opacity: 0, height: 0 }}
@@ -65,6 +77,9 @@ const Header = () => {
 						<ul className="flex flex-col px-2 py-2">
 							{navItems.map((navItem, i) => {
 								const Icon = navItem.icon;
+								const rand = pseudoRandom(i);
+								const shouldAnimate = rand > 0.5;
+								const initialDelay = rand * 8;
 								return (
 									<motion.li
 										key={navItem.label}
@@ -75,7 +90,9 @@ const Header = () => {
 										transition={{ duration: 0.3, delay: i * 0.06, ease: "easeOut" }}
 									>
 										<Button className="flex w-full items-center justify-start gap-2" onPress={() => onNavItemPress(navItem.src)} variant="ghost">
-											<Icon size={16} />
+											<motion.div animate={shouldAnimate ? { rotate: [0, 360], y: [0, -4, 0] } : {}} transition={{ duration: DURATION, repeat: Infinity, repeatDelay: DURATION, delay: initialDelay, ease: "easeInOut" }}>
+												<Icon size={16} />
+											</motion.div>
 											{navItem.label}
 										</Button>
 									</motion.li>
