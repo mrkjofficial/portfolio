@@ -7,6 +7,7 @@ import { Avatar, Button, Chip, Surface } from "@heroui/react";
 import HandwritingText from "@/components/common/handwriting-text";
 
 const DURATION = 2.0;
+const REPEAT_DELAY = 5.0;
 
 const pseudoRandom = (seed: number) => {
 	const x = Math.sin(seed + 1) * 10000;
@@ -47,6 +48,7 @@ const About = () => {
 			</div>
 			<div className="xs:grid-cols-2 grid w-full grid-cols-1 items-center justify-center gap-3 sm:grid-cols-4 md:grid-cols-1">
 				{about.links.map((link, index) => {
+					const Icon = link.icon;
 					const rand = pseudoRandom(index);
 					const shouldAnimate = rand > 0.5;
 					const initialDelay = rand * 8;
@@ -61,8 +63,11 @@ const About = () => {
 							transition={{ duration: 0.5, delay: index * 0.12, ease: "easeOut" }}
 						>
 							<Button className="w-full" onPress={() => router.push(link.url)} size="lg" variant="outline">
-								<motion.div animate={shouldAnimate ? { rotate: [0, 360], y: [0, -4, 0] } : {}} transition={{ duration: DURATION, repeat: Infinity, repeatDelay: DURATION, delay: initialDelay, ease: "easeInOut" }}>
-									<link.icon />
+								<motion.div
+									animate={shouldAnimate ? { rotate: [0, 360], y: [0, -10, 0] } : {}}
+									transition={{ duration: DURATION, repeat: Infinity, repeatType: "reverse", repeatDelay: REPEAT_DELAY, delay: initialDelay, ease: "easeInOut" }}
+								>
+									<Icon />
 								</motion.div>
 								{link.name}
 							</Button>

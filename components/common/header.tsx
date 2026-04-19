@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 
 const DURATION = 2.0;
+const REPEAT_DELAY = 5.0;
 
 const pseudoRandom = (seed: number) => {
 	const x = Math.sin(seed + 1) * 10000;
@@ -53,7 +54,10 @@ const Header = () => {
 									transition={{ duration: 0.5, delay: i * 0.12, ease: "easeOut" }}
 								>
 									<Button onPress={() => onNavItemPress(navItem.src)} variant="ghost">
-										<motion.div animate={shouldAnimate ? { rotate: [0, 360], y: [0, -4, 0] } : {}} transition={{ duration: DURATION, repeat: Infinity, repeatDelay: DURATION, delay: initialDelay, ease: "easeInOut" }}>
+										<motion.div
+											animate={shouldAnimate ? { rotate: [0, 360], y: [0, -10, 0] } : {}}
+											transition={{ duration: DURATION, repeat: Infinity, repeatType: "reverse", repeatDelay: REPEAT_DELAY, delay: initialDelay, ease: "easeInOut" }}
+										>
 											<Icon size={16} />
 										</motion.div>
 										{navItem.label}
@@ -90,7 +94,10 @@ const Header = () => {
 										transition={{ duration: 0.3, delay: i * 0.06, ease: "easeOut" }}
 									>
 										<Button className="flex w-full items-center justify-start gap-2" onPress={() => onNavItemPress(navItem.src)} variant="ghost">
-											<motion.div animate={shouldAnimate ? { rotate: [0, 360], y: [0, -4, 0] } : {}} transition={{ duration: DURATION, repeat: Infinity, repeatDelay: DURATION, delay: initialDelay, ease: "easeInOut" }}>
+											<motion.div
+												animate={shouldAnimate ? { rotate: [0, 360], y: [0, -10, 0] } : {}}
+												transition={{ duration: DURATION, repeat: Infinity, repeatType: "reverse", repeatDelay: REPEAT_DELAY, delay: initialDelay, ease: "easeInOut" }}
+											>
 												<Icon size={16} />
 											</motion.div>
 											{navItem.label}

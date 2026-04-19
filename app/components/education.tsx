@@ -1,13 +1,26 @@
 "use client";
 import { about } from "@data";
+import { useRef } from "react";
 import { CalendarDays } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { Avatar, Card, Chip } from "@heroui/react";
 
+const WORD_STAGGER = 0.08;
+const WORD_DURATION = 0.4;
+
 const Education = () => {
+	const ref = useRef(null);
+	const inView = useInView(ref, { once: true });
+
 	return (
-		<div className="flex w-full flex-col justify-center gap-3" id="education">
-			<h2 className="text-2xl font-bold">Education</h2>
+		<div ref={ref} className="flex w-full flex-col justify-center gap-3" id="education">
+			<h2 className="text-2xl font-bold">
+				{"Education".split(" ").map((word, i) => (
+					<motion.span key={i} className="mr-[0.25em] inline-block" initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: WORD_DURATION, delay: i * WORD_STAGGER, ease: "easeOut" }}>
+						{word}
+					</motion.span>
+				))}
+			</h2>
 			<Card className="flex w-full flex-col items-center justify-center gap-0 px-2 py-3" variant="tertiary">
 				{about.education.map((education, index) => (
 					<Card.Content className="flex w-full flex-col justify-center gap-3 p-3 not-last:border-b" key={index}>

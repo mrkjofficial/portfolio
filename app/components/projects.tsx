@@ -2,15 +2,15 @@
 import Link from "next/link";
 import { about } from "@data";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform, useInView } from "framer-motion";
 import { Card, Chip } from "@heroui/react";
 import { ExternalLink } from "lucide-react";
 
 const WORD_STAGGER = 0.08;
 const WORD_DURATION = 0.4;
-const CHAR_INTERVAL_MS = 50;
-const ICON_DURATION = 2.0;
+const DURATION = 2.0;
+const REPEAT_DELAY = 5.0;
 
 const pseudoRandom = (seed: number) => {
 	const x = Math.sin(seed + 1) * 10000;
@@ -48,31 +48,8 @@ const ThumbnailWithReveal = ({ src, alt }: { src: string; alt: string }) => {
 const ProjectContent = ({ name, description, url, githubUrl }: { name: string; description: string; url: string; githubUrl: string }) => {
 	const ref = useRef(null);
 	const inView = useInView(ref, { once: true });
-	const [displayed, setDisplayed] = useState("");
-	const [typingDone, setTypingDone] = useState(false);
-
 	const words = name.split(" ");
-	const descriptionStart = (words.length - 1) * WORD_STAGGER + WORD_DURATION + 0.1;
-
-	useEffect(() => {
-		if (!inView) return;
-		let interval: ReturnType<typeof setInterval>;
-		const timeout = setTimeout(() => {
-			let i = 0;
-			interval = setInterval(() => {
-				setDisplayed(description.slice(0, i + 1));
-				i++;
-				if (i === description.length) {
-					clearInterval(interval);
-					setTypingDone(true);
-				}
-			}, CHAR_INTERVAL_MS);
-		}, descriptionStart * 1000);
-		return () => {
-			clearTimeout(timeout);
-			clearInterval(interval);
-		};
-	}, [inView, description, descriptionStart]);
+	const descriptionDelay = (words.length - 1) * WORD_STAGGER + WORD_DURATION + 0.1;
 
 	return (
 		<div ref={ref} className="flex w-full flex-col justify-center gap-2">
@@ -90,27 +67,25 @@ const ProjectContent = ({ name, description, url, githubUrl }: { name: string; d
 					</motion.div>
 				</Link>
 			</motion.div>
-			<div className="relative">
-				<p className="text-muted-foreground text-sm opacity-0" aria-hidden>
-					{description}
-				</p>
-				<p className="text-muted-foreground absolute inset-0 text-sm">
-					{displayed}
-					{!typingDone && displayed.length > 0 && (
-						<motion.span animate={{ opacity: [1, 0] }} transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse" }}>
-							|
-						</motion.span>
-					)}
-				</p>
-			</div>
+			<motion.p className="text-muted-foreground text-sm" initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: WORD_DURATION, delay: descriptionDelay, ease: "easeOut" }}>
+				{description}
+			</motion.p>
 		</div>
 	);
 };
 
 const Projects = () => {
+	const ref = useRef(null);
+	const inView = useInView(ref, { once: true });
 	return (
-		<div className="flex w-full flex-col justify-center gap-3" id="projects">
-			<h2 className="text-2xl font-bold">Notable Projects</h2>
+		<div ref={ref} className="flex w-full flex-col justify-center gap-3" id="projects">
+			<h2 className="text-2xl font-bold">
+				{"Notable Projects".split(" ").map((word, i) => (
+					<motion.span key={i} className="mr-[0.25em] inline-block" initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: WORD_DURATION, delay: i * WORD_STAGGER, ease: "easeOut" }}>
+						{word}
+					</motion.span>
+				))}
+			</h2>
 			<div className="flex w-full flex-col items-center justify-center gap-6">
 				{about.projects.map(project => (
 					<Card key={project.name} variant="tertiary">
@@ -122,13 +97,17 @@ const Projects = () => {
 						</Card.Content>
 						<Card.Footer className="flex flex-wrap gap-2">
 							{project.skills.map((skill, j) => {
+								const Icon = skill.icon;
 								const rand = pseudoRandom(j);
 								const shouldAnimate = rand > 0.4;
 								const initialDelay = rand * 8;
 								return (
 									<Chip color="accent" key={skill?.name} variant="soft">
-										<motion.div animate={shouldAnimate ? { rotate: [0, 360], y: [0, -4, 0] } : {}} transition={{ duration: ICON_DURATION, repeat: Infinity, repeatDelay: ICON_DURATION, delay: initialDelay, ease: "easeInOut" }}>
-											<skill.icon className="size-4" />
+										<motion.div
+											animate={shouldAnimate ? { rotate: [0, 360], y: [0, -10, 0] } : {}}
+											transition={{ duration: DURATION, repeat: Infinity, repeatType: "reverse", repeatDelay: REPEAT_DELAY, delay: initialDelay, ease: "easeInOut" }}
+										>
+											<Icon className="size-4" />
 										</motion.div>
 										{skill.name}
 									</Chip>
