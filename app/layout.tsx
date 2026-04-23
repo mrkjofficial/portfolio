@@ -40,6 +40,11 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
 			<body className={`${inter.variable} antialiased`}>
 				<QueryProvider>
 					<NextThemesProvider attribute="class" defaultTheme="light" enableSystem nonce={nonce}>
+						<div className="aurora-bg" aria-hidden="true">
+							<span />
+							<span />
+							<span />
+						</div>
 						<Toast.Provider placement="top end" width={400} />
 						<div className="mx-auto max-w-5xl">
 							<main className="xs:px-5 flex min-h-screen w-full flex-col items-center px-2">

@@ -31,7 +31,7 @@ const About = () => {
 	}, []);
 
 	return (
-		<Surface className="flex h-full max-h-fit w-full flex-col items-center justify-start gap-6 rounded-3xl p-6 md:sticky md:top-22 md:my-6 md:min-h-[calc(100vh-10rem)]">
+		<Surface className="flex h-full max-h-fit w-full flex-col items-center justify-start gap-6 rounded-3xl p-6 md:sticky md:top-22 md:my-6 md:min-h-[calc(100vh-10rem)]" variant="transparent">
 			<div className="relative">
 				<div aria-hidden className="absolute -inset-2 rounded-full opacity-60 blur-xl" ref={glowRef} />
 				<div className="relative rounded-full p-1" ref={ringRef}>

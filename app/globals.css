@@ -93,6 +93,7 @@
 	}
 	body {
 		@apply bg-background text-foreground;
+		isolation: isolate;
 	}
 	svg {
 		@apply shrink-0;
@@ -120,6 +121,116 @@
 	}
 }
 
+/* Aurora Blobs Background */
+.aurora-bg {
+	position: fixed;
+	inset: 0;
+	z-index: -1;
+	overflow: hidden;
+	pointer-events: none;
+}
+
+.aurora-bg span {
+	position: absolute;
+	border-radius: 50%;
+	filter: blur(72px);
+	will-change: transform;
+	mix-blend-mode: multiply;
+}
+
+.dark .aurora-bg span {
+	mix-blend-mode: screen;
+}
+
+.aurora-bg span:nth-child(1) {
+	width: 60vw;
+	height: 60vw;
+	top: -10vh;
+	left: -10vw;
+	background: oklch(72% 0.16 253.83);
+	opacity: 0.55;
+	animation: aurora-drift-1 10s ease-in-out infinite alternate;
+}
+
+.aurora-bg span:nth-child(2) {
+	width: 55vw;
+	height: 55vw;
+	top: 20vh;
+	right: -15vw;
+	background: oklch(68% 0.15 310);
+	opacity: 0.5;
+	animation: aurora-drift-2 14s ease-in-out infinite alternate;
+}
+
+.aurora-bg span:nth-child(3) {
+	width: 50vw;
+	height: 50vw;
+	bottom: -10vh;
+	left: 10vw;
+	background: oklch(72% 0.14 185);
+	opacity: 0.5;
+	animation: aurora-drift-3 8s ease-in-out infinite alternate;
+}
+
+.dark .aurora-bg span:nth-child(1) {
+	background: oklch(45% 0.18 253.83);
+	opacity: 0.8;
+}
+
+.dark .aurora-bg span:nth-child(2) {
+	background: oklch(40% 0.16 310);
+	opacity: 0.75;
+}
+
+.dark .aurora-bg span:nth-child(3) {
+	background: oklch(42% 0.15 185);
+	opacity: 0.75;
+}
+
+@keyframes aurora-drift-1 {
+	0% {
+		transform: translate(0, 0) scale(1);
+	}
+	33% {
+		transform: translate(30vw, 20vh) scale(1.15);
+	}
+	66% {
+		transform: translate(10vw, 40vh) scale(0.88);
+	}
+	100% {
+		transform: translate(40vw, 10vh) scale(1.1);
+	}
+}
+
+@keyframes aurora-drift-2 {
+	0% {
+		transform: translate(0, 0) scale(1);
+	}
+	33% {
+		transform: translate(-25vw, -15vh) scale(1.18);
+	}
+	66% {
+		transform: translate(-10vw, -35vh) scale(0.85);
+	}
+	100% {
+		transform: translate(-30vw, -5vh) scale(1.12);
+	}
+}
+
+@keyframes aurora-drift-3 {
+	0% {
+		transform: translate(0, 0) scale(1);
+	}
+	33% {
+		transform: translate(20vw, -25vh) scale(1.12);
+	}
+	66% {
+		transform: translate(-15vw, -15vh) scale(0.9);
+	}
+	100% {
+		transform: translate(25vw, -30vh) scale(1.08);
+	}
+}
 
 @utility container {
 	margin-inline: auto;

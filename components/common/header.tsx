@@ -26,7 +26,7 @@ const Header = () => {
 	};
 
 	return (
-		<header className="bg-background border-border sticky top-0 z-10 w-full border-b">
+		<header className="border-border sticky top-0 z-10 w-full border-b">
 			<div className="flex h-16 w-full items-center justify-between gap-2">
 				<div className="flex items-center justify-center gap-1">
 					<Button aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"} className="flex md:hidden" variant="ghost" onPress={() => setIsOpen(!isOpen)}>
@@ -71,13 +71,7 @@ const Header = () => {
 			</div>
 			<AnimatePresence>
 				{isOpen && (
-					<motion.nav
-						className="border-border bg-background z-10 w-full border-t md:hidden"
-						initial={{ opacity: 0, height: 0 }}
-						animate={{ opacity: 1, height: "auto" }}
-						exit={{ opacity: 0, height: 0 }}
-						transition={{ duration: 0.3, ease: "easeInOut" }}
-					>
+					<motion.nav className="border-border z-10 w-full border-t md:hidden" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3, ease: "easeInOut" }}>
 						<ul className="flex flex-col px-2 py-2">
 							{navItems.map((navItem, i) => {
 								const Icon = navItem.icon;
