@@ -3,9 +3,9 @@ import Link from "next/link";
 import { about } from "@data";
 import Image from "next/image";
 import { useRef } from "react";
-import { motion, useMotionValue, useSpring, useTransform, useInView } from "framer-motion";
 import { Card, Chip } from "@heroui/react";
 import { ExternalLink } from "lucide-react";
+import { motion, useMotionValue, useSpring, useTransform, useInView } from "framer-motion";
 
 const WORD_STAGGER = 0.08;
 const WORD_DURATION = 0.4;
@@ -88,7 +88,7 @@ const Projects = () => {
 			</h2>
 			<div className="flex w-full flex-col items-center justify-center gap-6">
 				{about.projects.map(project => (
-					<Card key={project.name} variant="tertiary">
+					<Card key={project.name} variant="transparent">
 						<Card.Header className="relative aspect-2/1 w-full overflow-hidden">
 							<ThumbnailWithReveal src={project.thumbnail} alt={project.name} />
 						</Card.Header>
@@ -96,13 +96,13 @@ const Projects = () => {
 							<ProjectContent name={project.name} description={project.description} url={project.url} githubUrl={project.githubUrl} />
 						</Card.Content>
 						<Card.Footer className="flex flex-wrap gap-2">
-							{project.skills.map((skill, j) => {
+							{project.skills.map((skill, index) => {
 								const Icon = skill.icon;
-								const rand = pseudoRandom(j);
+								const rand = pseudoRandom(index);
 								const shouldAnimate = rand > 0.4;
 								const initialDelay = rand * 8;
 								return (
-									<Chip color="accent" key={skill?.name} variant="soft">
+									<Chip color="default" key={skill?.name} variant="soft">
 										<motion.div
 											animate={shouldAnimate ? { rotate: [0, 360], y: [0, -10, 0] } : {}}
 											transition={{ duration: DURATION, repeat: Infinity, repeatType: "reverse", repeatDelay: REPEAT_DELAY, delay: initialDelay, ease: "easeInOut" }}

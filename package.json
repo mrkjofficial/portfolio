@@ -60,5 +60,11 @@
 		"tailwindcss": "^4.2.2",
 		"typescript": "^6.0.2",
 		"typescript-eslint": "^8.58.2"
-	}
+	},
+	"browserslist": [
+		"chrome >= 107",
+		"firefox >= 104",
+		"safari >= 16",
+		"edge >= 107"
+	]
 }

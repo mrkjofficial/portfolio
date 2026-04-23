@@ -86,15 +86,15 @@ const Contact = () => {
 					</motion.span>
 				))}
 			</h2>
-			<Card className="flex w-full flex-col items-center justify-center overflow-hidden p-0" variant="tertiary">
+			<Card className="flex w-full flex-col items-center justify-center overflow-hidden p-0" variant="transparent">
 				<Card.Content className="flex w-full flex-col items-center justify-center gap-0 p-6">
 					<Form className="flex w-full flex-col items-center justify-center" onSubmit={handleSubmit(values => mutate(values))}>
 						<Fieldset className="flex w-full flex-col items-stretch justify-stretch gap-3 sm:flex-row md:flex-col lg:flex-row">
-							<div className="bg-default w-full flex-1 sm:w-1/3 md:w-full lg:w-1/3">
+							<div className="w-full flex-1 sm:w-1/3 md:w-full lg:w-1/3">
 								<div className="flex h-full items-center justify-between gap-2 sm:flex-col md:flex-row lg:flex-col">
 									<div className="flex h-full w-full items-center justify-center gap-2 sm:flex-col md:flex-row lg:flex-col">
 										<motion.div
-											className="bg-background flex size-16 shrink-0 items-center justify-center rounded-full"
+											className="bg-default flex size-16 shrink-0 items-center justify-center rounded-full"
 											initial={{ opacity: 0, x: -30 }}
 											whileInView={{ opacity: 1, x: 0 }}
 											viewport={{ once: true }}
@@ -116,7 +116,7 @@ const Contact = () => {
 										</motion.div>
 									</div>
 									<motion.div
-										className="text-muted-foreground hidden text-sm sm:flex sm:items-center sm:justify-center md:flex-col lg:flex-row"
+										className="text-muted-foreground hidden text-sm sm:flex sm:items-center sm:justify-center sm:gap-1 md:flex-col lg:flex-row"
 										initial={{ opacity: 0, x: -30 }}
 										whileInView={{ opacity: 1, x: 0 }}
 										viewport={{ once: true }}
@@ -124,11 +124,11 @@ const Contact = () => {
 									>
 										<Tooltip>
 											<Tooltip.Trigger>
-												<motion.div whileHover={{ x: [0, -4, 4, -4, 4, 0] }} transition={{ duration: 0.4, ease: "easeInOut" }}>
-													<Button aria-label={`Call ${about.contact.phone}`} isIconOnly onPress={() => router.push(`tel:${about.contact.phone}`)} variant="ghost">
+												<Button aria-label={`Call ${about.contact.phone}`} isIconOnly onPress={() => router.push(`tel:${about.contact.phone}`)} variant="ghost">
+													<motion.div whileHover={{ x: [0, -4, 4, -4, 4, 0] }} transition={{ duration: 0.4, ease: "easeInOut" }}>
 														<Phone />
-													</Button>
-												</motion.div>
+													</motion.div>
+												</Button>
 											</Tooltip.Trigger>
 											<Tooltip.Content>
 												<Tooltip.Arrow />
@@ -138,11 +138,11 @@ const Contact = () => {
 										<hr className="bg-foreground h-6 w-0.5 md:h-0.5 md:w-6 lg:h-6 lg:w-0.5" />
 										<Tooltip>
 											<Tooltip.Trigger>
-												<motion.div whileHover={{ x: [0, -4, 4, -4, 4, 0] }} transition={{ duration: 0.4, ease: "easeInOut" }}>
-													<Button aria-label={`Email ${about.contact.email}`} isIconOnly onPress={() => router.push(`mailto:${about.contact.email}`)} variant="ghost">
+												<Button aria-label={`Email ${about.contact.email}`} isIconOnly onPress={() => router.push(`mailto:${about.contact.email}`)} variant="ghost">
+													<motion.div whileHover={{ x: [0, -4, 4, -4, 4, 0] }} transition={{ duration: 0.4, ease: "easeInOut" }}>
 														<Mail />
-													</Button>
-												</motion.div>
+													</motion.div>
+												</Button>
 											</Tooltip.Trigger>
 											<Tooltip.Content>
 												<Tooltip.Arrow />
@@ -160,7 +160,20 @@ const Contact = () => {
 											name="name"
 											control={control}
 											render={({ field: { onBlur, onChange, ref, value } }) => (
-												<TextField fullWidth id="name" isInvalid={!!formState?.errors?.name} isRequired name="name" onBlur={onBlur} onChange={onChange} ref={ref} validationBehavior="aria" value={value}>
+												<TextField
+													autoComplete="on"
+													fullWidth
+													id="name"
+													isInvalid={!!formState?.errors?.name}
+													isRequired
+													name="name"
+													onBlur={onBlur}
+													onChange={onChange}
+													ref={ref}
+													validationBehavior="aria"
+													value={value}
+													variant="secondary"
+												>
 													<Label>Name</Label>
 													<Input placeholder="Enter your name" />
 													<FieldError>{formState?.errors?.name?.message}</FieldError>
@@ -173,7 +186,20 @@ const Contact = () => {
 											name="email"
 											control={control}
 											render={({ field: { onBlur, onChange, ref, value } }) => (
-												<TextField fullWidth id="email" isInvalid={!!formState?.errors?.email} isRequired name="email" onBlur={onBlur} onChange={onChange} ref={ref} validationBehavior="aria" value={value}>
+												<TextField
+													autoComplete="on"
+													fullWidth
+													id="email"
+													isInvalid={!!formState?.errors?.email}
+													isRequired
+													name="email"
+													onBlur={onBlur}
+													onChange={onChange}
+													ref={ref}
+													validationBehavior="aria"
+													value={value}
+													variant="secondary"
+												>
 													<Label>Email</Label>
 													<Input placeholder="Enter your email" />
 													<FieldError>{formState?.errors?.email?.message}</FieldError>
@@ -186,7 +212,20 @@ const Contact = () => {
 											name="message"
 											control={control}
 											render={({ field: { onBlur, onChange, ref, value } }) => (
-												<TextField fullWidth id="message" isInvalid={!!formState?.errors?.message} isRequired name="message" onBlur={onBlur} onChange={onChange} ref={ref} validationBehavior="aria" value={value}>
+												<TextField
+													autoComplete="on"
+													fullWidth
+													id="message"
+													isInvalid={!!formState?.errors?.message}
+													isRequired
+													name="message"
+													onBlur={onBlur}
+													onChange={onChange}
+													ref={ref}
+													validationBehavior="aria"
+													value={value}
+													variant="secondary"
+												>
 													<Label>Message</Label>
 													<TextArea className="resize-none" placeholder="Enter your message here" rows={4} />
 													<FieldError>{formState?.errors?.message?.message}</FieldError>

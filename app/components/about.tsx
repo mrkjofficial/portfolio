@@ -37,7 +37,7 @@ const About = () => {
 				<div className="relative rounded-full p-1" ref={ringRef}>
 					<div className="bg-background relative rounded-full p-0.5">
 						<Avatar className="size-48">
-							<Avatar.Image alt={about.name} src={about.avatarUrl} />
+							<Avatar.Image alt={about.name} fetchPriority="high" loading="eager" src={about.avatarUrl} />
 							<Avatar.Fallback className="text-7xl" />
 						</Avatar>
 						<Chip className="absolute right-0 bottom-0 z-50" color="default" size="lg" variant="secondary">

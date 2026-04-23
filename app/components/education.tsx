@@ -21,7 +21,7 @@ const Education = () => {
 					</motion.span>
 				))}
 			</h2>
-			<Card className="flex w-full flex-col items-center justify-center gap-0 px-2 py-3" variant="tertiary">
+			<Card className="flex w-full flex-col items-center justify-center gap-0 px-2 py-3" variant="transparent">
 				{about.education.map((education, index) => (
 					<Card.Content className="flex w-full flex-col justify-center gap-3 p-3 not-last:border-b" key={index}>
 						<div className="xs:flex-row xs:items-center flex flex-col justify-between gap-4">
