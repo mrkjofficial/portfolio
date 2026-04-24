@@ -26,7 +26,7 @@ const Header = () => {
 	};
 
 	return (
-		<header className="border-border sticky top-0 z-10 w-full border-b">
+		<header className="border-border sticky top-0 z-10 w-full border-b backdrop-blur-xl">
 			<div className="flex h-16 w-full items-center justify-between gap-2">
 				<div className="flex items-center justify-center gap-1">
 					<Button aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"} className="flex md:hidden" variant="ghost" onPress={() => setIsOpen(!isOpen)}>
