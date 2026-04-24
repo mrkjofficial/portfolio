@@ -38,8 +38,8 @@ const ThumbnailWithReveal = ({ src, alt }: { src: string; alt: string }) => {
 
 	return (
 		<div style={{ perspective: 800 }} className="h-full w-full">
-			<motion.div ref={ref} className="relative h-full w-full" style={{ rotateX, rotateY, transformStyle: "preserve-3d" }} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
-				<Image alt={alt} className="border-border rounded-3xl border" fill={true} sizes="100vw, (min-width: 768px) 640px" src={src} />
+			<motion.div ref={ref} className="border-border relative h-full w-full overflow-hidden rounded-3xl border" style={{ rotateX, rotateY, transformStyle: "preserve-3d" }} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
+				<Image alt={alt} className="rounded-3xl" fill={true} sizes="100vw, (min-width: 768px) 640px" src={src} />
 			</motion.div>
 		</div>
 	);
@@ -57,7 +57,7 @@ const ProjectContent = ({ name, description, url, githubUrl }: { name: string; d
 				<Link className="flex items-center gap-1" href={url || githubUrl} target="_blank" rel="noreferrer noopener">
 					<motion.h3 className="font-semibold" variants={{ hover: { scale: 1.05 } }} transition={{ duration: 0.2, ease: "easeOut" }}>
 						{words.map((word, i) => (
-							<motion.span key={i} className="mr-[0.25em] inline-block" initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: WORD_DURATION, delay: i * WORD_STAGGER, ease: "easeOut" }}>
+							<motion.span key={i} className="mr-1 inline-block" initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: WORD_DURATION, delay: i * WORD_STAGGER, ease: "easeOut" }}>
 								{word}
 							</motion.span>
 						))}
@@ -81,7 +81,7 @@ const Projects = () => {
 		<div ref={ref} className="flex w-full flex-col justify-center gap-3" id="projects">
 			<h2 className="text-2xl font-bold">
 				{"Notable Projects".split(" ").map((word, i) => (
-					<motion.span key={i} className="mr-[0.25em] inline-block" initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: WORD_DURATION, delay: i * WORD_STAGGER, ease: "easeOut" }}>
+					<motion.span key={i} className="mr-1 inline-block" initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: WORD_DURATION, delay: i * WORD_STAGGER, ease: "easeOut" }}>
 						{word}
 					</motion.span>
 				))}
@@ -89,7 +89,7 @@ const Projects = () => {
 			<div className="flex w-full flex-col items-center justify-center gap-6">
 				{about.projects.map(project => (
 					<Card key={project.name} variant="transparent">
-						<Card.Header className="relative aspect-2/1 w-full overflow-hidden">
+						<Card.Header className="relative aspect-2/1 w-full">
 							<ThumbnailWithReveal src={project.thumbnail} alt={project.name} />
 						</Card.Header>
 						<Card.Content>

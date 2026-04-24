@@ -1,10 +1,10 @@
 "use client";
 import { about } from "@data";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { animate, motion } from "framer-motion";
 import { Avatar, Button, Chip, Surface } from "@heroui/react";
-import HandwritingText from "@/components/common/handwriting-text";
+import HandwritingText from "@components/common/handwriting-text";
+import { animate, motion, useMotionTemplate, useMotionValue } from "framer-motion";
 
 const DURATION = 2.0;
 const REPEAT_DELAY = 5.0;
@@ -16,25 +16,19 @@ const pseudoRandom = (seed: number) => {
 
 const About = () => {
 	const router = useRouter();
-	const ringRef = useRef<HTMLDivElement>(null);
-	const glowRef = useRef<HTMLDivElement>(null);
+	const rotation = useMotionValue(0);
+	const gradient = useMotionTemplate`conic-gradient(from ${rotation}deg, var(--danger) 0deg, var(--warning) 40deg, var(--success) 80deg, var(--accent) 110deg, transparent 140deg)`;
 
 	useEffect(() => {
-		const setGradient = (value: number) => {
-			const bg = `conic-gradient(from ${value}deg, var(--danger) 0deg, var(--warning) 40deg, var(--success) 80deg, var(--accent) 110deg, transparent 140deg)`;
-			if (ringRef.current) ringRef.current.style.background = bg;
-			if (glowRef.current) glowRef.current.style.background = bg;
-		};
-		setGradient(0);
-		const controls = animate(0, 360, { duration: 4, repeat: Infinity, ease: "linear", onUpdate: setGradient });
+		const controls = animate(rotation, [0, 360], { duration: 4, repeat: Infinity, ease: "linear" });
 		return () => controls.stop();
-	}, []);
+	}, [rotation]);
 
 	return (
 		<Surface className="flex h-full max-h-fit w-full flex-col items-center justify-start gap-6 rounded-3xl p-6 md:sticky md:top-22 md:my-6 md:min-h-[calc(100vh-10rem)]" variant="transparent">
 			<div className="relative">
-				<div aria-hidden className="absolute -inset-2 rounded-full opacity-60 blur-xl" ref={glowRef} />
-				<div className="relative rounded-full p-1" ref={ringRef}>
+				<motion.div aria-hidden className="absolute -inset-2 rounded-full opacity-60 blur-xl" style={{ background: "conic-gradient(from 0deg, var(--danger) 0deg, var(--warning) 40deg, var(--success) 80deg, var(--accent) 110deg, transparent 140deg)", rotate: rotation }} />
+				<motion.div className="relative rounded-full p-1" style={{ background: gradient }}>
 					<div className="bg-background relative rounded-full p-0.5">
 						<Avatar className="size-48">
 							<Avatar.Image alt={about.name} fetchPriority="high" loading="eager" src={about.avatarUrl} />
@@ -44,7 +38,7 @@ const About = () => {
 							<HandwritingText className="h-5" font="/fonts/dancing-script.ttf" text={about.name} />
 						</Chip>
 					</div>
-				</div>
+				</motion.div>
 			</div>
 			<div className="xs:grid-cols-2 grid w-full grid-cols-1 items-center justify-center gap-3 sm:grid-cols-4 md:grid-cols-1">
 				{about.links.map((link, index) => {

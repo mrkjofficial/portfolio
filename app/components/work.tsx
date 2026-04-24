@@ -15,7 +15,7 @@ const Work = () => {
 		<div ref={ref} className="flex w-full flex-col justify-center gap-3" id="work">
 			<h2 className="text-2xl font-bold">
 				{"Work Experience".split(" ").map((word, i) => (
-					<motion.span key={i} className="mr-[0.25em] inline-block" initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: WORD_DURATION, delay: i * WORD_STAGGER, ease: "easeOut" }}>
+					<motion.span key={i} className="mr-1 inline-block" initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: WORD_DURATION, delay: i * WORD_STAGGER, ease: "easeOut" }}>
 						{word}
 					</motion.span>
 				))}
@@ -35,7 +35,7 @@ const Work = () => {
 								</div>
 							</motion.div>
 							<motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}>
-								<Chip color="accent" size="lg" variant="soft">
+								<Chip color="default" variant="soft">
 									<CalendarDays size={16} />
 									{work.startDate} - {work.endDate}
 								</Chip>

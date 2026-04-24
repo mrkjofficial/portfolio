@@ -60,4 +60,4 @@ SVG icons are React components in [assets/icons/](assets/icons/) and re-exported
 - Tailwind CSS 4 via PostCSS — no `tailwind.config.js`, configuration is in CSS or `postcss.config.mjs`
 - Prettier is configured with tabs (not spaces) and 320-char line width with the Tailwind plugin
 - HeroUI component library for pre-built UI primitives
-- Path alias `@/*` maps to the project root
+- Path alias `@*` maps to the project root

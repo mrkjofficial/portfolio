@@ -46,7 +46,7 @@ const Introduction = () => {
 		<div ref={ref} className="flex w-full flex-col gap-3" id="home">
 			<h1 className="text-2xl font-bold">
 				{headlineWords.map((word, i) => (
-					<motion.span key={i} className="mr-[0.25em] inline-block" initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: WORD_DURATION, delay: i * WORD_STAGGER, ease: "easeOut" }}>
+					<motion.span key={i} className="mr-1 inline-block" initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: WORD_DURATION, delay: i * WORD_STAGGER, ease: "easeOut" }}>
 						{word}
 					</motion.span>
 				))}
@@ -55,7 +55,7 @@ const Introduction = () => {
 				{subheadlineWords.map((word, i) => (
 					<motion.span
 						key={i}
-						className="mr-[0.25em] inline-block"
+						className="mr-1 inline-block"
 						initial={{ opacity: 0, x: -20 }}
 						animate={inView ? { opacity: 1, x: 0 } : {}}
 						transition={{ duration: WORD_DURATION, delay: subheadlineStart + i * WORD_STAGGER, ease: "easeOut" }}

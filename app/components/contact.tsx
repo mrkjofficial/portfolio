@@ -8,9 +8,10 @@ import { useRouter } from "next/navigation";
 import { ContactSchema } from "@schemas/contact";
 import { motion, useInView } from "framer-motion";
 import { useMutation } from "@tanstack/react-query";
+import FlyingRocket from "@components/common/rocket";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
-import { CheckCircle, LoaderCircle, Mail, Phone, Send, XCircle } from "lucide-react";
+import { CheckCircle, LoaderCircle, Mail, Phone, XCircle } from "lucide-react";
 import { Button, Card, Description, FieldError, FieldGroup, Fieldset, Form, Input, Label, TextArea, TextField, toast, Tooltip } from "@heroui/react";
 
 const WORD_STAGGER = 0.08;
@@ -81,7 +82,7 @@ const Contact = () => {
 		<div ref={ref} className="flex w-full flex-col justify-center gap-3" id="contact">
 			<h2 className="text-2xl font-bold">
 				{"Let's Connect".split(" ").map((word, i) => (
-					<motion.span key={i} className="mr-[0.25em] inline-block" initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: WORD_DURATION, delay: i * WORD_STAGGER, ease: "easeOut" }}>
+					<motion.span key={i} className="mr-1 inline-block" initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: WORD_DURATION, delay: i * WORD_STAGGER, ease: "easeOut" }}>
 						{word}
 					</motion.span>
 				))}
@@ -236,9 +237,9 @@ const Contact = () => {
 								</FieldGroup>
 								<motion.div className="w-full" initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.3, ease: "easeOut" }}>
 									<Fieldset.Actions className="w-full">
-										<Button className="w-full" isDisabled={isPending} type="submit">
+										<Button className="w-full" isDisabled={isPending} type="submit" variant="outline">
 											{isPending ? "Sending..." : "Send"}
-											<Send size={16} />
+											<FlyingRocket show={isPending} />
 										</Button>
 									</Fieldset.Actions>
 								</motion.div>
