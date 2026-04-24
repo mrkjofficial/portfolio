@@ -12,7 +12,7 @@ import FlyingRocket from "@components/common/rocket";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { CheckCircle, LoaderCircle, Mail, Phone, XCircle } from "lucide-react";
-import { Button, Card, Description, FieldError, FieldGroup, Fieldset, Form, Input, Label, TextArea, TextField, toast, Tooltip } from "@heroui/react";
+import { Button, Card, Description, FieldError, FieldGroup, Fieldset, Form, Input, Label, Separator, TextArea, TextField, toast, Tooltip } from "@heroui/react";
 
 const WORD_STAGGER = 0.08;
 const WORD_DURATION = 0.4;
@@ -136,7 +136,7 @@ const Contact = () => {
 												{about.contact.phone}
 											</Tooltip.Content>
 										</Tooltip>
-										<hr className="bg-foreground h-6 w-0.5 md:h-0.5 md:w-6 lg:h-6 lg:w-0.5" />
+										<Separator className="h-6 w-0.5 md:h-0.5 md:w-6 lg:h-6 lg:w-0.5" />
 										<Tooltip>
 											<Tooltip.Trigger>
 												<Button aria-label={`Email ${about.contact.email}`} isIconOnly onPress={() => router.push(`mailto:${about.contact.email}`)} variant="ghost">
