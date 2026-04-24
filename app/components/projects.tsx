@@ -2,9 +2,9 @@
 import Link from "next/link";
 import { about } from "@data";
 import Image from "next/image";
-import { useRef } from "react";
 import { Card, Chip } from "@heroui/react";
 import { ExternalLink } from "lucide-react";
+import { type MouseEvent, useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform, useInView } from "framer-motion";
 
 const WORD_STAGGER = 0.08;
@@ -24,7 +24,7 @@ const ThumbnailWithReveal = ({ src, alt }: { src: string; alt: string }) => {
 	const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [12, -12]), { stiffness: 300, damping: 30 });
 	const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-12, 12]), { stiffness: 300, damping: 30 });
 
-	const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+	const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
 		const rect = ref.current?.getBoundingClientRect();
 		if (!rect) return;
 		mouseX.set((e.clientX - rect.left) / rect.width - 0.5);
@@ -102,7 +102,7 @@ const Projects = () => {
 								const shouldAnimate = rand > 0.4;
 								const initialDelay = rand * 8;
 								return (
-									<Chip color="default" key={skill?.name} variant="soft">
+									<Chip className="gap-1 whitespace-nowrap" color="default" key={skill?.name} size="lg" variant="soft">
 										<motion.div
 											animate={shouldAnimate ? { rotate: [0, 360], y: [0, -10, 0] } : {}}
 											transition={{ duration: DURATION, repeat: Infinity, repeatType: "reverse", repeatDelay: REPEAT_DELAY, delay: initialDelay, ease: "easeInOut" }}

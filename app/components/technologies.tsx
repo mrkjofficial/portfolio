@@ -40,7 +40,7 @@ const Technologies = () => {
 								const initialDelay = rand * 8;
 								return (
 									<motion.div key={skill.name} initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: j * 0.05, ease: "easeOut" }}>
-										<Chip className="gap-1" color="default" variant="soft">
+										<Chip className="gap-1 whitespace-nowrap" color="default" size="lg" variant="soft">
 											<motion.div
 												animate={shouldAnimate ? { rotate: [0, 360], y: [0, -10, 0] } : {}}
 												transition={{ duration: DURATION, repeat: Infinity, repeatType: "reverse", repeatDelay: REPEAT_DELAY, delay: initialDelay, ease: "easeInOut" }}

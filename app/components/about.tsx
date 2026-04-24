@@ -2,7 +2,7 @@
 import { about } from "@data";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Avatar, Button, Chip, Surface } from "@heroui/react";
+import { Avatar, Button, Chip } from "@heroui/react";
 import HandwritingText from "@components/common/handwriting-text";
 import { animate, motion, useMotionTemplate, useMotionValue } from "framer-motion";
 
@@ -25,9 +25,13 @@ const About = () => {
 	}, [rotation]);
 
 	return (
-		<Surface className="flex h-full max-h-fit w-full flex-col items-center justify-start gap-6 rounded-3xl p-6 md:sticky md:top-22 md:my-6 md:min-h-[calc(100vh-10rem)]" variant="transparent">
+		<section className="flex h-full max-h-fit w-full flex-col items-center justify-start gap-6 rounded-3xl p-6 md:sticky md:top-22 md:my-6 md:h-[calc(100vh-7rem)] md:min-h-[calc(100vh-10rem)] md:w-1/3">
 			<div className="relative">
-				<motion.div aria-hidden className="absolute -inset-2 rounded-full opacity-60 blur-xl" style={{ background: "conic-gradient(from 0deg, var(--danger) 0deg, var(--warning) 40deg, var(--success) 80deg, var(--accent) 110deg, transparent 140deg)", rotate: rotation }} />
+				<motion.div
+					aria-hidden
+					className="absolute -inset-2 rounded-full opacity-60 blur-xl"
+					style={{ background: "conic-gradient(from 0deg, var(--danger) 0deg, var(--warning) 40deg, var(--success) 80deg, var(--accent) 110deg, transparent 140deg)", rotate: rotation }}
+				/>
 				<motion.div className="relative rounded-full p-1" style={{ background: gradient }}>
 					<div className="bg-background relative rounded-full p-0.5">
 						<Avatar className="size-48">
@@ -69,7 +73,7 @@ const About = () => {
 					);
 				})}
 			</div>
-		</Surface>
+		</section>
 	);
 };
 

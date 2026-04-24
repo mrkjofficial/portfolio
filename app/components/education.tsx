@@ -24,7 +24,7 @@ const Education = () => {
 			<Card className="flex w-full flex-col items-center justify-center gap-0 px-2 py-3" variant="transparent">
 				{about.education.map((education, index) => (
 					<Card.Content className="flex w-full flex-col justify-center gap-3 p-3 not-last:border-b" key={index}>
-						<div className="xs:flex-row xs:items-center flex flex-col justify-between gap-4">
+						<div className="xs:flex-row flex flex-col justify-between gap-4">
 							<motion.div className="flex items-center justify-center gap-2" initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, ease: "easeOut" }}>
 								<Avatar>
 									<Avatar.Image alt={education.institution} src={education.logo} />
@@ -36,7 +36,7 @@ const Education = () => {
 								</div>
 							</motion.div>
 							<motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}>
-								<Chip color="default" variant="soft">
+								<Chip className="whitespace-nowrap" color="default" size="lg" variant="soft">
 									<CalendarDays size={16} />
 									{education.startDate} - {education.endDate}
 								</Chip>

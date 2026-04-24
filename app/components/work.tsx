@@ -35,7 +35,7 @@ const Work = () => {
 								</div>
 							</motion.div>
 							<motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}>
-								<Chip color="default" variant="soft">
+								<Chip className="whitespace-nowrap" color="default" size="lg" variant="soft">
 									<CalendarDays size={16} />
 									{work.startDate} - {work.endDate}
 								</Chip>
