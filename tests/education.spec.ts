@@ -56,8 +56,8 @@ test.describe("Education Section", () => {
 
 	test("institution logos are rendered", async ({ page }) => {
 		await page.evaluate(() => document.getElementById("education")?.scrollIntoView());
-		await page.waitForTimeout(300);
 		const logos = page.locator("#education img");
+		await expect(logos.first()).toBeVisible({ timeout: 5000 });
 		const count = await logos.count();
 		expect(count).toBeGreaterThan(0);
 	});

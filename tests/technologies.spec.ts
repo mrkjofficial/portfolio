@@ -6,11 +6,14 @@ test.describe("Technologies Section", () => {
 	});
 
 	test("AI/ML category heading is displayed", async ({ page }) => {
-		await expect(page.getByRole("heading", { name: "AI/ML" })).toBeVisible();
+		// Category names are now <p> tags (changed from <h4>); match by text content
+		await expect(page.getByText("AI/ML", { exact: true })).toBeVisible();
 	});
 
 	test("Web category heading is displayed", async ({ page }) => {
-		await expect(page.getByRole("heading", { name: "Web", exact: true })).toBeVisible();
+		// Category names are now <p> tags (changed from <h4>); match by text content
+		// Exact match avoids "Web Development Intern" in the work section
+		await expect(page.getByText("Web", { exact: true })).toBeVisible();
 	});
 
 	// AI/ML skills
@@ -62,5 +65,9 @@ test.describe("Technologies Section", () => {
 
 	test("Zod skill chip is displayed", async ({ page }) => {
 		await expect(page.getByText("Zod").first()).toBeVisible();
+	});
+
+	test("MINIO skill chip is displayed", async ({ page }) => {
+		await expect(page.getByText("MINIO").first()).toBeVisible();
 	});
 });

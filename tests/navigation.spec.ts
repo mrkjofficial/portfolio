@@ -73,21 +73,23 @@ test.describe("Mobile Navigation", () => {
 	});
 
 	test("mobile menu is closed by default", async ({ page }) => {
-		const mobileNav = page.locator("header nav").last();
-		await expect(mobileNav).toBeHidden();
+		// The mobile nav is conditionally mounted by AnimatePresence (not in DOM when closed).
+		// The always-visible header <nav> (which holds the ThemeToggle) is always present, so
+		// "header nav.last()" would wrongly resolve to it. Use the md:hidden class that only
+		// the mobile nav has — toBeHidden passes when the locator finds 0 elements.
+		await expect(page.locator("header nav.md\\:hidden")).toBeHidden();
 	});
 
 	test("clicking hamburger opens mobile menu", async ({ page }) => {
 		const hamburger = page.locator("header").locator("button").first();
 		await hamburger.click();
-		const mobileNav = page.locator("header nav").last();
-		await expect(mobileNav).toBeVisible();
+		await expect(page.locator("header nav.md\\:hidden")).toBeVisible();
 	});
 
 	test("mobile menu shows all 5 navigation items when open", async ({ page }) => {
 		const hamburger = page.locator("header").locator("button").first();
 		await hamburger.click();
-		const mobileNav = page.locator("header nav").last();
+		const mobileNav = page.locator("header nav.md\\:hidden");
 		for (const label of ["Home", "Projects", "Work", "Education", "Contact"]) {
 			await expect(mobileNav.getByText(label)).toBeVisible();
 		}
@@ -97,23 +99,23 @@ test.describe("Mobile Navigation", () => {
 		const hamburger = page.locator("header").locator("button").first();
 		await hamburger.click();
 		await hamburger.click();
-		const mobileNav = page.locator("header nav").last();
-		await expect(mobileNav).toBeHidden();
+		// Mobile nav is removed from DOM by AnimatePresence; locator finds 0 elements → hidden
+		await expect(page.locator("header nav.md\\:hidden")).toBeHidden();
 	});
 
 	test("clicking a mobile nav item closes the menu", async ({ page }) => {
 		const hamburger = page.locator("header").locator("button").first();
 		await hamburger.click();
-		const mobileNav = page.locator("header nav").last();
+		const mobileNav = page.locator("header nav.md\\:hidden");
 		await mobileNav.getByText("Projects").click();
-		await expect(mobileNav).toBeHidden();
+		await expect(page.locator("header nav.md\\:hidden")).toBeHidden();
 		await expect(page).toHaveURL(/#projects/);
 	});
 
 	test("clicking a mobile nav item navigates to correct section", async ({ page }) => {
 		const hamburger = page.locator("header").locator("button").first();
 		await hamburger.click();
-		await page.locator("header nav").last().getByText("Contact").click();
+		await page.locator("header nav.md\\:hidden").getByText("Contact").click();
 		await expect(page).toHaveURL(/#contact/);
 	});
 });

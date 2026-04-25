@@ -6,26 +6,40 @@ test.describe("Introduction Section", () => {
 	});
 
 	test("headline is displayed", async ({ page }) => {
-		await expect(page.getByText("I turn your ideas into reality")).toBeVisible();
+		// Headline words are rendered as individual motion.span elements; textContent has no
+		// spaces between words ("Iturnyourideasintoreality"). Check the h1 is visible and the
+		// word "reality" (unique to this headline) is present as a substring.
+		const h1 = page.locator("#home h1");
+		await expect(h1).toBeVisible();
+		await expect(h1).toContainText("reality");
 	});
 
 	test("subheadline is displayed", async ({ page }) => {
-		await expect(page.getByText("Lead Software Engineer | Architect | Full-Stack Specialist")).toBeVisible();
+		// Subheadline words are individual motion.span elements; textContent has no spaces
+		// ("LeadSoftwareEngineer|Architect|Full-StackSpecialist"). Check the p is visible
+		// and "Specialist" (unique suffix substring) is present.
+		const subheadline = page.locator("#home p.font-semibold");
+		await expect(subheadline).toBeVisible();
+		await expect(subheadline).toContainText("Specialist");
 	});
 
 	test("description contains greeting", async ({ page }) => {
-		// Use a unique substring from the description that avoids apostrophe encoding issues
-		await expect(page.getByText(/Frontend-heavy Full-Stack Engineer/)).toBeVisible();
+		// The description is typed character-by-character. The aria-hidden ghost paragraph
+		// always holds the complete text; use toContainText (no visibility check needed).
+		await expect(page.locator("p.whitespace-pre-line[aria-hidden]")).toContainText("Frontend-heavy Full-Stack Engineer");
 	});
 
 	test("description mentions Full-Stack Engineer", async ({ page }) => {
-		// Target the description paragraph specifically (not the subheadline or li items)
-		await expect(page.locator("p.whitespace-pre-line")).toContainText("Full-Stack Engineer");
+		// Two p.whitespace-pre-line elements exist: one aria-hidden ghost spacer with the full
+		// text, and one absolute-positioned typing animation. Target the ghost which always
+		// has the complete description text regardless of animation progress.
+		await expect(page.locator("p.whitespace-pre-line[aria-hidden]")).toContainText("Full-Stack Engineer");
 	});
 
 	test("description mentions AI/ML capabilities", async ({ page }) => {
-		// Use a unique fragment that only appears in the description paragraph
-		await expect(page.getByText(/integrating AI\/ML capabilities/)).toBeVisible();
+		// This text appears at character ~436 (~10.6s after page load), well beyond the default
+		// assertion timeout. The aria-hidden ghost paragraph always has the full text immediately.
+		await expect(page.locator("p.whitespace-pre-line[aria-hidden]")).toContainText("integrating AI/ML capabilities");
 	});
 });
 
@@ -35,8 +49,9 @@ test.describe("Information Section", () => {
 	});
 
 	test("Location info is displayed", async ({ page }) => {
-		// Use exact heading role to avoid matching "India" in Certify description or footer
-		await expect(page.getByRole("heading", { name: "India" })).toBeVisible();
+		// Info values are now <p> tags (changed from <h4>); use exact text match to avoid
+		// matching "in India" in the footer or "India" inside Certify's description paragraph
+		await expect(page.getByText("India", { exact: true })).toBeVisible();
 	});
 
 	test("Experience info is displayed", async ({ page }) => {

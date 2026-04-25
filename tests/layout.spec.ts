@@ -18,7 +18,9 @@ test.describe("Layout", () => {
 	});
 
 	test("header contains logo with correct text", async ({ page }) => {
-		await expect(page.getByRole("heading", { name: "MrKJOfficial" })).toBeVisible();
+		// Logo text is a <span> inside a Button (changed from <h1>); scope to header to avoid
+		// any page body matches
+		await expect(page.locator("header").getByText("MrKJOfficial")).toBeVisible();
 	});
 
 	test("header logo image is present", async ({ page }) => {

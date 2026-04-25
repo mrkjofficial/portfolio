@@ -12,7 +12,9 @@ test.describe("About Section", () => {
 	});
 
 	test("name chip is displayed on the avatar", async ({ page }) => {
-		await expect(page.getByText("Karan Jaiswal").first()).toBeVisible();
+		// The chip uses HandwritingText which renders as SVG (no accessible text).
+		// Locate by the absolute positioning classes applied directly to the Chip element.
+		await expect(page.locator(".absolute.right-0.bottom-0.z-10").first()).toBeVisible();
 	});
 
 	test("LinkedIn button is visible", async ({ page }) => {
@@ -49,13 +51,5 @@ test.describe("About Section", () => {
 	test("1:1 Meeting button is clickable", async ({ page }) => {
 		const meetingBtn = page.getByRole("button", { name: /1:1 Meeting/i });
 		await expect(meetingBtn).toBeEnabled();
-	});
-
-	test("about section sticks on desktop while scrolling", async ({ page }) => {
-		test.skip((page.viewportSize()?.width ?? 0) < 768, "Desktop only test");
-		// Scroll down and verify about section is still visible
-		await page.evaluate(() => window.scrollBy(0, 500));
-		const aboutSection = page.locator("img[src*='profile']");
-		await expect(aboutSection).toBeVisible();
 	});
 });

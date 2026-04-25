@@ -11,9 +11,12 @@ test.describe("Responsive Layout - Desktop (1280px)", () => {
 		// md:flex-row causes side-by-side layout on desktop
 		// The about column and content column should both be visible side by side
 		const aboutColumn = page.locator("img[src*='profile']");
-		const introHeading = page.getByText("I turn your ideas into reality");
+		// Headline words animate word-by-word in motion.span elements; textContent has no spaces.
+		// Check the h1 is visible and contains "reality" (unique word from the headline).
+		const h1 = page.locator("#home h1");
 		await expect(aboutColumn).toBeVisible();
-		await expect(introHeading).toBeVisible();
+		await expect(h1).toBeVisible();
+		await expect(h1).toContainText("reality");
 	});
 
 	test("desktop nav list is visible on desktop", async ({ page }) => {
@@ -62,7 +65,7 @@ test.describe("Responsive Layout - Mobile (375px)", () => {
 	test("contact form fields are stacked on mobile", async ({ page }) => {
 		// Form fields should be visible and accessible on mobile
 		await expect(page.getByLabel("Name")).toBeVisible();
-		await expect(page.getByLabel("Email")).toBeVisible();
+		await expect(page.getByLabel("Email", { exact: true })).toBeVisible();
 		await expect(page.getByLabel("Message")).toBeVisible();
 	});
 });
@@ -75,7 +78,9 @@ test.describe("Responsive Layout - Tablet (768px)", () => {
 	});
 
 	test("page renders correctly at tablet width", async ({ page }) => {
-		await expect(page.getByText("I turn your ideas into reality")).toBeVisible();
+		// Headline words animate word-by-word in motion.span elements; textContent has no spaces.
+		// Check the h1 contains "reality" (unique word from the headline).
+		await expect(page.locator("#home h1")).toContainText("reality");
 	});
 
 	test("header is visible at tablet width", async ({ page }) => {

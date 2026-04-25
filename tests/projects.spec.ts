@@ -6,8 +6,9 @@ test.describe("Projects Section", () => {
 	});
 
 	test("projects section heading is displayed", async ({ page }) => {
-		// Heading is "Notable Projects" — use role to avoid matching nav button
-		await expect(page.getByRole("heading", { name: "Notable Projects" })).toBeVisible();
+		// "Notable Projects" is rendered word-by-word in motion.span elements; textContent has
+		// no spaces ("NotableProjects"). Check the h2 in the projects section contains "Projects".
+		await expect(page.locator("#projects h2")).toContainText("Projects");
 	});
 
 	test("Cognition project card is visible", async ({ page }) => {

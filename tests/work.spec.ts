@@ -6,7 +6,9 @@ test.describe("Work Section", () => {
 	});
 
 	test("work section heading is displayed", async ({ page }) => {
-		await expect(page.getByText("Work Experience")).toBeVisible();
+		// "Work Experience" is rendered word-by-word in motion.span elements; textContent has
+		// no spaces ("WorkExperience"). Check the h2 in the work section contains "Experience".
+		await expect(page.locator("#work h2")).toContainText("Experience");
 	});
 
 	test("Baseel Partners (Lead) entry is visible", async ({ page }) => {
@@ -60,9 +62,8 @@ test.describe("Work Section", () => {
 	test("company logos are rendered", async ({ page }) => {
 		// HeroUI Avatar.Image renders plain <img> tags; scroll to ensure they're in the DOM
 		await page.evaluate(() => document.getElementById("work")?.scrollIntoView());
-		await page.waitForTimeout(300);
-		// Verify logos by matching organization name initials in Avatar fallback or presence of img
 		const logos = page.locator("#work img");
+		await expect(logos.first()).toBeVisible({ timeout: 5000 });
 		const count = await logos.count();
 		expect(count).toBeGreaterThan(0);
 	});

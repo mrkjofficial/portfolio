@@ -6,7 +6,9 @@ test.describe("Contact Section - Visibility", () => {
 	});
 
 	test("contact section heading is displayed", async ({ page }) => {
-		await expect(page.getByText("Let's Connect")).toBeVisible();
+		// "Let's Connect" is rendered word-by-word in motion.span elements; textContent has
+		// no spaces ("Let'sConnect"). Check the h2 in the contact section contains "Connect".
+		await expect(page.locator("#contact h2")).toContainText("Connect");
 	});
 
 	test("name field is visible", async ({ page }) => {
@@ -14,7 +16,7 @@ test.describe("Contact Section - Visibility", () => {
 	});
 
 	test("email field is visible", async ({ page }) => {
-		await expect(page.getByLabel("Email")).toBeVisible();
+		await expect(page.getByLabel("Email", { exact: true })).toBeVisible();
 	});
 
 	test("message field is visible", async ({ page }) => {
@@ -74,7 +76,7 @@ test.describe("Contact Form - Validation", () => {
 	});
 
 	test("email field shows error for invalid email", async ({ page }) => {
-		const emailInput = page.getByLabel("Email");
+		const emailInput = page.getByLabel("Email", { exact: true });
 		await emailInput.pressSequentially("notanemail");
 		await emailInput.blur();
 		// Should show an email validation error
@@ -84,7 +86,7 @@ test.describe("Contact Form - Validation", () => {
 	});
 
 	test("email field accepts valid email format", async ({ page }) => {
-		const emailInput = page.getByLabel("Email");
+		const emailInput = page.getByLabel("Email", { exact: true });
 		await emailInput.pressSequentially("test@example.com");
 		await emailInput.blur();
 		await expect(emailInput).toHaveValue("test@example.com");
@@ -109,7 +111,7 @@ test.describe("Contact Form - Validation", () => {
 	test("send button is disabled while submitting", async ({ page }) => {
 		// Fill valid form data
 		await page.getByLabel("Name").pressSequentially("John Doe");
-		await page.getByLabel("Email").pressSequentially("john@example.com");
+		await page.getByLabel("Email", { exact: true }).pressSequentially("john@example.com");
 		await page.getByLabel("Message").pressSequentially("Hello there!");
 
 		// Intercept the API call to delay it so we can check loading state
@@ -127,7 +129,7 @@ test.describe("Contact Form - Validation", () => {
 
 	test("form resets after successful submission", async ({ page }) => {
 		await page.getByLabel("Name").pressSequentially("John Doe");
-		await page.getByLabel("Email").pressSequentially("john@example.com");
+		await page.getByLabel("Email", { exact: true }).pressSequentially("john@example.com");
 		await page.getByLabel("Message").pressSequentially("Hello there!");
 
 		// Mock successful API response
@@ -137,13 +139,13 @@ test.describe("Contact Form - Validation", () => {
 
 		// Wait for form to reset
 		await expect(page.getByLabel("Name")).toHaveValue("", { timeout: 8000 });
-		await expect(page.getByLabel("Email")).toHaveValue("", { timeout: 8000 });
+		await expect(page.getByLabel("Email", { exact: true })).toHaveValue("", { timeout: 8000 });
 		await expect(page.getByLabel("Message")).toHaveValue("", { timeout: 8000 });
 	});
 
 	test("success toast appears after successful submission", async ({ page }) => {
 		await page.getByLabel("Name").pressSequentially("John Doe");
-		await page.getByLabel("Email").pressSequentially("john@example.com");
+		await page.getByLabel("Email", { exact: true }).pressSequentially("john@example.com");
 		await page.getByLabel("Message").pressSequentially("Hello there!");
 
 		await page.route("/api/send", route => route.fulfill({ status: 200, body: JSON.stringify({ message: "Message sent successfully!" }) }));
@@ -156,10 +158,10 @@ test.describe("Contact Form - Validation", () => {
 
 	test("error toast appears on API failure", async ({ page }) => {
 		await page.getByLabel("Name").pressSequentially("John Doe");
-		await page.getByLabel("Email").pressSequentially("john@example.com");
+		await page.getByLabel("Email", { exact: true }).pressSequentially("john@example.com");
 		await page.getByLabel("Message").pressSequentially("Hello there!");
 
-		await page.route("/api/send", route => route.fulfill({ status: 500, body: JSON.stringify({ message: "Internal server error!" }) }));
+		await page.route("/api/send", route => route.fulfill({ status: 500, body: "Internal server error!" }));
 
 		await page.getByRole("button", { name: /Send/i }).click();
 
