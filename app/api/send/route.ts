@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
 			return response;
 		}
 
-		const logoUrl = `${publicUrl}/logo.webp`;
+		const logoUrl = `${publicUrl}/logo.png`;
 		const resend = new Resend(resendApiKey);
 
 		const promises = [sendMessage(resend, logoUrl, name, email, message), autoReply(resend, logoUrl, name, email)];
