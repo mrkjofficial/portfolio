@@ -38,7 +38,7 @@ const About = () => {
 							<Avatar.Image alt={about.name} fetchPriority="high" loading="eager" src={about.avatarUrl} />
 							<Avatar.Fallback className="text-7xl" />
 						</Avatar>
-						<Chip className="absolute right-0 bottom-0 z-50" color="default" size="lg" variant="secondary">
+						<Chip className="absolute right-0 bottom-0 z-10" color="default" size="lg" variant="secondary">
 							<HandwritingText className="h-5" font="/fonts/dancing-script.ttf" text={about.name} />
 						</Chip>
 					</div>
@@ -47,9 +47,7 @@ const About = () => {
 			<div className="xs:grid-cols-2 grid w-full grid-cols-1 items-center justify-center gap-3 sm:grid-cols-4 md:grid-cols-1">
 				{about.links.map((link, index) => {
 					const Icon = link.icon;
-					const rand = pseudoRandom(index);
-					const shouldAnimate = rand > 0.5;
-					const initialDelay = rand * 8;
+					const initialDelay = pseudoRandom(index) * 8;
 					return (
 						<motion.div
 							key={link.name}
@@ -61,10 +59,7 @@ const About = () => {
 							transition={{ duration: 0.5, delay: index * 0.12, ease: "easeOut" }}
 						>
 							<Button className="w-full" onPress={() => router.push(link.url)} size="lg" variant="outline">
-								<motion.div
-									animate={shouldAnimate ? { rotate: [0, 360], y: [0, -10, 0] } : {}}
-									transition={{ duration: DURATION, repeat: Infinity, repeatType: "reverse", repeatDelay: REPEAT_DELAY, delay: initialDelay, ease: "easeInOut" }}
-								>
+								<motion.div animate={{ rotate: [0, 360], y: [0, -10, 0] }} transition={{ duration: DURATION, repeat: Infinity, repeatType: "reverse", repeatDelay: REPEAT_DELAY, delay: initialDelay, ease: "easeInOut" }}>
 									<Icon />
 								</motion.div>
 								{link.name}

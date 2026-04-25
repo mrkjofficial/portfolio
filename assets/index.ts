@@ -1,6 +1,7 @@
 import type { ComponentType, SVGProps } from "react";
 
 import AntDesignSvg from "./icons/antdesign.svg";
+import AppwriteSvg from "./icons/appwrite.svg";
 import AwsSvg from "./icons/aws.svg";
 import ChromeWebStoreSvg from "./icons/chromewebstore.svg";
 import ClaudeSvg from "./icons/claude.svg";
@@ -58,6 +59,7 @@ import resumeSvg from "./icons/resume.svg";
 import TopmateSvg from "./icons/topmate.svg";
 
 export const AntDesign: ComponentType<SVGProps<SVGSVGElement>> = AntDesignSvg;
+export const Appwrite: ComponentType<SVGProps<SVGSVGElement>> = AppwriteSvg;
 export const AWS: ComponentType<SVGProps<SVGSVGElement>> = AwsSvg;
 export const ChromeWebStore: ComponentType<SVGProps<SVGSVGElement>> = ChromeWebStoreSvg;
 export const Claude: ComponentType<SVGProps<SVGSVGElement>> = ClaudeSvg;

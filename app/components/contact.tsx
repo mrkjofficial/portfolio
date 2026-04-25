@@ -8,9 +8,9 @@ import { useRouter } from "next/navigation";
 import { ContactSchema } from "@schemas/contact";
 import { motion, useInView } from "framer-motion";
 import { useMutation } from "@tanstack/react-query";
-import FlyingRocket from "@components/common/rocket";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
+import FlyingRocket from "@components/common/flying-rocket";
 import { CheckCircle, LoaderCircle, Mail, Phone, XCircle } from "lucide-react";
 import { Button, Card, Description, FieldError, FieldGroup, Fieldset, Form, Input, Label, Separator, TextArea, TextField, toast, Tooltip } from "@heroui/react";
 

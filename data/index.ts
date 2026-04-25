@@ -1,6 +1,7 @@
 import { Bot, Briefcase, FolderOpen, GraduationCap, Home, Mail, MapPinned, TerminalSquare } from "lucide-react";
 import {
 	AntDesign,
+	Appwrite,
 	AWS,
 	ChromeWebStore,
 	Claude,
@@ -14,6 +15,7 @@ import {
 	Github,
 	HeroUI,
 	HTML5,
+	Java,
 	JavaScript,
 	LinkedIn,
 	MongoDB,
@@ -24,6 +26,7 @@ import {
 	NPM,
 	Ollama,
 	OpenAI,
+	Playwright,
 	PNPM,
 	PostgreSQL,
 	Postman,
@@ -37,6 +40,7 @@ import {
 	Redux,
 	Resume,
 	ShadcnUI,
+	SpringBoot,
 	Stripe,
 	Supabase,
 	SWR,
@@ -46,13 +50,10 @@ import {
 	Vercel,
 	Vite,
 	Webpack,
+	Yup,
 	Zod,
 	Zustand,
-	SpringBoot,
-	Java,
-	Yup,
 	Minio,
-	Playwright,
 } from "@assets";
 
 export const APP_NAME = "MrKJOfficial";
@@ -308,6 +309,10 @@ export const about = {
 				{
 					name: "Docker",
 					icon: Docker,
+				},
+				{
+					name: "Appwrite",
+					icon: Appwrite,
 				},
 				{
 					name: "Clerk",
