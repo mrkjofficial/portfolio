@@ -33,7 +33,7 @@ const Header = () => {
 						{isOpen ? <X /> : <Menu />}
 					</Button>
 					<Button className="flex items-center gap-0" size="lg" variant="ghost">
-						<Image alt="Logo" height={48} priority={true} src="/logo.png" width={48} />
+						<Image alt="Logo" height={48} priority={true} src="/icon.webp" width={48} />
 						<span className="text-accent text-xl font-semibold">MrKJOfficial</span>
 					</Button>
 				</div>

@@ -1,10 +1,9 @@
 import { Resend } from "resend";
-import { list } from "@vercel/blob";
 import { ContactSchema } from "@schemas/contact";
 import { autoReply, sendMessage } from "./services";
 import { NextRequest, NextResponse } from "next/server";
 
-const blobPath = process.env.BLOB_PATH as string;
+const publicUrl = process.env.NEXT_PUBLIC_URL as string;
 const resendApiKey = process.env.RESEND_API_KEY as string;
 
 export async function POST(request: NextRequest) {
@@ -23,11 +22,10 @@ export async function POST(request: NextRequest) {
 			return response;
 		}
 
-		const data = await list({ limit: 1, prefix: `${blobPath}/logo` });
-		const url = data?.blobs?.at(0)?.url as string;
+		const logoUrl = `${publicUrl}/logo.webp`;
 		const resend = new Resend(resendApiKey);
 
-		const promises = [sendMessage(resend, url, name, email, message), autoReply(resend, url, name, email)];
+		const promises = [sendMessage(resend, logoUrl, name, email, message), autoReply(resend, logoUrl, name, email)];
 		await Promise.all(promises);
 
 		const response = NextResponse.json({ message: "Message sent successfully!" }, { status: 200 });

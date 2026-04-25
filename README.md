@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Karan Jaiswal — Portfolio
+
+Personal portfolio website built with Next.js, showcasing projects, work experience, education, and a contact form.
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| UI | React 19, HeroUI 3, Tailwind CSS 4 |
+| Language | TypeScript |
+| Animations | Framer Motion |
+| Forms | React Hook Form + Zod |
+| Data Fetching | TanStack Query, Axios |
+| Email | Resend, React Email |
+| File Storage | Vercel Blob |
+| Analytics | Vercel Analytics, Speed Insights |
+| Testing | Playwright (E2E) |
+| Package Manager | pnpm |
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Commands
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+pnpm dev            # Start dev server (Turbopack)
+pnpm build          # Production build
+pnpm start          # Start production server
+pnpm preview        # Build then start production server
+pnpm lint           # Run ESLint
+pnpm lint:fix       # Auto-fix lint issues
+pnpm format:check   # Check Prettier formatting
+pnpm format:fix     # Apply Prettier formatting
+pnpm type:check     # TypeScript type check
+pnpm test           # Run Playwright E2E tests (headless)
+pnpm test:ui        # Run Playwright tests with interactive UI
+pnpm test:headed    # Run Playwright tests in headed mode
+pnpm test:report    # Show last Playwright HTML report
+```
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+portfolio/
+├── app/
+│   ├── api/
+│   │   ├── send/          # Contact form API (Resend)
+│   │   └── download/      # Resume download API (Vercel Blob)
+│   ├── components/        # Page sections (introduction, about, projects, …)
+│   ├── globals.css        # Tailwind config, theme variables, custom breakpoints
+│   ├── layout.tsx         # Root layout with providers
+│   └── page.tsx           # Home page
+├── assets/icons/          # SVG icons (imported as React components via @svgr/webpack)
+├── components/common/     # Shared UI (header, footer, theme toggle)
+├── config/                # Axios client
+├── data/index.ts          # Single source of truth for all portfolio content
+├── emails/                # React Email templates (contact notification + auto-reply)
+├── hooks/                 # Custom React hooks
+├── providers/             # NextThemesProvider, QueryProvider
+├── public/                # Static assets (images, logos, resume PDF)
+├── schemas/contact.ts     # Zod schema for contact form
+└── tests/                 # Playwright E2E test suites
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Environment Variables
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Create a `.env.local` file at the project root:
 
-## Deploy on Vercel
+```env
+NEXT_PUBLIC_URL=             # Site URL (used for metadata and Playwright base URL)
+NEXT_PUBLIC_API_URL=         # Base URL for Axios client
+RESEND_API_KEY=              # Resend API key for sending emails
+CONTACT_EMAIL_ADDRESS=       # Recipient address for contact form submissions
+PERSONAL_EMAIL_ADDRESS=      # Auto-reply sender/recipient address
+BLOB_PATH=                   # Vercel Blob path for the resume file
+BLOB_READ_WRITE_TOKEN=       # Vercel Blob access token
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Content
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+All portfolio content — about info, projects, work experience, education, technologies, and navigation links — lives in a single file: `data/index.ts`. Edit only that file to update what appears on the site.
+
+## Testing
+
+E2E tests use Playwright and run against `http://localhost:3000`. The dev server starts automatically when running the test suite. Tests cover all major sections and run across four desktop browsers (Chromium, Firefox, WebKit, Edge) and two mobile viewports (Pixel 5, iPhone 14).
+
+```bash
+pnpm test           # headless, all browsers
+pnpm test:headed    # watch the browser
+pnpm test:ui        # interactive Playwright UI
+```
+
+## Deployment
+
+The site is deployed on [Vercel](https://vercel.com). Set the environment variables above in your Vercel project settings and push to the main branch.

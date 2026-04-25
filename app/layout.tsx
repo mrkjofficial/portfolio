@@ -18,13 +18,13 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-	appleWebApp: { capable: true, startupImage: { url: "/logo.png" }, statusBarStyle: "default", title: APP_NAME },
+	appleWebApp: { capable: true, startupImage: { url: "/icon.webp" }, statusBarStyle: "default", title: APP_NAME },
 	applicationName: APP_NAME,
 	description: APP_DESCRIPTION,
 	formatDetection: { address: true, date: true, email: true, telephone: true, url: true },
-	icons: { apple: ["/icons/icon-192x192.png", "/icons/icon-256x256.png", "/icons/icon-384x384.png", "/icons/icon-512x512.png"] },
+	icons: { apple: ["/icons/icon-192x192.webp", "/icons/icon-256x256.webp", "/icons/icon-384x384.webp", "/icons/icon-512x512.webp"] },
 	metadataBase: new URL(process.env.NEXT_PUBLIC_URL as string),
-	openGraph: { description: APP_DESCRIPTION, images: [{ alt: `${APP_NAME} logo`, url: "/logo.png" }], title: APP_NAME, type: "website", url: process.env.NEXT_PUBLIC_URL },
+	openGraph: { description: APP_DESCRIPTION, images: [{ alt: `${APP_NAME} logo`, url: "/icon.webp" }], title: APP_NAME, type: "website", url: process.env.NEXT_PUBLIC_URL },
 	title: APP_NAME,
 };
 
