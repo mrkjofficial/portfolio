@@ -1,7 +1,7 @@
 import { Reply } from "@emails";
+import { render } from "react-email";
 import { type Resend } from "resend";
 import { about, APP_NAME } from "@data";
-import { render } from "@react-email/render";
 
 const autoReply = async (resend: Resend, url: string, name: string, email: string) => {
 	return resend.emails.send({

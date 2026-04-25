@@ -1,4 +1,4 @@
-import { Body, Container, Font, Head, Heading, Html, Img, Link, Preview, Row, Section, Text } from "@react-email/components";
+import { Body, Container, Font, Head, Heading, Html, Img, Link, Preview, Row, Section, Text } from "react-email";
 
 type ReplyProps = {
 	logoURL: string;

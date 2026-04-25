@@ -1,7 +1,7 @@
 import { Contact } from "@emails";
+import { render } from "react-email";
 import { type Resend } from "resend";
 import { about, APP_NAME } from "@data";
-import { render } from "@react-email/render";
 
 const sendMessage = async (resend: Resend, url: string, name: string, email: string, message: string) => {
 	return resend.emails.send({
