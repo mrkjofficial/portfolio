@@ -4,7 +4,7 @@ import { about } from "@data";
 import Image from "next/image";
 import { Card, Chip } from "@heroui/react";
 import { ExternalLink } from "lucide-react";
-import { type MouseEvent, useRef } from "react";
+import { type MouseEvent, type TouchEvent, useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform, useInView } from "framer-motion";
 
 const WORD_STAGGER = 0.08;
@@ -26,7 +26,9 @@ const ThumbnailWithReveal = ({ src, alt }: { src: string; alt: string }) => {
 
 	const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
 		const rect = ref.current?.getBoundingClientRect();
-		if (!rect) return;
+		if (!rect) {
+			return;
+		}
 		mouseX.set((e.clientX - rect.left) / rect.width - 0.5);
 		mouseY.set((e.clientY - rect.top) / rect.height - 0.5);
 	};
@@ -36,9 +38,32 @@ const ThumbnailWithReveal = ({ src, alt }: { src: string; alt: string }) => {
 		mouseY.set(0);
 	};
 
+	const handleTouchMove = (e: TouchEvent<HTMLDivElement>) => {
+		const touch = e.touches[0];
+		const rect = ref.current?.getBoundingClientRect();
+		if (!rect || !touch) {
+			return;
+		}
+		mouseX.set((touch.clientX - rect.left) / rect.width - 0.5);
+		mouseY.set((touch.clientY - rect.top) / rect.height - 0.5);
+	};
+
+	const handleTouchEnd = () => {
+		mouseX.set(0);
+		mouseY.set(0);
+	};
+
 	return (
 		<div style={{ perspective: 800 }} className="h-full w-full">
-			<motion.div ref={ref} className="border-border relative h-full w-full overflow-hidden rounded-3xl border" style={{ rotateX, rotateY, transformStyle: "preserve-3d" }} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
+			<motion.div
+				ref={ref}
+				className="border-border relative h-full w-full overflow-hidden rounded-3xl border"
+				style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+				onMouseMove={handleMouseMove}
+				onMouseLeave={handleMouseLeave}
+				onTouchMove={handleTouchMove}
+				onTouchEnd={handleTouchEnd}
+			>
 				<Image alt={alt} className="rounded-3xl" fill={true} sizes="100vw, (min-width: 768px) 640px" src={src} />
 			</motion.div>
 		</div>
