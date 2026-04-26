@@ -26,23 +26,21 @@ const About = () => {
 
 	return (
 		<section className="flex h-full max-h-fit w-full flex-col items-center justify-start gap-6 rounded-3xl p-6 md:sticky md:top-22 md:my-6 md:h-[calc(100vh-7rem)] md:min-h-[calc(100vh-10rem)] md:w-1/3">
-			<div className="relative">
+			<div className="relative p-1">
 				<motion.div
 					aria-hidden
-					className="absolute -inset-2 rounded-full opacity-60 blur-xl"
-					style={{ background: "conic-gradient(from 0deg, var(--danger) 0deg, var(--warning) 40deg, var(--success) 80deg, var(--accent) 110deg, transparent 140deg)", rotate: rotation }}
+					className="pointer-events-none absolute inset-0 rounded-full [-webkit-mask:radial-gradient(farthest-side,transparent_calc(100%-4px),white_calc(100%-4px))] [mask:radial-gradient(farthest-side,transparent_calc(100%-4px),white_calc(100%-4px))]"
+					style={{ background: gradient }}
 				/>
-				<motion.div className="relative rounded-full p-1" style={{ background: gradient }}>
-					<div className="bg-background relative rounded-full p-0.5">
-						<Avatar className="size-48">
-							<Avatar.Image alt={about.name} fetchPriority="high" loading="eager" src={about.avatarUrl} />
-							<Avatar.Fallback className="text-7xl" />
-						</Avatar>
-						<Chip className="absolute right-0 bottom-0 z-10" color="default" size="lg" variant="secondary">
-							<HandwritingText className="h-5" font="/fonts/dancing-script.ttf" text={about.name} />
-						</Chip>
-					</div>
-				</motion.div>
+				<div className="relative p-0.5">
+					<Avatar className="size-48 bg-transparent">
+						<Avatar.Image alt={about.name} fetchPriority="high" loading="eager" src={about.avatarUrl} />
+						<Avatar.Fallback className="text-7xl" />
+					</Avatar>
+					<Chip className="absolute right-0 bottom-0 z-10" color="default" size="lg" variant="secondary">
+						<HandwritingText className="h-5" font="/fonts/dancing-script.ttf" text={about.name} />
+					</Chip>
+				</div>
 			</div>
 			<div className="xs:grid-cols-2 grid w-full grid-cols-1 items-center justify-center gap-3 sm:grid-cols-4 md:grid-cols-1">
 				{about.links.map((link, index) => {
