@@ -20,9 +20,9 @@ const Work = () => {
 					</motion.span>
 				))}
 			</h2>
-			<Card className="flex w-full flex-col items-center justify-center gap-0 px-2 py-3" variant="transparent">
+			<Card className="flex w-full flex-col items-center justify-center gap-0 p-0" variant="transparent">
 				{about.work.map((work, index) => (
-					<Card.Content className="flex w-full flex-col justify-center gap-3 p-3 not-last:border-b" key={index}>
+					<Card.Content className="flex w-full flex-col justify-center gap-3 py-5 not-last:border-b" key={index}>
 						<div className="xs:flex-row xs:items-center flex flex-col justify-between gap-4">
 							<motion.div className="flex items-center justify-center gap-2" initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, ease: "easeOut" }}>
 								<Avatar>

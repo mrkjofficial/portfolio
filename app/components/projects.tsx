@@ -113,7 +113,7 @@ const Projects = () => {
 			</h2>
 			<div className="flex w-full flex-col items-center justify-center gap-6">
 				{about.projects.map(project => (
-					<Card key={project.name} variant="transparent">
+					<Card className="p-0" key={project.name} variant="transparent">
 						<Card.Header className="relative aspect-2/1 w-full">
 							<ThumbnailWithReveal src={project.thumbnail} alt={project.name} />
 						</Card.Header>

@@ -88,7 +88,7 @@ const Contact = () => {
 				))}
 			</h2>
 			<Card className="flex w-full flex-col items-center justify-center overflow-hidden p-0" variant="transparent">
-				<Card.Content className="flex w-full flex-col items-center justify-center gap-0 p-6">
+				<Card.Content className="flex w-full flex-col items-center justify-center gap-0 py-5">
 					<Form className="flex w-full flex-col items-center justify-center" onSubmit={handleSubmit(values => mutate(values))}>
 						<Fieldset className="flex w-full flex-col items-stretch justify-stretch gap-3 sm:flex-row md:flex-col lg:flex-row">
 							<div className="w-full flex-1 sm:w-1/3 md:w-full lg:w-1/3">
