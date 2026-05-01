@@ -39,11 +39,10 @@ const Header = () => {
 				</div>
 				<nav className="flex items-center justify-center gap-1">
 					<ul className="hidden md:flex md:items-center md:justify-center">
-						{navItems.map((navItem, i) => {
+						{navItems.map((navItem, index) => {
 							const Icon = navItem.icon;
-							const rand = pseudoRandom(i);
-							const shouldAnimate = rand > 0.5;
-							const initialDelay = rand * 8;
+							const initialDelay = pseudoRandom(index) * 8;
+
 							return (
 								<motion.li
 									key={navItem.label}
@@ -51,13 +50,10 @@ const Header = () => {
 									animate={{ opacity: 1, x: 0 }}
 									whileHover={{ y: -5, scale: 1.03 }}
 									whileTap={{ scale: 0.94 }}
-									transition={{ duration: 0.5, delay: i * 0.12, ease: "easeOut" }}
+									transition={{ duration: 0.5, delay: index * 0.12, ease: "easeOut" }}
 								>
 									<Button onPress={() => onNavItemPress(navItem.src)} variant="ghost">
-										<motion.div
-											animate={shouldAnimate ? { rotate: [0, 360], y: [0, -10, 0] } : {}}
-											transition={{ duration: DURATION, repeat: Infinity, repeatType: "reverse", repeatDelay: REPEAT_DELAY, delay: initialDelay, ease: "easeInOut" }}
-										>
+										<motion.div animate={{ rotate: [0, 360], y: [0, -10, 0] }} transition={{ duration: DURATION, repeat: Infinity, repeatType: "reverse", repeatDelay: REPEAT_DELAY, delay: initialDelay, ease: "easeInOut" }}>
 											<Icon size={16} />
 										</motion.div>
 										{navItem.label}

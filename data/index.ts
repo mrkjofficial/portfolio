@@ -118,7 +118,7 @@ export const about = {
 	],
 	introduction: {
 		headline: "I turn your ideas into reality",
-		subHeadline: "Lead Software Engineer | Architect | Full-Stack Specialist",
+		subHeadline: "Lead Software Engineer | Team Lead | Full-Stack Specialist",
 		description:
 			"👋 Hi, I’m Karan. I am a Frontend-heavy Full-Stack Engineer who specializes in building scalable products from the first line of code to final deployment.\n\nCurrently, I lead a high-performing team of seven developers, bridging the gap between complex technical architecture and seamless user experiences. Having architected multiple projects from scratch, I focus on building systems that aren't just functional, but enduring.\n\nI’m now integrating AI/ML capabilities into my workflow to create smarter, adaptive applications that drive real business value. I thrive where thoughtful engineering meets strategic leadership.",
 	},
@@ -763,7 +763,7 @@ export const about = {
 	],
 	work: [
 		{
-			organization: "Baseel Partners",
+			organization: "Baseel",
 			organizationUrl: "https://www.baseel.com",
 			role: "Lead Software Engineer",
 			logo: "/logos/baseel-partners.webp",
@@ -776,7 +776,7 @@ export const about = {
 			],
 		},
 		{
-			organization: "Baseel Partners",
+			organization: "Baseel",
 			organizationUrl: "https://www.baseel.com",
 			role: "Software Engineer",
 			logo: "/logos/baseel-partners.webp",
@@ -789,7 +789,7 @@ export const about = {
 			],
 		},
 		{
-			organization: "Enterprise Minds, Inc",
+			organization: "Enterprise Minds Inc.",
 			organizationUrl: "https://www.eminds.ai",
 			role: "Web Development Intern",
 			logo: "/logos/enterprise-minds.webp",

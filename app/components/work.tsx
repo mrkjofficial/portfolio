@@ -1,9 +1,10 @@
 "use client";
 import { about } from "@data";
 import { useRef } from "react";
-import { CalendarDays } from "lucide-react";
+import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import { Avatar, Card, Chip } from "@heroui/react";
+import { CalendarDays, ExternalLink } from "lucide-react";
 
 const WORD_STAGGER = 0.08;
 const WORD_DURATION = 0.4;
@@ -29,10 +30,17 @@ const Work = () => {
 									<Avatar.Image alt={work.organization} src={work.logo} />
 									<Avatar.Fallback>{work.organization.charAt(0)}</Avatar.Fallback>
 								</Avatar>
-								<div className="flex w-full flex-col justify-center">
-									<h3 className="line-clamp-1 font-semibold break-all">{work.organization}</h3>
+								<motion.div whileHover="hover" className="flex w-full flex-col justify-center">
+									<Link className="flex items-center gap-1 hover:gap-2" href={work?.organizationUrl} target="_blank" rel="noreferrer noopener">
+										<motion.h3 className="line-clamp-1 font-semibold break-all" variants={{ hover: { scale: 1.05 } }} transition={{ duration: 0.2, ease: "easeOut" }}>
+											{work.organization}
+										</motion.h3>
+										<motion.div variants={{ hover: { x: [0, -3, 3, -3, 3, 0] } }} transition={{ duration: 0.4, ease: "easeInOut" }}>
+											<ExternalLink size={16} />
+										</motion.div>
+									</Link>
 									<p className="text-muted-foreground text-xs">{work.role}</p>
-								</div>
+								</motion.div>
 							</motion.div>
 							<motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}>
 								<Chip className="whitespace-nowrap" color="default" size="lg" variant="soft">

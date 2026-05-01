@@ -14,7 +14,7 @@ const pseudoRandom = (seed: number) => {
 const Technologies = () => {
 	return (
 		<div className="flex w-full flex-col items-center justify-center gap-3">
-			{about.technologies.map((tech, i) => {
+			{about.technologies.map((tech, index) => {
 				const Icon = tech.icon;
 				return (
 					<div className="flex w-full flex-col items-center justify-center gap-3" key={tech.name}>
@@ -25,26 +25,22 @@ const Technologies = () => {
 							animate={{ y: [0, -2, 0] }}
 							viewport={{ once: true }}
 							transition={{
-								opacity: { duration: 5.0, delay: i * 0.1, ease: "easeOut" },
-								y: { duration: 3.0, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 },
+								opacity: { duration: 5.0, delay: index * 0.1, ease: "easeOut" },
+								y: { duration: 3.0, repeat: Infinity, ease: "easeInOut", delay: index * 0.5 },
 							}}
 						>
 							<Icon size={24} />
 							<p className="font-semibold">{tech.name}</p>
 						</motion.div>
 						<div className="flex w-full flex-wrap items-center gap-3">
-							{tech.skills.map((skill, j) => {
+							{tech.skills.map((skill, index) => {
 								const Icon = skill.icon;
-								const rand = pseudoRandom(j);
-								const shouldAnimate = rand > 0.5;
-								const initialDelay = rand * 8;
+								const initialDelay = pseudoRandom(index) * 8;
+
 								return (
-									<motion.div key={skill.name} initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: j * 0.05, ease: "easeOut" }}>
+									<motion.div key={skill.name} initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: index * 0.05, ease: "easeOut" }}>
 										<Chip className="gap-1 whitespace-nowrap" color="default" size="lg" variant="soft">
-											<motion.div
-												animate={shouldAnimate ? { rotate: [0, 360], y: [0, -10, 0] } : {}}
-												transition={{ duration: DURATION, repeat: Infinity, repeatType: "reverse", repeatDelay: REPEAT_DELAY, delay: initialDelay, ease: "easeInOut" }}
-											>
+											<motion.div animate={{ rotate: [0, 360], y: [0, -10, 0] }} transition={{ duration: DURATION, repeat: Infinity, repeatType: "reverse", repeatDelay: REPEAT_DELAY, delay: initialDelay, ease: "easeInOut" }}>
 												<Icon className="size-4" />
 											</motion.div>
 											{skill.name}

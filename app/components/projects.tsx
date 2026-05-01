@@ -54,10 +54,10 @@ const ThumbnailWithReveal = ({ src, alt }: { src: string; alt: string }) => {
 	};
 
 	return (
-		<div style={{ perspective: 800 }} className="h-full w-full">
+		<div style={{ perspective: 800 }} className="size-full">
 			<motion.div
 				ref={ref}
-				className="border-border relative h-full w-full overflow-hidden rounded-3xl border"
+				className="border-border relative size-full rounded-3xl border"
 				style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
 				onMouseMove={handleMouseMove}
 				onMouseLeave={handleMouseLeave}
@@ -79,7 +79,7 @@ const ProjectContent = ({ name, description, url, githubUrl }: { name: string; d
 	return (
 		<div ref={ref} className="flex w-full flex-col justify-center gap-2">
 			<motion.div whileHover="hover" className="flex w-fit items-center gap-1">
-				<Link className="flex items-center gap-1" href={url || githubUrl} target="_blank" rel="noreferrer noopener">
+				<Link className="flex items-center gap-1 hover:gap-2" href={url || githubUrl} target="_blank" rel="noreferrer noopener">
 					<motion.h3 className="font-semibold" variants={{ hover: { scale: 1.05 } }} transition={{ duration: 0.2, ease: "easeOut" }}>
 						{words.map((word, i) => (
 							<motion.span key={i} className="mr-1 inline-block" initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: WORD_DURATION, delay: i * WORD_STAGGER, ease: "easeOut" }}>
@@ -111,9 +111,9 @@ const Projects = () => {
 					</motion.span>
 				))}
 			</h2>
-			<div className="flex w-full flex-col items-center justify-center gap-6">
+			<div className="flex w-full flex-col items-center justify-center gap-10">
 				{about.projects.map(project => (
-					<Card className="p-0" key={project.name} variant="transparent">
+					<Card className="overflow-visible p-0" key={project.name} variant="transparent">
 						<Card.Header className="relative aspect-2/1 w-full">
 							<ThumbnailWithReveal src={project.thumbnail} alt={project.name} />
 						</Card.Header>
@@ -123,15 +123,11 @@ const Projects = () => {
 						<Card.Footer className="flex flex-wrap gap-2">
 							{project.skills.map((skill, index) => {
 								const Icon = skill.icon;
-								const rand = pseudoRandom(index);
-								const shouldAnimate = rand > 0.4;
-								const initialDelay = rand * 8;
+								const initialDelay = pseudoRandom(index) * 8;
+
 								return (
 									<Chip className="gap-1 whitespace-nowrap" color="default" key={skill?.name} size="lg" variant="soft">
-										<motion.div
-											animate={shouldAnimate ? { rotate: [0, 360], y: [0, -10, 0] } : {}}
-											transition={{ duration: DURATION, repeat: Infinity, repeatType: "reverse", repeatDelay: REPEAT_DELAY, delay: initialDelay, ease: "easeInOut" }}
-										>
+										<motion.div animate={{ rotate: [0, 360], y: [0, -10, 0] }} transition={{ duration: DURATION, repeat: Infinity, repeatType: "reverse", repeatDelay: REPEAT_DELAY, delay: initialDelay, ease: "easeInOut" }}>
 											<Icon className="size-4" />
 										</motion.div>
 										{skill.name}
