@@ -358,7 +358,7 @@ export const about = {
 			name: "Cognition",
 			thumbnail: "/projects/cognition.webp",
 			description: "From beginner basics to advanced expertise our courses help you grow faster, smarter, and stronger. Trusted by students, teachers, and top companies alike.",
-			url: "https://cognition-uat.baseel.com",
+			url: "https://cognition.baseel.com",
 			githubUrl: "",
 			skills: [
 				{
@@ -790,7 +790,7 @@ export const about = {
 		},
 		{
 			organization: "Enterprise Minds, Inc",
-			organizationUrl: "https://eminds.ai",
+			organizationUrl: "https://www.eminds.ai",
 			role: "Web Development Intern",
 			logo: "/logos/enterprise-minds.webp",
 			startDate: "Jan, 2023",
