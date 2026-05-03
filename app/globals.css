@@ -121,8 +121,7 @@
 	}
 }
 
-/* Aurora Blobs Background */
-.aurora-bg {
+.aurora {
 	position: fixed;
 	inset: 0;
 	z-index: -1;
@@ -130,7 +129,7 @@
 	pointer-events: none;
 }
 
-.aurora-bg span {
+.aurora span {
 	position: absolute;
 	border-radius: 50%;
 	filter: blur(72px);
@@ -138,11 +137,11 @@
 	mix-blend-mode: multiply;
 }
 
-.dark .aurora-bg span {
+.dark .aurora span {
 	mix-blend-mode: screen;
 }
 
-.aurora-bg span:nth-child(1) {
+.aurora span:nth-child(1) {
 	width: 60vw;
 	height: 60vw;
 	top: -10vh;
@@ -152,7 +151,7 @@
 	animation: aurora-drift-1 10s ease-in-out infinite alternate;
 }
 
-.aurora-bg span:nth-child(2) {
+.aurora span:nth-child(2) {
 	width: 55vw;
 	height: 55vw;
 	top: 20vh;
@@ -162,7 +161,7 @@
 	animation: aurora-drift-2 14s ease-in-out infinite alternate;
 }
 
-.aurora-bg span:nth-child(3) {
+.aurora span:nth-child(3) {
 	width: 50vw;
 	height: 50vw;
 	bottom: -10vh;
@@ -172,17 +171,17 @@
 	animation: aurora-drift-3 8s ease-in-out infinite alternate;
 }
 
-.dark .aurora-bg span:nth-child(1) {
+.dark .aurora span:nth-child(1) {
 	background: oklch(45% 0.18 253.83);
 	opacity: 0.8;
 }
 
-.dark .aurora-bg span:nth-child(2) {
+.dark .aurora span:nth-child(2) {
 	background: oklch(40% 0.16 310);
 	opacity: 0.75;
 }
 
-.dark .aurora-bg span:nth-child(3) {
+.dark .aurora span:nth-child(3) {
 	background: oklch(42% 0.15 185);
 	opacity: 0.75;
 }

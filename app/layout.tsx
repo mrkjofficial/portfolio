@@ -40,7 +40,7 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
 			<body className={`${inter.variable} antialiased`}>
 				<QueryProvider>
 					<NextThemesProvider attribute="class" defaultTheme="light" enableSystem nonce={nonce}>
-						<div className="aurora-bg" aria-hidden="true">
+						<div className="aurora" aria-hidden="true">
 							<span />
 							<span />
 							<span />
