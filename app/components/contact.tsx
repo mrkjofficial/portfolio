@@ -154,7 +154,7 @@ const Contact = () => {
 								</div>
 							</div>
 							<div className="bg-border h-0.5 w-full shrink-0 sm:h-full sm:w-0.5 md:h-0.5 md:w-full lg:h-full lg:w-0.5" />
-							<div className="flex w-full flex-col items-center justify-center gap-3 sm:w-2/3 md:w-full lg:w-2/3">
+							<div className="flex w-full flex-col items-center justify-center gap-3 px-1 sm:w-2/3 md:w-full lg:w-2/3">
 								<FieldGroup>
 									<motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, ease: "easeOut" }}>
 										<Controller
