@@ -33,7 +33,7 @@ const About = () => {
 					style={{ background: gradient }}
 				/>
 				<div className="relative p-0.5">
-					<Avatar className="size-48 bg-transparent">
+					<Avatar className="size-48 rounded-full bg-transparent">
 						<Avatar.Image alt={about.name} fetchPriority="high" loading="eager" src={about.avatarUrl} />
 						<Avatar.Fallback className="text-7xl" />
 					</Avatar>
