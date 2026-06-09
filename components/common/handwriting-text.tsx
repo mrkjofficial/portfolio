@@ -1,8 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
-import type { Font } from "opentype.js";
-import * as opentype from "opentype.js";
 import { useEffect, useState } from "react";
+import opentype, { type Font } from "opentype.js";
 
 const FONT_CACHE = new Map<string, Font>();
 
