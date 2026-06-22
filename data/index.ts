@@ -470,7 +470,7 @@ export const about = {
 			name: "Certify",
 			thumbnail: "/projects/certify.webp",
 			description:
-				"Certify serves as a versatile certification platform, enabling organizations to obtain certifications aligned with a wide range of global standards and regulations. Our platform checks for compliance with prominent frameworks such as GDPR, Cert-In Cyber Security Baseline, RBI Cyber Security Guidelines, Indian Digital Personal Data Protection Act, United Arab Emirates Personal Data Protection Law, Abu Dhabi Global Market Regulations, Kingdom of Saudi Arabia Personal Data Protection Law, and Bahrain Personal Data Protection Law.",
+				"Certify serves as a versatile certification platform, enabling organizations to obtain certifications aligned with a wide range of global standards and regulations. Our platform checks for compliance with prominent frameworks such as GDPR, Cert-In, Indian DPDPA, RBI Cyber Security Guidelines, UAE Personal Data Protection Law, Abu Dhabi Global Market Regulations, etc.",
 			url: "https://certify.baseel.com",
 			githubUrl: "",
 			skills: [
@@ -572,7 +572,7 @@ export const about = {
 			name: "Greenrhea",
 			thumbnail: "/projects/greenrhea.webp",
 			description:
-				"Greenrhea is a dynamic sustainability platform designed to empower businesses with data-driven insights into the environmental and social responsibility of other companies. By generating in-depth sustainability reports, Greenrhea provides critical information for companies considering partnerships, investments, or any form of collaboration. The platform is ideal for assessing potential partners’ sustainability efforts, enabling organizations to make informed, responsible decisions aligned with their values and environmental goals.",
+				"Greenrhea is a dynamic sustainability platform designed to empower businesses with data-driven insights into the environmental and social responsibility of other companies. The platform is ideal for assessing potential partners’ sustainability efforts, enabling organizations to make informed, responsible decisions aligned with their values and environmental goals.",
 			url: "https://www.greenrhea.com",
 			githubUrl: "",
 			skills: [
