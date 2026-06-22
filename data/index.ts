@@ -6,7 +6,9 @@ import {
 	ChromeWebStore,
 	Claude,
 	Clerk,
+	Copilot,
 	CSS3,
+	Cursor,
 	Docker,
 	ExpressJS,
 	Firebase,
@@ -18,6 +20,7 @@ import {
 	Java,
 	JavaScript,
 	LinkedIn,
+	Minio,
 	MongoDB,
 	MUI,
 	MySQL,
@@ -53,7 +56,6 @@ import {
 	Yup,
 	Zod,
 	Zustand,
-	Minio,
 } from "@assets";
 
 export const APP_NAME = "MrKJOfficial";
@@ -118,7 +120,7 @@ export const about = {
 	],
 	introduction: {
 		headline: "Turning ideas into production-ready products.",
-		subHeadline: "Lead Software Engineer | Team Lead | Full-Stack Specialist",
+		subHeadline: "Lead Software Engineer | Team Lead | Frontend Specialist",
 		description:
 			"👋 Hi, I’m Karan. I am a Frontend-heavy Full-Stack Engineer who specializes in building scalable products from the first line of code to final deployment.\n\nCurrently, I lead a high-performing team of seven developers, bridging the gap between complex technical architecture and seamless user experiences. Having architected multiple projects from scratch, I focus on building systems that aren't just functional, but enduring.\n\nI’m now integrating AI/ML capabilities into my workflow to create smarter, adaptive applications that drive real business value. I thrive where thoughtful engineering meets strategic leadership.",
 	},
@@ -147,6 +149,14 @@ export const about = {
 				{
 					name: "Claude",
 					icon: Claude,
+				},
+				{
+					name: "Copilot",
+					icon: Copilot,
+				},
+				{
+					name: "Cursor",
+					icon: Cursor,
 				},
 				{
 					name: "Gemini",
@@ -357,7 +367,8 @@ export const about = {
 		{
 			name: "Cognition",
 			thumbnail: "/projects/cognition.webp",
-			description: "From beginner basics to advanced expertise our courses help you grow faster, smarter, and stronger. Trusted by students, teachers, and top companies alike.",
+			description:
+				"Cognition is a next-generation, web-based Learning Management System designed to streamline and enhance the educational experience for institutions, instructors, learners, and organizations. Built with a modern technology stack, Cognition offers secure, scalable, and intuitive tools for managing courses, users, content, and analytics. The platform supports advanced role-based access for a wide range of stakeholders, ensuring a tailored and compliant solution for diverse educational needs.",
 			url: "https://cognition.baseel.com",
 			githubUrl: "",
 			skills: [
@@ -459,7 +470,7 @@ export const about = {
 			name: "Certify",
 			thumbnail: "/projects/certify.webp",
 			description:
-				"Certify is first of its kind certification body offering accredited certificates to organizations and businesses for privacy and information security compliance in India. Our certificates are designated credentials once earned shall verify your legitimacy and competence to process personal information under national regulations.",
+				"Certify serves as a versatile certification platform, enabling organizations to obtain certifications aligned with a wide range of global standards and regulations. Our platform checks for compliance with prominent frameworks such as GDPR, Cert-In Cyber Security Baseline, RBI Cyber Security Guidelines, Indian Digital Personal Data Protection Act, United Arab Emirates Personal Data Protection Law, Abu Dhabi Global Market Regulations, Kingdom of Saudi Arabia Personal Data Protection Law, and Bahrain Personal Data Protection Law.",
 			url: "https://certify.baseel.com",
 			githubUrl: "",
 			skills: [
@@ -561,7 +572,7 @@ export const about = {
 			name: "Greenrhea",
 			thumbnail: "/projects/greenrhea.webp",
 			description:
-				"At Greenrhea, we specialize in deep web intelligence gathering, utilizing advanced tools to actively monitor global media, including dark web sources, regulatory filings, and industry journals. Our approach ensures that your organization stays ahead of potential controversies by anticipating key events and trends.",
+				"Greenrhea is a dynamic sustainability platform designed to empower businesses with data-driven insights into the environmental and social responsibility of other companies. By generating in-depth sustainability reports, Greenrhea provides critical information for companies considering partnerships, investments, or any form of collaboration. The platform is ideal for assessing potential partners’ sustainability efforts, enabling organizations to make informed, responsible decisions aligned with their values and environmental goals.",
 			url: "https://www.greenrhea.com",
 			githubUrl: "",
 			skills: [
@@ -662,7 +673,8 @@ export const about = {
 		{
 			name: "Neosmile",
 			thumbnail: "/projects/neosmile.webp",
-			description: "Your home for top-tier dental care and stunning smiles. Our modern practice is more than just a dental practice - it is a place where compassion and skill unite to offer you an exceptional dental experience.",
+			description:
+				"NeoSmile is an advanced web-based Dental and Facial Aesthetics Practice Management Platform built for modern clinics to streamline their daily operations. The system is designed to assist in managing appointments, patients, staff, treatments, and financial workflows efficiently through a secure and intuitive interface.",
 			url: "https://www.neosmile.co.uk",
 			githubUrl: "",
 			skills: [
