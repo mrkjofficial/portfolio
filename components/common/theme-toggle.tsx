@@ -14,13 +14,15 @@ const ThemeToggle = () => {
 
 	if (mounted) {
 		return (
-			<Switch aria-label="Toggle dark mode" isSelected={theme === "dark"} size="lg" onChange={toggleTheme}>
+			<Switch aria-label="Toggle dark mode" isSelected={theme === "dark"} onChange={toggleTheme} size="lg">
 				{({ isSelected }) => (
-					<Switch.Control>
-						<Switch.Thumb>
-							<Switch.Icon>{isSelected ? <Moon size={16} /> : <Sun size={16} />}</Switch.Icon>
-						</Switch.Thumb>
-					</Switch.Control>
+					<Switch.Content>
+						<Switch.Control>
+							<Switch.Thumb>
+								<Switch.Icon>{isSelected ? <Moon size={16} /> : <Sun size={16} />}</Switch.Icon>
+							</Switch.Thumb>
+						</Switch.Control>
+					</Switch.Content>
 				)}
 			</Switch>
 		);
