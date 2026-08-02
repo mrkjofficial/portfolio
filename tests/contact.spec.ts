@@ -168,6 +168,19 @@ test.describe("Contact Form - Validation", () => {
 		await expect(page.getByText("Error!", { exact: true })).toBeVisible({ timeout: 5000 });
 	});
 
+	test("rate limit toast shows the backend's message on 429 response", async ({ page }) => {
+		await page.getByLabel("Name").pressSequentially("John Doe");
+		await page.getByLabel("Email", { exact: true }).pressSequentially("john@example.com");
+		await page.getByLabel("Message").pressSequentially("Hello there!");
+
+		await page.route("/api/send", route => route.fulfill({ status: 429, body: JSON.stringify({ message: "Too many requests!" }) }));
+
+		await page.getByRole("button", { name: /Send/i }).click();
+
+		await expect(page.getByText("Error!", { exact: true })).toBeVisible({ timeout: 5000 });
+		await expect(page.getByText("Too many requests!", { exact: true })).toBeVisible({ timeout: 5000 });
+	});
+
 	test("form validation blocks submission when fields are empty", async ({ page }) => {
 		// The send button is only disabled when isPending; empty field validation
 		// is handled by React Hook Form and prevents the API from being called at all

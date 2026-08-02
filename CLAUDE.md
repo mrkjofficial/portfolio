@@ -20,32 +20,40 @@ npm run test:headed  # Run Playwright tests in headed mode
 npm run test:report  # Show last Playwright HTML report
 ```
 
+To run a single Playwright spec or test, pass a path/grep straight to the CLI (there's no dedicated npm script for it):
+
+```bash
+npx playwright test tests/contact.spec.ts --project=chromium
+npx playwright test --grep "rate limit"
+```
+
 ## Architecture
 
-**Stack:** Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS 4 · HeroUI 3
+**Stack:** Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS 4 · HeroUI 3 · Framer Motion
 
 ### Content & Data
 
-All portfolio content lives in a single file: [data/index.ts](data/index.ts). This is the source of truth for everything rendered on the page — about info, projects, work experience, education, technologies, and links. When updating portfolio content, edit only this file.
+All portfolio content lives in a single file: [data/index.ts](data/index.ts). This is the source of truth for everything rendered on the page — about info, projects, work experience, education, technologies, and links (including the resume, which is a static file served from [public/karan-jaiswal.pdf](public/karan-jaiswal.pdf), not an API route). When updating portfolio content, edit only this file.
 
 ### Page Structure
 
-The home page ([app/page.tsx](app/page.tsx)) composes section components from [app/components/](app/components/):
+The home page ([app/page.tsx](app/page.tsx)) renders `About` as a persistent sidebar, with the remaining sections scrolling inside a `ScrollShadow` container. Section components live in [app/components/](app/components/):
 - `introduction.tsx`, `information.tsx`, `about.tsx`
 - `technologies.tsx`, `projects.tsx`, `work.tsx`, `education.tsx`, `contact.tsx`
 
-Reusable UI components (header, footer, theme toggle) are in [components/common/](components/common/).
+Reusable UI components (header, footer, theme toggle) are in [components/common/](components/common/). Custom hooks live in [hooks/](hooks/) (e.g. `useThemeToggle`, used by the theme toggle button).
 
-Providers (`NextThemesProvider`, `QueryProvider`) wrap the layout in [providers/](providers/) and are registered in [app/layout.tsx](app/layout.tsx).
+Providers (`QueryProvider`, `NextThemesProvider`) wrap the layout in [providers/](providers/) and are registered in [app/layout.tsx](app/layout.tsx), along with Vercel Analytics/Speed Insights and the HeroUI `Toast.Provider`. SEO/metadata special files ([app/sitemap.ts](app/sitemap.ts), [app/robots.ts](app/robots.ts), [app/manifest.ts](app/manifest.ts), [app/not-found.tsx](app/not-found.tsx)) sit alongside `layout.tsx`.
 
 ### API Routes
 
-- `POST /api/send` — Contact form handler. Sends a notification email + auto-reply via Resend. Service functions in [app/api/send/services/](app/api/send/services/).
-- `POST /api/download` — Serves files from Vercel Blob storage. Service in [app/api/download/services/](app/api/download/services/).
+- `POST /api/send` — Contact form handler. IP rate-limited (5 requests / 10 min via [config/ratelimit.ts](config/ratelimit.ts)), then sends a notification email + auto-reply via Resend. Service functions in [app/api/send/services/](app/api/send/services/).
 
 ### Contact Form Flow
 
-`contact.tsx` → Zod schema ([schemas/contact.ts](schemas/contact.ts)) → React Hook Form + `zodResolver` → TanStack Query mutation → `POST /api/send` → Resend API (two emails: [emails/contact.tsx](emails/contact.tsx) + [emails/reply.tsx](emails/reply.tsx))
+`contact.tsx` → Zod schema ([schemas/contact.ts](schemas/contact.ts)) → React Hook Form + `zodResolver` → TanStack Query mutation → `POST /api/send` → Resend API (two emails: [emails/contact.tsx](emails/contact.tsx) + [emails/reply.tsx](emails/reply.tsx)).
+
+The 429 rate-limit response is deliberately returned as JSON (`{ message }`), same as every other response from this route — `contact.tsx`'s `onError` reads `error.response.data.message` directly to populate the error toast, so any new response body from this route must keep that shape or the frontend needs a matching update.
 
 ### Assets
 
@@ -53,7 +61,7 @@ SVG icons live in [assets/icons/](assets/icons/) and are imported as React compo
 
 ### Testing
 
-E2E tests use Playwright and live in [tests/](tests/). They run against `http://localhost:3000` (auto-started by `npm run dev`). There are no unit or integration tests — all coverage is end-to-end.
+E2E tests use Playwright and live in [tests/](tests/). They run against `http://localhost:3000`, auto-started via `npm run preview` (production build) rather than `npm run dev` — this is required because rate limiting in [app/api/send/route.ts](app/api/send/route.ts) only activates when `NODE_ENV === "production"`. Tests that hit `/api/send` directly (in [tests/api.spec.ts](tests/api.spec.ts)) must pass a unique `x-forwarded-for` header per test so they don't share a rate-limit bucket with each other. There are no unit or integration tests — all coverage is end-to-end, across chromium, firefox, webkit, edge, mobile-chrome, and mobile-safari projects ([playwright.config.ts](playwright.config.ts)).
 
 ### Environment Variables
 
@@ -64,8 +72,8 @@ E2E tests use Playwright and live in [tests/](tests/). They run against `http://
 | `RESEND_API_KEY` | Resend email service |
 | `CONTACT_EMAIL_ADDRESS` | Recipient for contact form messages |
 | `PERSONAL_EMAIL_ADDRESS` | Auto-reply sender/recipient |
-| `BLOB_PATH` | Vercel Blob path for resume file |
-| `BLOB_READ_WRITE_TOKEN` | Vercel Blob access token |
+| `UPSTASH_REDIS_REST_URL` | Upstash Redis REST URL for rate limiting ([config/redis.ts](config/redis.ts)) |
+| `UPSTASH_REDIS_REST_TOKEN` | Upstash Redis REST token for rate limiting ([config/redis.ts](config/redis.ts)) |
 
 ### Styling Conventions
 

@@ -67,12 +67,12 @@ const Contact = () => {
 				indicator: <CheckCircle />,
 			});
 		},
-		onError: (error: AxiosError<string>) => {
+		onError: (error: AxiosError<{ message: string }>) => {
 			if (onSendToast) {
 				toast.close(onSendToast);
 			}
 			toast.danger("Error!", {
-				description: error?.response?.data ?? "An error occurred!",
+				description: error?.response?.data?.message ?? "An error occurred!",
 				indicator: <XCircle />,
 			});
 		},

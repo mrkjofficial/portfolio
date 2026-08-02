@@ -13,16 +13,16 @@ Personal portfolio website built with Next.js, showcasing projects, work experie
 | Forms | React Hook Form + Zod |
 | Data Fetching | TanStack Query, Axios |
 | Email | Resend, React Email |
-| File Storage | Vercel Blob |
+| Rate Limiting | Upstash Redis |
 | Analytics | Vercel Analytics, Speed Insights |
 | Testing | Playwright (E2E) |
-| Package Manager | pnpm |
+| Package Manager | npm |
 
 ## Getting Started
 
 ```bash
-pnpm install
-pnpm dev
+npm install
+npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
@@ -30,19 +30,19 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ## Commands
 
 ```bash
-pnpm dev            # Start dev server (Turbopack)
-pnpm build          # Production build
-pnpm start          # Start production server
-pnpm preview        # Build then start production server
-pnpm lint           # Run ESLint
-pnpm lint:fix       # Auto-fix lint issues
-pnpm format:check   # Check Prettier formatting
-pnpm format:fix     # Apply Prettier formatting
-pnpm type:check     # TypeScript type check
-pnpm test           # Run Playwright E2E tests (headless)
-pnpm test:ui        # Run Playwright tests with interactive UI
-pnpm test:headed    # Run Playwright tests in headed mode
-pnpm test:report    # Show last Playwright HTML report
+npm run dev          # Start dev server (Turbopack)
+npm run build        # Production build
+npm run start        # Start production server
+npm run preview      # Build then start production server
+npm run lint          # Run ESLint
+npm run lint:fix      # Auto-fix lint issues
+npm run format:check  # Check Prettier formatting
+npm run format:fix    # Apply Prettier formatting
+npm run type:check    # TypeScript type check
+npm run test           # Run Playwright E2E tests (headless)
+npm run test:ui        # Run Playwright tests with interactive UI
+npm run test:headed    # Run Playwright tests in headed mode
+npm run test:report    # Show last Playwright HTML report
 ```
 
 ## Project Structure
@@ -51,22 +51,21 @@ pnpm test:report    # Show last Playwright HTML report
 portfolio/
 ├── app/
 │   ├── api/
-│   │   ├── send/          # Contact form API (Resend)
-│   │   └── download/      # Resume download API (Vercel Blob)
-│   ├── components/        # Page sections (introduction, about, projects, …)
-│   ├── globals.css        # Tailwind config, theme variables, custom breakpoints
-│   ├── layout.tsx         # Root layout with providers
-│   └── page.tsx           # Home page
-├── assets/icons/          # SVG icons (imported as React components via @svgr/webpack)
-├── components/common/     # Shared UI (header, footer, theme toggle)
-├── config/                # Axios client
-├── data/index.ts          # Single source of truth for all portfolio content
-├── emails/                # React Email templates (contact notification + auto-reply)
-├── hooks/                 # Custom React hooks
-├── providers/             # NextThemesProvider, QueryProvider
-├── public/                # Static assets (images, logos, resume PDF)
-├── schemas/contact.ts     # Zod schema for contact form
-└── tests/                 # Playwright E2E test suites
+│   │   └── send/         # Contact form API (rate limited, sends via Resend)
+│   ├── components/       # Page sections (introduction, about, projects, …)
+│   ├── globals.css       # Tailwind config, theme variables, custom breakpoints
+│   ├── layout.tsx        # Root layout with providers
+│   └── page.tsx          # Home page
+├── assets/icons/         # SVG icons (imported as React components via @svgr/webpack)
+├── components/common/    # Shared UI (header, footer, theme toggle)
+├── config/               # Axios client, Upstash Redis client, rate limiter
+├── data/index.ts         # Single source of truth for all portfolio content
+├── emails/               # React Email templates (contact notification + auto-reply)
+├── hooks/                # Custom React hooks
+├── providers/            # NextThemesProvider, QueryProvider
+├── public/               # Static assets (images, logos, resume PDF)
+├── schemas/contact.ts    # Zod schema for contact form
+└── tests/                # Playwright E2E test suites
 ```
 
 ## Environment Variables
@@ -79,8 +78,8 @@ NEXT_PUBLIC_API_URL=         # Base URL for Axios client
 RESEND_API_KEY=              # Resend API key for sending emails
 CONTACT_EMAIL_ADDRESS=       # Recipient address for contact form submissions
 PERSONAL_EMAIL_ADDRESS=      # Auto-reply sender/recipient address
-BLOB_PATH=                   # Vercel Blob path for the resume file
-BLOB_READ_WRITE_TOKEN=       # Vercel Blob access token
+UPSTASH_REDIS_REST_URL=      # Upstash Redis REST URL for contact form rate limiting
+UPSTASH_REDIS_REST_TOKEN=    # Upstash Redis REST token for contact form rate limiting
 ```
 
 ## Content
@@ -89,12 +88,12 @@ All portfolio content — about info, projects, work experience, education, tech
 
 ## Testing
 
-E2E tests use Playwright and run against `http://localhost:3000`. The dev server starts automatically when running the test suite. Tests cover all major sections and run across four desktop browsers (Chromium, Firefox, WebKit, Edge) and two mobile viewports (Pixel 5, iPhone 14).
+E2E tests use Playwright and run against `http://localhost:3000`, served by a production build (`npm run preview`) that starts automatically when the test suite runs — this is required because contact form rate limiting only activates when `NODE_ENV === "production"`. Tests cover all major sections and run across four desktop browsers (Chromium, Firefox, WebKit, Edge) and two mobile viewports (Pixel 5, iPhone 14).
 
 ```bash
-pnpm test           # headless, all browsers
-pnpm test:headed    # watch the browser
-pnpm test:ui        # interactive Playwright UI
+npm run test           # headless, all browsers
+npm run test:headed    # watch the browser
+npm run test:ui        # interactive Playwright UI
 ```
 
 ## Deployment
