@@ -1,9 +1,10 @@
 "use client";
+import type { Font, Path } from "opentype.js";
 import { motion } from "framer-motion";
+import * as opentype from "opentype.js";
 import { useEffect, useState } from "react";
-import opentype, { type Font } from "opentype.js";
 
-const FONT_CACHE = new Map<string, Font>();
+const FONT_CACHE = new Map<string, Promise<Font>>();
 
 type SvgData = {
 	paths: string[];
@@ -38,13 +39,42 @@ export type HandwritingTextProps = {
 const loadFont = async (url: string) => {
 	const cached = FONT_CACHE.get(url);
 	if (cached) {
-		return Promise.resolve(cached);
-	} else {
-		return opentype.load(url).then(font => {
-			FONT_CACHE.set(url, font);
-			return font;
-		});
+		return cached;
 	}
+
+	const fontPromise = fetch(url)
+		.then(response => {
+			if (!response.ok) {
+				throw new Error(`Failed to load font at ${url}: ${response.status} ${response.statusText}`);
+			}
+
+			return response.arrayBuffer();
+		})
+		.then(buffer => opentype.parse(buffer));
+
+	FONT_CACHE.set(url, fontPromise);
+	void fontPromise.catch(() => FONT_CACHE.delete(url));
+	return fontPromise;
+};
+
+const pathToData = (path: Path) => {
+	const format = (value: number) => Number(value.toFixed(2)).toString();
+
+	return path.commands
+		.map(command => {
+			switch (command.type) {
+				case "M":
+				case "L":
+					return `${command.type}${format(command.x)} ${format(command.y)}`;
+				case "Q":
+					return `Q${format(command.x1)} ${format(command.y1)} ${format(command.x)} ${format(command.y)}`;
+				case "C":
+					return `C${format(command.x1)} ${format(command.y1)} ${format(command.x2)} ${format(command.y2)} ${format(command.x)} ${format(command.y)}`;
+				case "Z":
+					return "Z";
+			}
+		})
+		.join("");
 };
 
 const HandwritingText = ({ className, delay = 0, duration = 0.4, ease = "easeInOut", font, fontSize = 60, strokeWidth = 3, stagger = 0.25, text }: HandwritingTextProps) => {
@@ -67,8 +97,9 @@ const HandwritingText = ({ className, delay = 0, duration = 0.4, ease = "easeInO
 
 				for (const char of text) {
 					const glyph = font.charToGlyph(char);
-					if (char !== " " && glyph.path.commands.length > 0) {
-						const d = glyph.getPath(curX, ascender, fontSize).toPathData(2);
+					const path = glyph.getPath(curX, ascender, fontSize);
+					if (char !== " " && path.commands.length > 0) {
+						const d = pathToData(path);
 						if (d) paths.push(d);
 					}
 					curX += ((glyph.advanceWidth ?? 0) / font.unitsPerEm) * fontSize;

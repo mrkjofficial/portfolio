@@ -21,6 +21,7 @@ Personal portfolio website built with Next.js, showcasing projects, work experie
 ## Getting Started
 
 ```bash
+cp .env.example .env
 npm install
 npm run dev
 ```
@@ -70,7 +71,7 @@ portfolio/
 
 ## Environment Variables
 
-Create a `.env.local` file at the project root:
+Create a `.env` file at the project root:
 
 ```env
 NEXT_PUBLIC_URL=             # Site URL (used for metadata and Playwright base URL)
