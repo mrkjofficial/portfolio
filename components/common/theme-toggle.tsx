@@ -1,18 +1,23 @@
 "use client";
 import { Switch } from "@heroui/react";
 import { Moon, Sun } from "lucide-react";
-import { useLayoutEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import useThemeToggle from "@hooks/useThemeToggle";
 
+const subscribe = () => () => {};
+
+const useIsClient = () =>
+	useSyncExternalStore(
+		subscribe,
+		() => true,
+		() => false
+	);
+
 const ThemeToggle = () => {
-	const [mounted, setMounted] = useState(false);
+	const isClient = useIsClient();
 	const { theme, toggleTheme } = useThemeToggle();
 
-	useLayoutEffect(() => {
-		setTimeout(() => setMounted(true), 0);
-	}, []);
-
-	if (mounted) {
+	if (isClient) {
 		return (
 			<Switch aria-label="Toggle dark mode" isSelected={theme === "dark"} onChange={toggleTheme} size="lg">
 				{({ isSelected }) => (

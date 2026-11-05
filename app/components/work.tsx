@@ -2,6 +2,7 @@
 import { about } from "@data";
 import { useRef } from "react";
 import Link from "next/link";
+import splitWords from "@lib/splitWords";
 import { motion, useInView } from "framer-motion";
 import { Avatar, Card, Chip } from "@heroui/react";
 import { CalendarDays, ExternalLink } from "lucide-react";
@@ -15,15 +16,15 @@ const Work = () => {
 	return (
 		<div ref={ref} className="flex w-full flex-col justify-center gap-3" id="work">
 			<h2 className="text-2xl font-bold">
-				{"Work Experience".split(" ").map((word, i) => (
-					<motion.span key={i} className="mr-1 inline-block" initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: WORD_DURATION, delay: i * WORD_STAGGER, ease: "easeOut" }}>
+				{splitWords("Work Experience").map(({ key, word }, i) => (
+					<motion.span key={key} className="mr-1 inline-block" initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: WORD_DURATION, delay: i * WORD_STAGGER, ease: "easeOut" }}>
 						{word}
 					</motion.span>
 				))}
 			</h2>
 			<Card className="flex w-full flex-col items-center justify-center gap-0 p-0" variant="transparent">
-				{about.work.map((work, index) => (
-					<Card.Content className="flex w-full flex-col justify-center gap-3 py-5 not-last:border-b" key={index}>
+				{about.work.map(work => (
+					<Card.Content className="flex w-full flex-col justify-center gap-3 py-5 not-last:border-b" key={work.id}>
 						<div className="xs:flex-row xs:items-center flex flex-col justify-between gap-4">
 							<motion.div className="flex items-center justify-center gap-2" initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, ease: "easeOut" }}>
 								<Avatar>
@@ -52,8 +53,15 @@ const Work = () => {
 						<ul className="list-inside list-disc">
 							{work.achievements &&
 								work.achievements.map((achievement, i) => (
-									<motion.li className="indent-3 text-sm" key={i} initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.4 + i * 0.1, ease: "easeOut" }}>
-										{achievement}
+									<motion.li
+										className="indent-3 text-sm"
+										key={achievement.id}
+										initial={{ opacity: 0, x: -30 }}
+										whileInView={{ opacity: 1, x: 0 }}
+										viewport={{ once: true }}
+										transition={{ duration: 0.4, delay: 0.4 + i * 0.1, ease: "easeOut" }}
+									>
+										{achievement.title}
 									</motion.li>
 								))}
 						</ul>

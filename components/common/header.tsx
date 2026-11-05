@@ -45,7 +45,7 @@ const Header = () => {
 
 							return (
 								<motion.li
-									key={navItem.label}
+									key={navItem.id}
 									initial={{ opacity: 0, x: -16 }}
 									animate={{ opacity: 1, x: 0 }}
 									whileHover={{ y: -5, scale: 1.03 }}
@@ -76,7 +76,7 @@ const Header = () => {
 								const initialDelay = rand * 8;
 								return (
 									<motion.li
-										key={navItem.label}
+										key={navItem.id}
 										initial={{ opacity: 0, x: -16 }}
 										animate={{ opacity: 1, x: 0 }}
 										whileHover={{ x: 5, scale: 1.03 }}

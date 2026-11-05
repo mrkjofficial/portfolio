@@ -3,6 +3,7 @@ import z from "zod";
 import { about } from "@data";
 import axios from "@config/axios";
 import { AxiosError } from "axios";
+import splitWords from "@lib/splitWords";
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ContactSchema } from "@schemas/contact";
@@ -81,8 +82,8 @@ const Contact = () => {
 	return (
 		<div ref={ref} className="flex w-full flex-col justify-center gap-3" id="contact">
 			<h2 className="text-2xl font-bold">
-				{"Let's Connect".split(" ").map((word, i) => (
-					<motion.span key={i} className="mr-1 inline-block" initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: WORD_DURATION, delay: i * WORD_STAGGER, ease: "easeOut" }}>
+				{splitWords("Let's Connect").map(({ key, word }, i) => (
+					<motion.span key={key} className="mr-1 inline-block" initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: WORD_DURATION, delay: i * WORD_STAGGER, ease: "easeOut" }}>
 						{word}
 					</motion.span>
 				))}

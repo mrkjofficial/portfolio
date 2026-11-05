@@ -48,7 +48,7 @@ const About = () => {
 					const initialDelay = pseudoRandom(index) * 8;
 					return (
 						<motion.div
-							key={link.name}
+							key={link.id}
 							initial={{ opacity: 0, y: 32 }}
 							whileInView={{ opacity: 1, y: 0 }}
 							whileHover={{ y: -5, scale: 1.03 }}

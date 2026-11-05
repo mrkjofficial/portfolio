@@ -1,5 +1,6 @@
 "use client";
 import { about } from "@data";
+import splitWords from "@lib/splitWords";
 import { motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
@@ -7,8 +8,8 @@ const WORD_STAGGER = 0.08;
 const WORD_DURATION = 0.4;
 const CHAR_INTERVAL_MS = 20;
 
-const headlineWords = about.introduction.headline.split(" ");
-const subheadlineWords = about.introduction.subHeadline.split(" ");
+const headlineWords = splitWords(about.introduction.headline);
+const subheadlineWords = splitWords(about.introduction.subHeadline);
 
 const subheadlineStart = (headlineWords.length - 1) * WORD_STAGGER + WORD_DURATION + 0.05;
 const descriptionStart = subheadlineStart + (subheadlineWords.length - 1) * WORD_STAGGER + WORD_DURATION + 0.05;
@@ -20,7 +21,9 @@ const Introduction = () => {
 	const [typingDone, setTypingDone] = useState(false);
 
 	useEffect(() => {
-		if (!inView) return;
+		if (!inView) {
+			return;
+		}
 
 		let interval: ReturnType<typeof setInterval>;
 
@@ -45,16 +48,16 @@ const Introduction = () => {
 	return (
 		<div ref={ref} className="flex w-full flex-col gap-3" id="home">
 			<h1 className="text-xl font-bold">
-				{headlineWords.map((word, i) => (
-					<motion.span key={i} className="mr-1 inline-block" initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: WORD_DURATION, delay: i * WORD_STAGGER, ease: "easeOut" }}>
+				{headlineWords.map(({ key, word }, i) => (
+					<motion.span key={key} className="mr-1 inline-block" initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: WORD_DURATION, delay: i * WORD_STAGGER, ease: "easeOut" }}>
 						{word}
 					</motion.span>
 				))}
 			</h1>
 			<p className="font-semibold">
-				{subheadlineWords.map((word, i) => (
+				{subheadlineWords.map(({ key, word }, i) => (
 					<motion.span
-						key={i}
+						key={key}
 						className="mr-1 inline-block"
 						initial={{ opacity: 0, x: -20 }}
 						animate={inView ? { opacity: 1, x: 0 } : {}}

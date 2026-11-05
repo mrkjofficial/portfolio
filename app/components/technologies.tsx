@@ -17,7 +17,7 @@ const Technologies = () => {
 			{about.technologies.map((tech, index) => {
 				const Icon = tech.icon;
 				return (
-					<div className="flex w-full flex-col items-center justify-center gap-3" key={tech.name}>
+					<div className="flex w-full flex-col items-center justify-center gap-3" key={tech.id}>
 						<motion.div
 							className="flex w-full items-center gap-1"
 							initial={{ opacity: 0 }}
@@ -38,7 +38,7 @@ const Technologies = () => {
 								const initialDelay = pseudoRandom(index) * 8;
 
 								return (
-									<motion.div key={skill.name} initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: index * 0.05, ease: "easeOut" }}>
+									<motion.div key={skill.id} initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: index * 0.05, ease: "easeOut" }}>
 										<Chip className="gap-1 whitespace-nowrap" color="default" size="lg" variant="soft">
 											<motion.div animate={{ rotate: [0, 360], y: [0, -10, 0] }} transition={{ duration: DURATION, repeat: Infinity, repeatType: "reverse", repeatDelay: REPEAT_DELAY, delay: initialDelay, ease: "easeInOut" }}>
 												<Icon className="size-4" />

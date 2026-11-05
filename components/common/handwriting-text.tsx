@@ -6,8 +6,15 @@ import { useEffect, useState } from "react";
 
 const FONT_CACHE = new Map<string, Promise<Font>>();
 
+type Glyph = {
+	/** SVG path data for one drawn character. */
+	d: string;
+	/** Stable React key: the character's position in the source text. */
+	key: string;
+};
+
 type SvgData = {
-	paths: string[];
+	glyphs: Glyph[];
 	width: number;
 	height: number;
 };
@@ -93,19 +100,19 @@ const HandwritingText = ({ className, delay = 0, duration = 0.4, ease = "easeInO
 				const height = ascender + Math.abs(font.descender / font.unitsPerEm) * fontSize;
 
 				let curX = 0;
-				const paths: string[] = [];
+				const glyphs: Glyph[] = [];
 
-				for (const char of text) {
+				for (const [position, char] of Array.from(text).entries()) {
 					const glyph = font.charToGlyph(char);
 					const path = glyph.getPath(curX, ascender, fontSize);
 					if (char !== " " && path.commands.length > 0) {
 						const d = pathToData(path);
-						if (d) paths.push(d);
+						if (d) glyphs.push({ d, key: `${position}-${char}` });
 					}
 					curX += ((glyph.advanceWidth ?? 0) / font.unitsPerEm) * fontSize;
 				}
 
-				setSvgData({ paths, width: curX, height });
+				setSvgData({ glyphs, width: curX, height });
 			})
 			.catch(console.error);
 
@@ -123,13 +130,13 @@ const HandwritingText = ({ className, delay = 0, duration = 0.4, ease = "easeInO
 	} else {
 		return (
 			<svg className={className} style={{ width: "auto", overflow: "visible", display: "block" }} viewBox={`0 0 ${svgData.width} ${svgData.height}`} width={svgData.width} height={svgData.height}>
-				{svgData.paths.map((d, i) => (
+				{svgData.glyphs.map(({ d, key }, i) => (
 					<motion.path
 						animate={{ pathLength: 1, fillOpacity: 1, strokeOpacity: 1 }}
 						d={d}
 						fill="currentColor"
 						initial={{ pathLength: 0, fillOpacity: 0, strokeOpacity: 0 }}
-						key={i}
+						key={key}
 						stroke="currentColor"
 						strokeLinecap="round"
 						strokeLinejoin="round"

@@ -10,7 +10,7 @@ const Information = () => {
 					const Icon = info.icon;
 					return (
 						<motion.div
-							key={info.name}
+							key={info.id}
 							className="xs:w-auto flex w-40 items-center justify-center gap-2"
 							initial={{ opacity: 0 }}
 							whileInView={{ opacity: 1 }}

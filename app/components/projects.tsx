@@ -4,6 +4,7 @@ import { about } from "@data";
 import Image from "next/image";
 import { Card, Chip } from "@heroui/react";
 import { ExternalLink } from "lucide-react";
+import splitWords from "@lib/splitWords";
 import { type MouseEvent, type TouchEvent, useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform, useInView } from "framer-motion";
 
@@ -73,7 +74,7 @@ const ThumbnailWithReveal = ({ src, alt }: { src: string; alt: string }) => {
 const ProjectContent = ({ name, description, url, githubUrl }: { name: string; description: string; url: string; githubUrl: string }) => {
 	const ref = useRef(null);
 	const inView = useInView(ref, { once: true });
-	const words = name.split(" ");
+	const words = splitWords(name);
 	const descriptionDelay = (words.length - 1) * WORD_STAGGER + WORD_DURATION + 0.1;
 
 	return (
@@ -81,8 +82,8 @@ const ProjectContent = ({ name, description, url, githubUrl }: { name: string; d
 			<motion.div whileHover="hover" className="flex w-fit items-center gap-1">
 				<Link className="flex items-center gap-1 hover:gap-2" href={url || githubUrl} target="_blank" rel="noreferrer noopener">
 					<motion.h3 className="font-semibold" variants={{ hover: { scale: 1.05 } }} transition={{ duration: 0.2, ease: "easeOut" }}>
-						{words.map((word, i) => (
-							<motion.span key={i} className="mr-1 inline-block" initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: WORD_DURATION, delay: i * WORD_STAGGER, ease: "easeOut" }}>
+						{words.map(({ key, word }, i) => (
+							<motion.span key={key} className="mr-1 inline-block" initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: WORD_DURATION, delay: i * WORD_STAGGER, ease: "easeOut" }}>
 								{word}
 							</motion.span>
 						))}
@@ -105,15 +106,15 @@ const Projects = () => {
 	return (
 		<div ref={ref} className="flex w-full flex-col justify-center gap-3" id="projects">
 			<h2 className="text-2xl font-bold">
-				{"Notable Projects".split(" ").map((word, i) => (
-					<motion.span key={i} className="mr-1 inline-block" initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: WORD_DURATION, delay: i * WORD_STAGGER, ease: "easeOut" }}>
+				{splitWords("Notable Projects").map(({ key, word }, i) => (
+					<motion.span key={key} className="mr-1 inline-block" initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: WORD_DURATION, delay: i * WORD_STAGGER, ease: "easeOut" }}>
 						{word}
 					</motion.span>
 				))}
 			</h2>
 			<div className="flex w-full flex-col items-center justify-center gap-10">
 				{about.projects.map(project => (
-					<Card className="overflow-visible p-0" key={project.name} variant="transparent">
+					<Card className="overflow-visible p-0" key={project.id} variant="transparent">
 						<Card.Header className="relative aspect-2/1 w-full">
 							<ThumbnailWithReveal src={project.thumbnail} alt={project.name} />
 						</Card.Header>
@@ -126,7 +127,7 @@ const Projects = () => {
 								const initialDelay = pseudoRandom(index) * 8;
 
 								return (
-									<Chip className="gap-1 whitespace-nowrap" color="default" key={skill?.name} size="lg" variant="soft">
+									<Chip className="gap-1 whitespace-nowrap" color="default" key={skill.id} size="lg" variant="soft">
 										<motion.div animate={{ rotate: [0, 360], y: [0, -10, 0] }} transition={{ duration: DURATION, repeat: Infinity, repeatType: "reverse", repeatDelay: REPEAT_DELAY, delay: initialDelay, ease: "easeInOut" }}>
 											<Icon className="size-4" />
 										</motion.div>
