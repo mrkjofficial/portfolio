@@ -97,15 +97,16 @@ test.describe("API - /api/send", () => {
 		expect(response.status()).toBe(400);
 	});
 
-	test("returns non-404 for valid request (may 200 or 500 depending on env config)", async ({ request }) => {
+	test("returns non-404 for valid request (may 200, 500 or 503 depending on env config)", async ({ request }) => {
 		const response = await request.post("/api/send", {
 			data: { name: "Test User", email: "test@example.com", message: "Hello there" },
 			headers: uniqueIp(),
 		});
-		// With no Resend API key configured in test env, we get 500
-		// But should NOT get 400 (validation passes)
+		// With no Upstash Redis configured, the rate limiter is unavailable and the route refuses to send (503).
+		// With Redis but no Resend API key configured, sending fails (500).
+		// Either way it should NOT get 400 (validation passes).
 		expect(response.status()).not.toBe(400);
-		expect([200, 500]).toContain(response.status());
+		expect([200, 500, 503]).toContain(response.status());
 	});
 });
 

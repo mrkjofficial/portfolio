@@ -1,6 +1,6 @@
 import { Resend } from "resend";
-import ratelimit from "@config/ratelimit";
 import { ContactSchema } from "@schemas/contact";
+import checkRateLimit from "@lib/checkRateLimit";
 import { autoReply, sendMessage } from "./services";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -9,23 +9,14 @@ const resendApiKey = process.env.RESEND_API_KEY as string;
 
 export async function POST(request: NextRequest) {
 	try {
-		if (process.env.NODE_ENV === "production") {
-			const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || request.headers.get("x-real-ip") || "127.0.0.1";
+		const rateLimit = await checkRateLimit(request);
 
-			const ratelimitResponse = await ratelimit.limit(ip).catch((error: unknown) => {
-				console.error((error as Error)?.message);
-			});
-
-			if (ratelimitResponse) {
-				const { success, limit, remaining, reset } = ratelimitResponse;
-				if (!success) {
-					const response = NextResponse.json({ message: "Too many requests!" }, { status: 429 });
-					response.headers.set("X-RateLimit-Limit", limit.toString());
-					response.headers.set("X-RateLimit-Remaining", remaining.toString());
-					response.headers.set("X-RateLimit-Reset", reset.toString());
-					return response;
-				}
-			}
+		if (rateLimit.status === "LIMITED") {
+			const response = NextResponse.json({ message: "Too many requests!" }, { status: 429 });
+			response.headers.set("X-RateLimit-Limit", rateLimit.limit.toString());
+			response.headers.set("X-RateLimit-Remaining", rateLimit.remaining.toString());
+			response.headers.set("X-RateLimit-Reset", rateLimit.reset.toString());
+			return response;
 		}
 
 		const { name, email, message } = (await request.json()) as { name: string; email: string; message: string };
@@ -39,6 +30,11 @@ export async function POST(request: NextRequest) {
 
 		if (!result.success) {
 			const response = NextResponse.json({ message: "Invalid request!" }, { status: 400 });
+			return response;
+		}
+
+		if (rateLimit.status === "UNAVAILABLE") {
+			const response = NextResponse.json({ message: "Service temporarily unavailable!" }, { status: 503 });
 			return response;
 		}
 
