@@ -44,8 +44,9 @@ export async function POST(request: NextRequest) {
 
 		const logoUrl = `${publicUrl}/logo.png`;
 		const resend = new Resend(resendApiKey);
+		const contact = result.data;
 
-		const promises = [sendMessage(resend, logoUrl, name, email, message), autoReply(resend, logoUrl, name, email)];
+		const promises = [sendMessage(resend, logoUrl, contact.name, contact.email, contact.message), autoReply(resend, logoUrl, contact.name, contact.email)];
 		await Promise.all(promises);
 
 		const response = NextResponse.json({ message: "Message sent successfully!" }, { status: 200 });

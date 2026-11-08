@@ -49,9 +49,25 @@ test.describe("API - /api/send", () => {
 		expect(response.status()).toBe(400);
 	});
 
-	test("returns 400 for message too long (>30 chars)", async ({ request }) => {
+	test("returns 400 for message too long (>1000 chars)", async ({ request }) => {
 		const response = await request.post("/api/send", {
-			data: { name: "Test User", email: "test@example.com", message: "A".repeat(31) },
+			data: { name: "Test User", email: "test@example.com", message: "A".repeat(1001) },
+			headers: uniqueIp(),
+		});
+		expect(response.status()).toBe(400);
+	});
+
+	test("returns 400 for name containing a line break", async ({ request }) => {
+		const response = await request.post("/api/send", {
+			data: { name: "Test\nUser", email: "test@example.com", message: "Hello world" },
+			headers: uniqueIp(),
+		});
+		expect(response.status()).toBe(400);
+	});
+
+	test("returns 400 for name that is only whitespace", async ({ request }) => {
+		const response = await request.post("/api/send", {
+			data: { name: "     ", email: "test@example.com", message: "Hello world" },
 			headers: uniqueIp(),
 		});
 		expect(response.status()).toBe(400);
