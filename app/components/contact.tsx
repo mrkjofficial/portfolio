@@ -8,10 +8,12 @@ import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ContactSchema } from "@schemas/contact";
 import { motion, useInView } from "framer-motion";
+import useThemeToggle from "@hooks/useThemeToggle";
 import { useMutation } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import FlyingRocket from "@components/common/flying-rocket";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { CheckCircle, LoaderCircle, Mail, Phone, XCircle } from "lucide-react";
 import { Button, Card, Description, FieldError, FieldGroup, Fieldset, Form, Input, Label, Separator, TextArea, TextField, toast, Tooltip } from "@heroui/react";
 
@@ -20,11 +22,18 @@ const WORD_DURATION = 0.4;
 const DURATION = 2.0;
 const REPEAT_DELAY = 5.0;
 
+const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY as string;
+
 const Contact = () => {
 	const ref = useRef(null);
 	const router = useRouter();
+	const { theme } = useThemeToggle();
 	const inView = useInView(ref, { once: true });
+	const turnstileRef = useRef<TurnstileInstance>(null);
+	const [turnstileToken, setTurnstileToken] = useState("");
+	const turnstileTheme = theme === "dark" ? "dark" : "light";
 	const [onSendToast, setOnSendToast] = useState<string | null>(null);
+	const isAwaitingVerification = Boolean(turnstileSiteKey) && !turnstileToken;
 
 	const defaultValues: z.infer<typeof ContactSchema> = {
 		name: "",
@@ -53,7 +62,7 @@ const Contact = () => {
 			})
 		);
 		const { name, email, message } = data;
-		await axios.post("/api/send", { name, email, message });
+		await axios.post("/api/send", { name, email, message, token: turnstileToken });
 	};
 
 	const { mutate, isPending } = useMutation({
@@ -76,6 +85,11 @@ const Contact = () => {
 				description: error?.response?.data?.message ?? "An error occurred!",
 				indicator: <XCircle />,
 			});
+		},
+		onSettled: () => {
+			// A Turnstile token can only be verified once, so get a fresh one for the next submission.
+			setTurnstileToken("");
+			turnstileRef.current?.reset();
 		},
 	});
 
@@ -237,9 +251,21 @@ const Contact = () => {
 									</motion.div>
 								</FieldGroup>
 								<motion.div className="w-full" initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.3, ease: "easeOut" }}>
+									{turnstileSiteKey && (
+										<Turnstile
+											className="mb-3 w-full"
+											key={turnstileTheme}
+											onError={() => setTurnstileToken("")}
+											onExpire={() => setTurnstileToken("")}
+											onSuccess={setTurnstileToken}
+											options={{ size: "flexible", theme: turnstileTheme }}
+											ref={turnstileRef}
+											siteKey={turnstileSiteKey}
+										/>
+									)}
 									<Fieldset.Actions className="w-full">
-										<Button className="w-full" isDisabled={isPending} type="submit" variant="outline">
-											{isPending ? "Sending..." : "Send"}
+										<Button className="w-full" isDisabled={isPending || isAwaitingVerification} type="submit" variant="outline">
+											{isPending ? "Sending..." : isAwaitingVerification ? "Verifying..." : "Send"}
 											<FlyingRocket show={isPending} />
 										</Button>
 									</Fieldset.Actions>

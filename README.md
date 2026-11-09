@@ -81,7 +81,11 @@ CONTACT_EMAIL_ADDRESS=       # Recipient address for contact form submissions
 PERSONAL_EMAIL_ADDRESS=      # Auto-reply sender/recipient address
 UPSTASH_REDIS_REST_URL=      # Upstash Redis REST URL for contact form rate limiting
 UPSTASH_REDIS_REST_TOKEN=    # Upstash Redis REST token for contact form rate limiting
+NEXT_PUBLIC_TURNSTILE_SITE_KEY= # Cloudflare Turnstile site key for the contact form CAPTCHA
+TURNSTILE_SECRET_KEY=        # Cloudflare Turnstile secret key, used to verify CAPTCHA tokens server-side
 ```
+
+For local development, use Cloudflare's [test keys](https://developers.cloudflare.com/turnstile/troubleshooting/testing/) (`1x00000000000000000000AA` / `1x0000000000000000000000000000000AA`), which always pass.
 
 ## Content
 

@@ -7,7 +7,8 @@ export function proxy(request: NextRequest) {
 
 	const csp = `
 		default-src 'self';
-		script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${nodeEnv === "development" ? " 'unsafe-eval'" : ""};
+		script-src 'self' 'nonce-${nonce}' 'strict-dynamic' https://challenges.cloudflare.com${nodeEnv === "development" ? " 'unsafe-eval'" : ""};
+		frame-src https://challenges.cloudflare.com;
 		style-src 'self' 'unsafe-inline';
 		img-src 'self' blob: data:;
 		font-src 'self';

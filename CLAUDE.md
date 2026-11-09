@@ -47,7 +47,7 @@ Providers (`QueryProvider`, `NextThemesProvider`) wrap the layout in [providers/
 
 ### API Routes
 
-- `POST /api/send` — Contact form handler. IP rate-limited (5 requests / 10 min via [config/ratelimit.ts](config/ratelimit.ts)), then sends a notification email + auto-reply via Resend. Service functions in [app/api/send/services/](app/api/send/services/).
+- `POST /api/send` — Contact form handler. Checks run in this order: IP rate limit (5 requests / 10 min → 429), Zod validation (→ 400), Cloudflare Turnstile token ([lib/verifyTurnstile.ts](lib/verifyTurnstile.ts), missing/invalid → 403), global daily cap (50 sends / day → 429), then sends a notification email via Resend. The auto-reply is only sent if that recipient address hasn't had one in the last 24 hours (keyed by a SHA-256 hash of the address, never the raw email); otherwise the message is still delivered without it. All limiters live in [config/ratelimit.ts](config/ratelimit.ts) and are checked through [lib/checkRateLimit.ts](lib/checkRateLimit.ts), which never throws. If Redis or Turnstile verification is unavailable, the route fails closed with 503 and sends nothing. Service functions in [app/api/send/services/](app/api/send/services/).
 
 ### Contact Form Flow
 
@@ -74,6 +74,8 @@ E2E tests use Playwright and live in [tests/](tests/). They run against `http://
 | `PERSONAL_EMAIL_ADDRESS` | Auto-reply sender/recipient |
 | `UPSTASH_REDIS_REST_URL` | Upstash Redis REST URL for rate limiting ([config/redis.ts](config/redis.ts)) |
 | `UPSTASH_REDIS_REST_TOKEN` | Upstash Redis REST token for rate limiting ([config/redis.ts](config/redis.ts)) |
+| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | Cloudflare Turnstile site key for the contact form widget; if unset, the widget isn't rendered |
+| `TURNSTILE_SECRET_KEY` | Cloudflare Turnstile secret key ([lib/verifyTurnstile.ts](lib/verifyTurnstile.ts)); if unset, valid submissions get 503. Use Cloudflare's test keys locally |
 
 ### Styling Conventions
 

@@ -97,16 +97,27 @@ test.describe("API - /api/send", () => {
 		expect(response.status()).toBe(400);
 	});
 
-	test("returns non-404 for valid request (may 200, 500 or 503 depending on env config)", async ({ request }) => {
+	test("returns 403 for valid input without a Turnstile token", async ({ request }) => {
 		const response = await request.post("/api/send", {
 			data: { name: "Test User", email: "test@example.com", message: "Hello there" },
 			headers: uniqueIp(),
 		});
-		// With no Upstash Redis configured, the rate limiter is unavailable and the route refuses to send (503).
-		// With Redis but no Resend API key configured, sending fails (500).
+		expect(response.status()).toBe(403);
+		expect(await response.json()).toEqual({ message: "Verification failed! Please try again." });
+	});
+
+	test("returns non-404 for valid request (may 200, 500 or 503 depending on env config)", async ({ request }) => {
+		const response = await request.post("/api/send", {
+			// Cloudflare's test secret keys accept this dummy token.
+			data: { name: "Test User", email: "test@example.com", message: "Hello there", token: "XXXX.DUMMY.TOKEN.XXXX" },
+			headers: uniqueIp(),
+		});
+		// With no Turnstile secret or no Upstash Redis configured, the route refuses to send (503).
+		// With a production (non-test) Turnstile secret, Cloudflare rejects the dummy token (403).
+		// With test keys and Redis but no Resend API key configured, sending fails (500).
 		// Either way it should NOT get 400 (validation passes).
 		expect(response.status()).not.toBe(400);
-		expect([200, 500, 503]).toContain(response.status());
+		expect([200, 403, 500, 503]).toContain(response.status());
 	});
 });
 
