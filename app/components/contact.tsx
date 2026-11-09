@@ -253,7 +253,7 @@ const Contact = () => {
 								<motion.div className="w-full" initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.3, ease: "easeOut" }}>
 									{turnstileSiteKey && (
 										<Turnstile
-											className="mb-3 w-full"
+											className="mb-3 w-full overflow-hidden rounded-2xl"
 											key={turnstileTheme}
 											onError={() => setTurnstileToken("")}
 											onExpire={() => setTurnstileToken("")}
