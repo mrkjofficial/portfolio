@@ -24,8 +24,9 @@ export const metadata: Metadata = {
 	formatDetection: { address: true, date: true, email: true, telephone: true, url: true },
 	icons: { apple: ["/icons/icon-192x192.webp", "/icons/icon-256x256.webp", "/icons/icon-384x384.webp", "/icons/icon-512x512.webp"] },
 	metadataBase: new URL(process.env.NEXT_PUBLIC_URL as string),
-	openGraph: { description: APP_DESCRIPTION, images: [{ alt: `${APP_NAME} logo`, url: "/icon.webp" }], title: APP_NAME, type: "website", url: process.env.NEXT_PUBLIC_URL },
+	openGraph: { description: APP_DESCRIPTION, images: [{ alt: `${APP_NAME} logo`, url: "/icon.webp" }], siteName: APP_NAME, title: APP_NAME, type: "website", url: process.env.NEXT_PUBLIC_URL },
 	title: APP_NAME,
+	twitter: { card: "summary", description: APP_DESCRIPTION, images: [{ alt: `${APP_NAME} logo`, url: "/logo.png" }], title: APP_NAME },
 };
 
 type RootLayoutProps = Readonly<{
