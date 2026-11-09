@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 	metadataBase: new URL(process.env.NEXT_PUBLIC_URL as string),
 	openGraph: { description: APP_DESCRIPTION, images: [{ alt: `${APP_NAME} logo`, url: "/icon.webp" }], siteName: APP_NAME, title: APP_NAME, type: "website", url: process.env.NEXT_PUBLIC_URL },
 	title: APP_NAME,
-	twitter: { card: "summary", description: APP_DESCRIPTION, images: [{ alt: `${APP_NAME} logo`, url: "/logo.png" }], title: APP_NAME },
+	twitter: { card: "summary", description: APP_DESCRIPTION, images: [{ alt: `${APP_NAME} logo`, url: "/icon.webp" }], title: APP_NAME },
 };
 
 type RootLayoutProps = Readonly<{
