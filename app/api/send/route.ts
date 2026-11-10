@@ -83,21 +83,28 @@ export async function POST(request: NextRequest) {
 		// You always receive the message; the visitor gets at most one auto-reply per address per 24 hours.
 		const autoReplyLimit = await checkRateLimit(autoReplyRateLimit, hashEmail(contact.email));
 
-		const promises = [sendMessage(resend, logoUrl, contact.name, contact.email, contact.message)];
+		// Send both emails at the same time. Only ALLOWED sends the auto-reply; LIMITED and UNAVAILABLE both skip it.
+		const [messageResult, autoReplyResult] = await Promise.all([sendMessage(resend, logoUrl, contact.name, contact.email, contact.message), autoReplyLimit.status === "ALLOWED" ? autoReply(resend, logoUrl, contact.name, contact.email) : null]);
 
-		// Only ALLOWED adds the auto-reply; LIMITED and UNAVAILABLE both skip it.
-		if (autoReplyLimit.status === "ALLOWED") {
-			promises.push(autoReply(resend, logoUrl, contact.name, contact.email));
+		// Resend doesn't throw when sending fails (API error, network error, unverified domain, quota);
+		// it returns { error }, so each result has to be checked.
+		if (messageResult.error) {
+			console.error(`Failed to send contact message: ${messageResult.error.message}`);
+			const response = NextResponse.json({ message: "Failed to send message!" }, { status: 502 });
+			return response;
 		}
 
-		// Send both emails at the same time.
-		await Promise.all(promises);
+		// The message itself was delivered, so a failed auto-reply is only logged; the visitor still sees success.
+		if (autoReplyResult?.error) {
+			console.error(`Failed to send auto-reply: ${autoReplyResult.error.message}`);
+			const response = NextResponse.json({ message: "Message sent but failed to send auto-reply!" }, { status: 200 });
+			return response;
+		}
 
 		const response = NextResponse.json({ message: "Message sent successfully!" }, { status: 200 });
 		return response;
 	} catch (error: unknown) {
 		// Anything unexpected, such as a body that isn't JSON or a missing Resend API key.
-		// Note: Resend doesn't throw when an email fails to send; it returns { error }, which isn't checked above.
 		console.error((error as Error)?.message);
 		const response = NextResponse.json({ message: "Internal server error!" }, { status: 500 });
 		return response;

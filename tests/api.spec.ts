@@ -117,9 +117,10 @@ test.describe("API - /api/send", () => {
 		// With no Turnstile secret or no Upstash Redis configured, the route refuses to send (503).
 		// With a production (non-test) Turnstile secret, Cloudflare rejects the dummy token (403).
 		// With test keys and Redis but no Resend API key configured, sending fails (500).
+		// With an invalid Resend API key or an unverified sender domain, Resend rejects the email (502).
 		// Either way it should NOT get 400 (validation passes).
 		expect(response.status()).not.toBe(400);
-		expect([200, 403, 500, 503]).toContain(response.status());
+		expect([200, 403, 500, 502, 503]).toContain(response.status());
 	});
 });
 
