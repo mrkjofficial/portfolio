@@ -252,16 +252,18 @@ const Contact = () => {
 								</FieldGroup>
 								<motion.div className="w-full" initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.3, ease: "easeOut" }}>
 									{turnstileSiteKey && (
-										<Turnstile
-											className="mb-3 w-full overflow-hidden rounded-2xl"
-											key={turnstileTheme}
-											onError={() => setTurnstileToken("")}
-											onExpire={() => setTurnstileToken("")}
-											onSuccess={setTurnstileToken}
-											options={{ size: "flexible", theme: turnstileTheme }}
-											ref={turnstileRef}
-											siteKey={turnstileSiteKey}
-										/>
+										<div className="mb-3 w-full overflow-hidden rounded-2xl">
+											<Turnstile
+												key={turnstileTheme}
+												onError={() => setTurnstileToken("")}
+												onExpire={() => setTurnstileToken("")}
+												onSuccess={setTurnstileToken}
+												options={{ size: "flexible", theme: turnstileTheme }}
+												ref={turnstileRef}
+												siteKey={turnstileSiteKey}
+												style={{ margin: -1, width: "calc(100% + 2px)" }}
+											/>
+										</div>
 									)}
 									<Fieldset.Actions className="w-full">
 										<Button className="w-full" isDisabled={isPending || isAwaitingVerification} type="submit" variant="outline">
