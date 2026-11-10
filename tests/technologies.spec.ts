@@ -1,6 +1,9 @@
 import { expect, test } from "@playwright/test";
 
+// Skills section: category headings and a sample of skill chips from data/index.ts.
+// Many skills also appear as chips on project cards, so most checks use .first() or exact matches.
 test.describe("Technologies Section", () => {
+	// Every test starts from a fresh load of the home page.
 	test.beforeEach(async ({ page }) => {
 		await page.goto("/");
 	});

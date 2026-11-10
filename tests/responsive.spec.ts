@@ -1,5 +1,9 @@
 import { expect, test } from "@playwright/test";
 
+// Layout at three screen widths. Each group fixes its own viewport size with test.use,
+// overriding the device size set in playwright.config.ts.
+
+// Desktop: two columns, desktop navigation, sticky About sidebar.
 test.describe("Responsive Layout - Desktop (1280px)", () => {
 	test.use({ viewport: { width: 1280, height: 800 } });
 
@@ -35,6 +39,7 @@ test.describe("Responsive Layout - Desktop (1280px)", () => {
 	});
 });
 
+// Phone: one column, hamburger menu instead of desktop navigation.
 test.describe("Responsive Layout - Mobile (375px)", () => {
 	test.use({ viewport: { width: 375, height: 812 } });
 
@@ -70,6 +75,7 @@ test.describe("Responsive Layout - Mobile (375px)", () => {
 	});
 });
 
+// Tablet: exactly at Tailwind's md breakpoint, where the layout switches to two columns.
 test.describe("Responsive Layout - Tablet (768px)", () => {
 	test.use({ viewport: { width: 768, height: 1024 } });
 

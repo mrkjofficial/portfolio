@@ -1,6 +1,8 @@
 import { expect, test } from "@playwright/test";
 
+// Page shell: title, header, logo, footer, theme switch and the two-column layout.
 test.describe("Layout", () => {
+	// Every test starts from a fresh load of the home page.
 	test.beforeEach(async ({ page }) => {
 		await page.goto("/");
 	});

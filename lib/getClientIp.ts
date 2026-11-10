@@ -1,5 +1,8 @@
 import { NextRequest } from "next/server";
 
+// Returns the visitor's IP address, used as the key for per-IP rate limiting.
+// x-forwarded-for can hold a chain of addresses ("client, proxy1, proxy2"); the first one is the visitor.
+// Falls back to x-real-ip, then to localhost when neither header is present.
 const getClientIp = (request: NextRequest) => {
 	// Vercel overwrites x-forwarded-for with the real client IP, so clients cannot spoof it there.
 	// If this app is ever hosted elsewhere, read the IP from a header that host's proxy sets instead.

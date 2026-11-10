@@ -1,9 +1,10 @@
 import { expect, test } from "@playwright/test";
 
+// Light/dark mode switch: it renders, applies a theme to <html>, and toggles back and forth.
 test.describe("Theme Toggle", () => {
 	test.beforeEach(async ({ page }) => {
 		await page.goto("/");
-		// Wait for hydration — ThemeToggle mounts after a setTimeout(0)
+		// Wait for hydration: ThemeToggle renders nothing on the server and only appears in the browser.
 		await page.waitForSelector("[role='switch']");
 	});
 

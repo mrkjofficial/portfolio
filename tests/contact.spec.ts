@@ -1,6 +1,11 @@
 import { expect, test } from "@playwright/test";
 
+// Contact section and form, tested in the browser.
+// Tests that submit the form mock /api/send with page.route, so no real email is ever sent.
+
+// Every heading, field, placeholder and button in the section is shown.
 test.describe("Contact Section - Visibility", () => {
+	// Every test starts from a fresh load of the home page.
 	test.beforeEach(async ({ page }) => {
 		await page.goto("/");
 	});
@@ -45,6 +50,7 @@ test.describe("Contact Section - Visibility", () => {
 	});
 });
 
+// Field validation messages, and what happens after sending succeeds, fails or is rate limited.
 test.describe("Contact Form - Validation", () => {
 	test.beforeEach(async ({ page }) => {
 		await page.goto("/");
@@ -101,6 +107,7 @@ test.describe("Contact Form - Validation", () => {
 		expect(hasError).toBeGreaterThan(0);
 	});
 
+	// The test name's "8-30 chars" is outdated: the message limit is now 8–1000 characters.
 	test("message field accepts valid input (8-30 chars)", async ({ page }) => {
 		const messageInput = page.getByLabel("Message");
 		await messageInput.pressSequentially("Hello there!");
@@ -196,6 +203,7 @@ test.describe("Contact Form - Validation", () => {
 	});
 });
 
+// The phone and email shortcut buttons, which are only shown on wider screens.
 test.describe("Contact Section - Phone & Email Tooltips", () => {
 	test.use({ viewport: { width: 1280, height: 800 } });
 

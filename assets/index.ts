@@ -1,5 +1,10 @@
 import type { ComponentType, SVGProps } from "react";
 
+// Every SVG icon used on the site, imported as a React component.
+// @svgr/webpack (configured in next.config.ts) turns each .svg file into a component.
+// Each export is given an explicit component type, because Next.js types .svg imports as "any".
+
+// Technology and tool logos, used in the Skills and Projects sections.
 import AntDesignSvg from "./icons/antdesign.svg";
 import AppwriteSvg from "./icons/appwrite.svg";
 import AwsSvg from "./icons/aws.svg";
@@ -54,11 +59,13 @@ import YupSvg from "./icons/yup.svg";
 import ZodSvg from "./icons/zod.svg";
 import ZustandSvg from "./icons/zustand.svg";
 
+// Profile link icons, used in the About sidebar.
 import GithubSvg from "./icons/github.svg";
 import LinkedInSvg from "./icons/linkedin.svg";
 import resumeSvg from "./icons/resume.svg";
 import TopmateSvg from "./icons/topmate.svg";
 
+// Technology and tool logos.
 export const AntDesign: ComponentType<SVGProps<SVGSVGElement>> = AntDesignSvg;
 export const Appwrite: ComponentType<SVGProps<SVGSVGElement>> = AppwriteSvg;
 export const AWS: ComponentType<SVGProps<SVGSVGElement>> = AwsSvg;
@@ -113,6 +120,7 @@ export const Yup: ComponentType<SVGProps<SVGSVGElement>> = YupSvg;
 export const Zod: ComponentType<SVGProps<SVGSVGElement>> = ZodSvg;
 export const Zustand: ComponentType<SVGProps<SVGSVGElement>> = ZustandSvg;
 
+// Profile link icons.
 export const Github: ComponentType<SVGProps<SVGSVGElement>> = GithubSvg;
 export const LinkedIn: ComponentType<SVGProps<SVGSVGElement>> = LinkedInSvg;
 export const Resume: ComponentType<SVGProps<SVGSVGElement>> = resumeSvg;

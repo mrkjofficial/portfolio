@@ -1,6 +1,9 @@
 import { expect, test } from "@playwright/test";
 
+// Education section: every institution, degree, date and achievement from data/index.ts is shown.
+// These tests check real content, so they need updating when the education data changes.
 test.describe("Education Section", () => {
+	// Every test starts from a fresh load of the home page.
 	test.beforeEach(async ({ page }) => {
 		await page.goto("/");
 	});
@@ -55,6 +58,7 @@ test.describe("Education Section", () => {
 	});
 
 	test("institution logos are rendered", async ({ page }) => {
+		// Scroll the section into view first, so lazily loaded logos are fetched.
 		await page.evaluate(() => document.getElementById("education")?.scrollIntoView());
 		const logos = page.locator("#education img");
 		await expect(logos.first()).toBeVisible({ timeout: 5000 });

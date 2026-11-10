@@ -1,6 +1,9 @@
 import { expect, test } from "@playwright/test";
 
+// Work experience section: every company, role, date and achievement from data/index.ts is shown.
+// These tests check real content, so they need updating when the work data changes.
 test.describe("Work Section", () => {
+	// Every test starts from a fresh load of the home page.
 	test.beforeEach(async ({ page }) => {
 		await page.goto("/");
 	});

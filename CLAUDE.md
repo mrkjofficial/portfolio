@@ -70,8 +70,8 @@ E2E tests use Playwright and live in [tests/](tests/). They run against `http://
 | `NEXT_PUBLIC_URL` | Site URL for metadata and Playwright base URL |
 | `NEXT_PUBLIC_API_URL` | Base URL for Axios client ([config/axios.ts](config/axios.ts)) |
 | `RESEND_API_KEY` | Resend email service |
-| `CONTACT_EMAIL_ADDRESS` | Recipient for contact form messages |
-| `PERSONAL_EMAIL_ADDRESS` | Auto-reply sender/recipient |
+| `CONTACT_EMAIL_ADDRESS` | Sender (`from`) address for both emails; must be on a domain verified in Resend |
+| `PERSONAL_EMAIL_ADDRESS` | Your inbox: receives contact form messages and is the `replyTo` of the auto-reply |
 | `UPSTASH_REDIS_REST_URL` | Upstash Redis REST URL for rate limiting ([config/redis.ts](config/redis.ts)) |
 | `UPSTASH_REDIS_REST_TOKEN` | Upstash Redis REST token for rate limiting ([config/redis.ts](config/redis.ts)) |
 | `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | Cloudflare Turnstile site key for the contact form widget; if unset, the widget isn't rendered |

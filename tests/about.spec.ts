@@ -1,6 +1,9 @@
 import { expect, test } from "@playwright/test";
 
+// About sidebar: avatar, handwritten name badge and the profile link buttons.
+// The buttons are only checked for being visible and enabled; following external links isn't tested.
 test.describe("About Section", () => {
+	// Every test starts from a fresh load of the home page.
 	test.beforeEach(async ({ page }) => {
 		await page.goto("/");
 	});

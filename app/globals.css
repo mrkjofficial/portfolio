@@ -1,3 +1,5 @@
+/* Global styles: Tailwind CSS 4, the HeroUI theme colours, base element styles and the animated background. */
+/* Tailwind 4 is configured here in CSS; there is no tailwind.config.js. */
 @import "tailwindcss";
 @import "@heroui/styles";
 
@@ -42,6 +44,7 @@
 	--warning-foreground: oklch(21.03% 0.0059 72.33);
 
 	/* Border Radius */
+	/* Base unit for HeroUI's radius scale (e.g. rounded-2xl is twice this, 8px). */
 	--radius: 0.25rem;
 	--field-radius: 0.5rem;
 
@@ -50,8 +53,10 @@
 	--font-sans: var(--font-inter);
 }
 
+/* Dark mode colours, applied when next-themes adds the "dark" class to <html>. */
 .dark,
 [data-theme="dark"] {
+	/* Tells the browser to draw its own controls (scrollbars, inputs) in dark style too. */
 	color-scheme: dark;
 	/* Theme Colors (Dark Mode) */
 	--accent: oklch(62.04% 0.195 253.83);
@@ -84,26 +89,33 @@
 
 @theme inline {
 	/* Breakpoints */
+	/* Adds an "xs:" prefix for screens 512px and wider, between phones and Tailwind's "sm" (640px). */
 	--breakpoint-xs: 512px;
 }
 
+/* Default styles for plain HTML elements. */
 @layer base {
+	/* Every border uses the theme's border colour unless told otherwise. */
 	* {
 		@apply border-border;
 	}
 	body {
 		@apply bg-background text-foreground;
+		/* Starts a new stacking context, so the background's z-index: -1 stays behind the page but above the body colour. */
 		isolation: isolate;
 	}
+	/* Stop icons from shrinking when they sit in a crowded flex row. */
 	svg {
 		@apply shrink-0;
 	}
+	/* Browsers paint autofilled inputs yellow or blue. An extremely slow transition keeps the theme's colour instead. */
 	input:-webkit-autofill,
 	input:-webkit-autofill:hover,
 	input:-webkit-autofill:focus,
 	input:-webkit-autofill:active {
 		transition: background-color 5000s ease-in-out 0s;
 	}
+	/* Hide browser-specific input decorations: the clock icon, number arrows, and old Edge/IE clear and show-password buttons. */
 	input[type="time"]::-webkit-calendar-picker-indicator {
 		display: none;
 	}
@@ -121,6 +133,8 @@
 	}
 }
 
+/* Aurora background: three large, blurred colour blobs that slowly drift behind the page (markup in app/layout.tsx). */
+/* It covers the whole screen, sits behind everything and ignores clicks. */
 .aurora {
 	position: fixed;
 	inset: 0;
@@ -129,6 +143,8 @@
 	pointer-events: none;
 }
 
+/* Each blob is a heavily blurred circle. will-change keeps the animation smooth by moving it to the GPU. */
+/* "multiply" blends the colours into the light background. */
 .aurora span {
 	position: absolute;
 	border-radius: 50%;
@@ -137,10 +153,12 @@
 	mix-blend-mode: multiply;
 }
 
+/* "screen" lightens instead, so the blobs glow on the dark background. */
 .dark .aurora span {
 	mix-blend-mode: screen;
 }
 
+/* Blob 1: blue, top left. Each blob has its own size, colour, path and speed, so they never move in step. */
 .aurora span:nth-child(1) {
 	width: 60vw;
 	height: 60vw;
@@ -151,6 +169,7 @@
 	animation: aurora-drift-1 10s ease-in-out infinite alternate;
 }
 
+/* Blob 2: purple, right side. */
 .aurora span:nth-child(2) {
 	width: 55vw;
 	height: 55vw;
@@ -161,6 +180,7 @@
 	animation: aurora-drift-2 14s ease-in-out infinite alternate;
 }
 
+/* Blob 3: teal, bottom left. */
 .aurora span:nth-child(3) {
 	width: 50vw;
 	height: 50vw;
@@ -171,6 +191,7 @@
 	animation: aurora-drift-3 8s ease-in-out infinite alternate;
 }
 
+/* Dark mode: darker, more opaque versions of the same three colours. */
 .dark .aurora span:nth-child(1) {
 	background: oklch(45% 0.18 253.83);
 	opacity: 0.8;
@@ -186,6 +207,8 @@
 	opacity: 0.75;
 }
 
+/* Drift paths: each blob wanders through a few points while growing and shrinking. */
+/* "alternate" in the animations above plays each path forwards then backwards, so there's no jump at the end. */
 @keyframes aurora-drift-1 {
 	0% {
 		transform: translate(0, 0) scale(1);
@@ -231,6 +254,7 @@
 	}
 }
 
+/* Custom "container" utility: centred with side padding, no width limit from 512px up, then capped at 1400px on very wide screens. */
 @utility container {
 	margin-inline: auto;
 	padding-inline: 2rem;

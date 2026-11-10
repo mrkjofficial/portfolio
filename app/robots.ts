@@ -1,3 +1,5 @@
+// Next.js special file: generates /robots.txt.
+// Lets every search engine crawl the whole site and points them to the sitemap.
 const robots = () => {
 	return {
 		rules: { allow: ["/"], userAgent: "*" },

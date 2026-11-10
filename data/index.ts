@@ -1,3 +1,5 @@
+// All of the portfolio's content lives in this file. To update the site's text, links or lists, edit only here.
+// Every list item has an id from uuidv7(). It's only used as the React key when rendering lists.
 import { v7 as uuidv7 } from "uuid";
 import { Bot, Briefcase, FolderOpen, GraduationCap, Home, Mail, MapPinned, TerminalSquare } from "lucide-react";
 import {
@@ -59,9 +61,11 @@ import {
 	Zustand,
 } from "@assets";
 
+// Site name and description, used in page metadata, link previews, the web app manifest and emails.
 export const APP_NAME = "MrKJOfficial";
 export const APP_DESCRIPTION = "Karan's Portfolio";
 
+// Header navigation. Each src is the id of a section on the home page, so clicking scrolls to it.
 export const navItems = [
 	{
 		id: uuidv7(),
@@ -95,13 +99,17 @@ export const navItems = [
 	},
 ];
 
+// Everything shown on the home page, section by section.
 export const about = {
 	name: "Karan Jaiswal",
+	// Paths starting with "/" are files in the public/ folder.
 	avatarUrl: "/profile.webp",
+	// Used by the call and email buttons in the Contact section.
 	contact: {
 		email: "karanjaiswal0000@gmail.com",
 		phone: "+91 99336 27730",
 	},
+	// Buttons in the About sidebar. The resume is a static PDF in public/.
 	links: [
 		{
 			id: uuidv7(),
@@ -128,12 +136,14 @@ export const about = {
 			url: "https://topmate.io/mrkjofficial",
 		},
 	],
+	// Opening section. The description is typed out character by character; "\n\n" starts a new paragraph.
 	introduction: {
 		headline: "Turning ideas into production-ready products.",
 		subHeadline: "Lead Software Engineer | Team Lead | Frontend Specialist",
 		description:
 			"👋 Hi, I’m Karan. I am a Frontend-heavy Full-Stack Engineer who specializes in building scalable products from the first line of code to final deployment.\n\nCurrently, I lead a high-performing team of seven developers, bridging the gap between complex technical architecture and seamless user experiences. Having architected multiple projects from scratch, I focus on building systems that aren't just functional, but enduring.\n\nI’m now integrating AI/ML capabilities into my workflow to create smarter, adaptive applications that drive real business value. I thrive where thoughtful engineering meets strategic leadership.",
 	},
+	// Quick facts shown in a row under the introduction.
 	information: [
 		{
 			id: uuidv7(),
@@ -154,6 +164,7 @@ export const about = {
 			value: "7+",
 		},
 	],
+	// Skills section: categories, each with a list of skills. Skill icons come from assets/index.ts.
 	technologies: [
 		{
 			id: uuidv7(),
@@ -430,6 +441,8 @@ export const about = {
 			],
 		},
 	],
+	// Projects section. thumbnail is a screenshot in public/projects/.
+	// The title links to url, or to githubUrl when url is empty. skills are the chips under each card.
 	projects: [
 		{
 			id: uuidv7(),
@@ -936,6 +949,7 @@ export const about = {
 			],
 		},
 	],
+	// Work experience, newest first. logo is an image in public/logos/; achievements become bullet points.
 	work: [
 		{
 			id: uuidv7(),
@@ -1007,6 +1021,7 @@ export const about = {
 			],
 		},
 	],
+	// Education, newest first. Same shape as work, with institution and degree instead of organization and role.
 	education: [
 		{
 			id: uuidv7(),

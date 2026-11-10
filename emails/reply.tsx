@@ -1,36 +1,48 @@
 import { Body, Container, Font, Head, Heading, Html, Img, Link, Preview, Row, Section, Text } from "react-email";
 
 type ReplyProps = {
+	// Absolute URL of the logo shown at the top of the email.
 	logoURL: string;
+	// You, the site owner.
 	senderName: string;
+	// The visitor who filled in the form.
 	recipientName: string;
+	// Link to the site, shown at the bottom.
 	appURL: string;
 	appName: string;
 };
 
+// Email template for the automatic "thank you" sent to a visitor after they use the contact form.
+// Styles are inline because many email apps ignore stylesheets.
 const Reply = ({ logoURL, senderName, recipientName, appURL, appName }: ReplyProps) => {
 	return (
 		<Html>
 			<Head>
+				{/* Roboto from Google Fonts, falling back to Helvetica in email apps that block web fonts. */}
 				<Font fallbackFontFamily="Helvetica" fontFamily="Roboto" fontStyle="normal" fontWeight={400} webFont={{ format: "woff2", url: "https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2" }} />
 			</Head>
+			{/* Preview text shown next to the subject in the inbox list. */}
 			<Preview>{`Thank you for contacting me.`}</Preview>
 			<Body style={{ color: "#3F3F46", fontFamily: "Roboto" }}>
 				<Img alt="logo" height={32} src={logoURL} style={{ margin: "20px auto" }} width={144} />
+				{/* Main card. */}
 				<Container style={{ background: "#F6FAFF", borderRadius: "20px", padding: "24px" }}>
 					<Heading as="h2" style={{ textAlign: "center" }}>{`Message from ${senderName}`}</Heading>
+					{/* Greeting. */}
 					<Section>
 						<Row>
 							<Text style={{ fontSize: "16px", fontWeight: 500 }}>{`Dear ${recipientName},`}</Text>
 							<Text style={{ fontSize: "16px" }}>{`Thank you for contacting me.`}</Text>
 						</Row>
 					</Section>
+					{/* Body text. */}
 					<Section>
 						<Row>
 							<Text style={{ fontSize: "16px" }}>{`I appreciate you contacting me. I'll be getting back to you shortly. Thanks in advance for your patience.`}</Text>
 							<Text style={{ fontSize: "16px" }}>{`Have a great day.`}</Text>
 						</Row>
 					</Section>
+					{/* Sign-off. */}
 					<Section>
 						<Row>
 							<Text>{`Best regards,`}</Text>
@@ -38,6 +50,7 @@ const Reply = ({ logoURL, senderName, recipientName, appURL, appName }: ReplyPro
 						</Row>
 					</Section>
 				</Container>
+				{/* Link back to the site below the card. */}
 				<Container>
 					<Link href={appURL} style={{ color: "#3F3F46", display: "block", margin: "20px auto", textAlign: "center" }}>
 						{appName}

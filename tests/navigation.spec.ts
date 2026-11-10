@@ -1,5 +1,9 @@
 import { expect, test } from "@playwright/test";
 
+// Header navigation on desktop and mobile. Each nav item should jump to its section,
+// which shows up as the section's #id in the URL.
+
+// Desktop: the links sit in the header and the hamburger button is hidden.
 test.describe("Desktop Navigation", () => {
 	test.use({ viewport: { width: 1280, height: 800 } });
 
@@ -54,6 +58,7 @@ test.describe("Desktop Navigation", () => {
 	});
 });
 
+// Mobile: the links live in a menu opened by the hamburger button.
 test.describe("Mobile Navigation", () => {
 	test.use({ viewport: { width: 375, height: 812 } });
 

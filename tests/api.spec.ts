@@ -6,6 +6,8 @@ import { expect, test } from "@playwright/test";
 // where rate limiting is genuinely active.
 const uniqueIp = () => ({ "x-forwarded-for": randomUUID() });
 
+// The contact form API, called directly without a browser.
+// Covers validation (400), the Turnstile check (403) and a request that passes validation.
 test.describe("API - /api/send", () => {
 	test("returns 400 for missing fields", async ({ request }) => {
 		const response = await request.post("/api/send", {
@@ -121,10 +123,13 @@ test.describe("API - /api/send", () => {
 	});
 });
 
+// Per-IP rate limit (5 requests per 10 minutes). Needs Upstash Redis credentials,
+// so these two tests fail locally when Redis isn't configured.
 test.describe("API - /api/send - Rate Limiting", () => {
 	test("allows 5 requests then blocks the 6th from the same IP", async ({ request }) => {
 		const headers = uniqueIp();
 
+		// Empty bodies still count towards the limit, because the IP check runs before validation.
 		for (let i = 0; i < 5; i++) {
 			const response = await request.post("/api/send", { data: {}, headers });
 			expect(response.status()).toBe(400);

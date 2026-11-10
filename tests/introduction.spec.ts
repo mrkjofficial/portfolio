@@ -1,6 +1,9 @@
 import { expect, test } from "@playwright/test";
 
+// Introduction (headline, subheadline, typed description) and the quick-facts row beneath it.
+// These tests check real content, so they need updating when the introduction data changes.
 test.describe("Introduction Section", () => {
+	// Every test starts from a fresh load of the home page.
 	test.beforeEach(async ({ page }) => {
 		await page.goto("/");
 	});
@@ -43,6 +46,7 @@ test.describe("Introduction Section", () => {
 	});
 });
 
+// The row of quick facts (location, experience, project count).
 test.describe("Information Section", () => {
 	test.beforeEach(async ({ page }) => {
 		await page.goto("/");

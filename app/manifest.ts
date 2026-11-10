@@ -1,5 +1,7 @@
 import { APP_DESCRIPTION, APP_NAME } from "@data";
 
+// Next.js special file: generates the web app manifest (/manifest.webmanifest).
+// It lets visitors install the site as an app on their phone or computer.
 const manifest = () => {
 	return {
 		name: APP_NAME,
@@ -7,9 +9,11 @@ const manifest = () => {
 		description: APP_DESCRIPTION,
 		start_url: "/",
 		scope: "/",
+		// Opens in its own window without the browser's address bar.
 		display: "standalone",
 		background_color: "#FFFFFF",
 		theme_color: "#FFFFFF",
+		// "any" icons are shown as-is. "maskable" icons can be cropped to the device's icon shape (circle, squircle, etc.).
 		icons: [
 			{
 				src: "icons/icon-192x192.webp",
@@ -60,6 +64,7 @@ const manifest = () => {
 				purpose: "maskable",
 			},
 		],
+		// Shown in the install dialog. "narrow" is for phones, "wide" for desktops.
 		screenshots: [
 			{
 				form_factor: "narrow",

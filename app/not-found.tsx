@@ -1,3 +1,5 @@
+// Next.js special file: shown for any URL that doesn't exist (404).
+// "use client" is needed because the Refresh button uses the router.
 "use client";
 import { useRouter } from "next/navigation";
 import { AlertTriangle } from "lucide-react";
@@ -10,6 +12,7 @@ const NotFoundPage = () => {
 		<main className="flex h-full min-h-[calc(100vh-4rem)] w-full items-center justify-center">
 			<Card className="m-5 w-full max-w-3xl px-2 py-16">
 				<Card.Content className="flex flex-col items-center justify-center gap-5">
+					{/* Large warning icon that grows with the screen size. */}
 					<AlertTriangle className="xs:size-40 size-32 sm:size-48 md:size-56 lg:size-64 xl:size-72" />
 					<div className="flex flex-col items-center justify-center gap-2">
 						<Chip className="gap-1 whitespace-nowrap" color="default" size="lg" variant="soft">
@@ -20,6 +23,7 @@ const NotFoundPage = () => {
 					</div>
 				</Card.Content>
 				<Card.Footer className="flex flex-col items-center justify-center gap-10">
+					{/* Re-fetches the current route from the server, in case the page was only briefly missing. */}
 					<Button onPress={router.refresh} size="lg" variant="ghost">{`Refresh`}</Button>
 				</Card.Footer>
 			</Card>

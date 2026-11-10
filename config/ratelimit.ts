@@ -1,6 +1,10 @@
 import redis from "@config/redis";
 import { Ratelimit } from "@upstash/ratelimit";
 
+// The contact form's rate limiters, all stored in Upstash Redis.
+// Each one uses its own key prefix, so their counters never mix.
+// They're checked through lib/checkRateLimit.ts, never called directly.
+
 // Per recipient address: at most 1 auto-reply per 24 hours, so the form can't be used to flood someone's inbox.
 export const autoReplyRateLimit = new Ratelimit({
 	redis,
@@ -9,6 +13,7 @@ export const autoReplyRateLimit = new Ratelimit({
 });
 
 // Across all visitors: at most 50 messages sent per day, so abuse can never exhaust the email quota.
+// A fixed window resets at the same time each day, which is what a daily cap should do.
 export const dailyRateLimit = new Ratelimit({
 	redis,
 	limiter: Ratelimit.fixedWindow(50, "1 d"),
@@ -16,6 +21,7 @@ export const dailyRateLimit = new Ratelimit({
 });
 
 // Per visitor IP: 5 contact-form requests per 10 minutes.
+// A sliding window stops bursts at the edge of a window, unlike a fixed one.
 export const ipRateLimit = new Ratelimit({
 	redis,
 	limiter: Ratelimit.slidingWindow(5, "10 m"),

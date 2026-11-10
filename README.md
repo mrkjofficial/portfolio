@@ -77,8 +77,8 @@ Create a `.env` file at the project root:
 NEXT_PUBLIC_URL=             # Site URL (used for metadata and Playwright base URL)
 NEXT_PUBLIC_API_URL=         # Base URL for Axios client
 RESEND_API_KEY=              # Resend API key for sending emails
-CONTACT_EMAIL_ADDRESS=       # Recipient address for contact form submissions
-PERSONAL_EMAIL_ADDRESS=      # Auto-reply sender/recipient address
+CONTACT_EMAIL_ADDRESS=       # Sender address for both emails (must be on a domain verified in Resend)
+PERSONAL_EMAIL_ADDRESS=      # Your inbox: receives contact form messages and replies to the auto-reply
 UPSTASH_REDIS_REST_URL=      # Upstash Redis REST URL for contact form rate limiting
 UPSTASH_REDIS_REST_TOKEN=    # Upstash Redis REST token for contact form rate limiting
 NEXT_PUBLIC_TURNSTILE_SITE_KEY= # Cloudflare Turnstile site key for the contact form CAPTCHA

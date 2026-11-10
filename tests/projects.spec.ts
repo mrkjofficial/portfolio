@@ -1,6 +1,9 @@
 import { expect, test } from "@playwright/test";
 
+// Projects section: each project's title, screenshot, description, link and skill chips.
+// These tests check real content, so they need updating when projects are added, renamed or removed.
 test.describe("Projects Section", () => {
+	// Every test starts from a fresh load of the home page.
 	test.beforeEach(async ({ page }) => {
 		await page.goto("/");
 	});
