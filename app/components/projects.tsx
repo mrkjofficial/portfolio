@@ -79,7 +79,7 @@ const ThumbnailWithReveal = ({ src, alt }: { src: string; alt: string }) => {
 				onTouchEnd={handleTouchEnd}
 			>
 				{/* fill makes the image cover its box; sizes tells the browser which image width to download. */}
-				<Image alt={alt} className="rounded-3xl" fill={true} sizes="100vw, (min-width: 768px) 640px" src={src} />
+				<Image alt={alt} className="rounded-3xl" fill={true} sizes="(min-width: 768px) 640px, 100vw" src={src} />
 			</motion.div>
 		</div>
 	);
